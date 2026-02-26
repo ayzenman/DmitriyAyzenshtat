@@ -302,7 +302,7 @@ const Contact = () => {
               <div className="space-y-6">
                 
                 <div className="flex items-center gap-4">
-                {/*  <div className="w-12 h-12 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] flex items-center justify-center">
                     <Phone className="w-5 h-5 text-[var(--color-gold)]" />
                   </div>
                   <div>
@@ -310,7 +310,7 @@ const Contact = () => {
                     <a href="tel:+79990000000" className="text-lg hover:text-[var(--color-gold)] transition-colors">
                       +7 (999) 000-00-00
                     </a>
-                  </div>*/}
+                  </div>
                 </div> 
                 
                 <div className="flex items-center gap-4">
