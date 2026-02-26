@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://dmitriyayzenshtat.vercel.app/sitemap.xml
