@@ -252,8 +252,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-[var(--color-text-muted)]">Email</div>
-                    <a href="mailto:info@example.ru" className="text-lg hover:text-[var(--color-gold)] transition-colors">
-                      info@example.ru
+                    <a href="mailto:Dmitriy.Ayzenshtat@gmail.com" className="text-lg hover:text-[var(--color-gold)] transition-colors">
+                      Dmitriy.Ayzenshtat@gmail.com
                     </a>
                   </div>
                 </div>
@@ -264,15 +264,15 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-[var(--color-text-muted)]">Telegram</div>
-                    <a href="https://t.me/username" className="text-lg hover:text-[var(--color-gold)] transition-colors">
-                      @username
+                    <a href="https://t.me/DmitriyAyzenshtat" className="text-lg hover:text-[var(--color-gold)] transition-colors">
+                      @DmitriyAyzenshtat
                     </a>
                   </div>
                 </div>
 
                 <div className="pt-6 border-t border-[var(--color-border)]">
                   <p className="text-sm text-[var(--color-text-muted)]">
-                    Отвечаю в течение рабочего дня
+                    // Отвечаю в течении рабочего дня
                   </p>
                 </div>
               </div>
