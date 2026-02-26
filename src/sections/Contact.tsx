@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Добавьте Loader в импорт вместе с другими иконками
-import { Phone, Mail, Send, MessageCircle, CheckCircle, Loader } from 'lucide-react';
+import { Mail, Send, MessageCircle, CheckCircle, Loader } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 gsap.registerPlugin(ScrollTrigger);
