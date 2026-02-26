@@ -1,7 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Phone, Mail, Send, MessageCircle, CheckCircle } from 'lucide-react';
+// Добавьте Loader в импорт вместе с другими иконками
+import { Phone, Mail, Send, MessageCircle, CheckCircle, Loader } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -14,6 +15,7 @@ const Contact = () => {
   const dividerRef = useRef<HTMLDivElement>(null);
   
   const [showSuccess, setShowSuccess] = useState(false);
+  const [isLoading, setIsLoading] = useState(false); // новое состояние для кнопки
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -118,11 +120,69 @@ const Contact = () => {
     return () => ctx.revert();
   }, []);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setShowSuccess(true);
-    setFormData({ name: '', phone: '', email: '', company: '' });
+   // ===== НОВАЯ ФУНКЦИЯ ОТПРАВКИ В TELEGRAM =====
+  const sendToTelegram = async (data: typeof formData) => {
+    const TOKEN = '8268295506:AAHhFaN0XJqp9r9He39ilJlEcb_ohPLXKTE';        // ⚠️ ЗАМЕНИТЕ НА СВОЙ ТОКЕН
+    const CHAT_ID = '366708878';         // ⚠️ ЗАМЕНИТЕ НА СВОЙ CHAT ID
+
+    // Формируем текст сообщения
+    const message = `
+📩 <b>Новая заявка с сайта</b>
+
+👤 <b>Имя:</b> ${data.name}
+📞 <b>Телефон:</b> ${data.phone}
+✉️ <b>Email:</b> ${data.email}
+🏢 <b>Компания и оборот:</b> ${data.company || 'не указано'}
+    `;
+
+    const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          chat_id: CHAT_ID,
+          text: message,
+          parse_mode: 'HTML', // чтобы жирный текст работал
+        }),
+      });
+
+      return response.ok;
+    } catch (error) {
+      console.error('Ошибка отправки в Telegram:', error);
+      return false;
+    }
   };
+
+  // Конец вставки
+   // ===== ОБНОВЛЁННЫЙ handleSubmit =====
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsLoading(true); // включаем индикатор загрузки
+
+    try {
+      const success = await sendToTelegram(formData);
+
+      if (success) {
+        setShowSuccess(true);               // показываем диалог успеха
+        setFormData({ name: '', phone: '', email: '', company: '' }); // очищаем поля
+      } else {
+        alert('Не удалось отправить заявку. Попробуйте позже или свяжитесь напрямую.');
+      }
+    } catch (error) {
+      alert('Произошла ошибка. Попробуйте ещё раз.');
+    } finally {
+      setIsLoading(false); // выключаем загрузку в любом случае
+    }
+  };
+  // const handleSubmit = (e: React.FormEvent) => {
+    // e.preventDefault();
+    // setShowSuccess(true);
+   // setFormData({ name: '', phone: '', email: '', company: '' });
+ // };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
@@ -213,13 +273,33 @@ const Contact = () => {
                 />
               </div>
 
-              <button 
-                type="submit"
-                className="submit-btn btn-primary w-full opacity-0"
-              >
-                <span>Записаться на диагностику</span>
-                <Send className="ml-2 w-5 h-5" />
-              </button>
+               <button 
+          type="submit"
+          className="submit-btn btn-primary w-full opacity-0 flex items-center justify-center"
+          disabled={isLoading} // блокируем кнопку во время отправки
+        >
+          {isLoading ? (
+            <>
+              <Loader className="animate-spin mr-2 w-5 h-5" />
+              Отправка...
+            </>
+          ) : (
+            <>
+              <span>Записаться на диагностику</span>
+              <Send className="ml-2 w-5 h-5" />
+            </>
+          )}
+        </button>
+
+        {/* Остальная часть формы и контактов без изменений */}
+              
+             // <button 
+              //  type="submit"
+              //  className="submit-btn btn-primary w-full opacity-0"
+             // >
+              //  <span>Записаться на диагностику</span>
+              //  <Send className="ml-2 w-5 h-5" />
+             // </button>
             </form>
 
             {/* Divider */}
@@ -233,7 +313,7 @@ const Contact = () => {
               ref={contactsRef}
               className="lg:pl-12 flex flex-col justify-center opacity-0"
             >
-             {/* <div className="space-y-6">
+              <div className="space-y-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] flex items-center justify-center">
                     <Phone className="w-5 h-5 text-[var(--color-gold)]" />
@@ -244,7 +324,7 @@ const Contact = () => {
                       +7 (999) 000-00-00
                     </a>
                   </div>
-                </div> */}
+                </div> 
 
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] flex items-center justify-center">
@@ -272,7 +352,7 @@ const Contact = () => {
 
                 <div className="pt-6 border-t border-[var(--color-border)]">
                   <p className="text-sm text-[var(--color-text-muted)]">
-                    {/* Отвечаю в течении рабочего дня */}
+                    // Отвечаю в течении рабочего дня
                   </p>
                 </div>
               </div>
