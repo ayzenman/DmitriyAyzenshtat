@@ -134,7 +134,7 @@ const Hero = () => {
             ref={preTitleRef}
             className="inline-block text-xs sm:text-sm tracking-[0.2em] uppercase text-[var(--color-gold)] mb-6 opacity-0"
           >
-            Финансовый консалтинг для среднего бизнеса
+            Финансовый консалтинг для бизнеса
           </span>
 
           {/* Title */}
@@ -192,7 +192,7 @@ const Hero = () => {
               <BarChart3 className="w-6 h-6 text-[var(--color-gold)]" />
             </div>
             <div>
-              <div className="font-mono text-2xl lg:text-3xl font-semibold text-[var(--color-gold)]">2 млрд+</div>
+              <div className="font-mono text-2xl lg:text-3xl font-semibold text-[var(--color-gold)]">20 млрд+</div>
               <div className="text-sm text-[var(--color-text-muted)]">оборот под управлением</div>
             </div>
           </div>
@@ -203,7 +203,7 @@ const Hero = () => {
             </div>
             <div>
               <div className="font-mono text-2xl lg:text-3xl font-semibold text-[var(--color-gold)]">50+</div>
-              <div className="text-sm text-[var(--color-text-muted)]">внедрённых систем</div>
+              <div className="text-sm text-[var(--color-text-muted)]">внедрённых проектов</div>
             </div>
           </div>
         </div>
