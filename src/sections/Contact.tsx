@@ -339,7 +339,7 @@ const Contact = () => {
 
                  <div className="pt-6 border-t border-[var(--color-border)]">
                   <p className="text-sm text-[var(--color-text-muted)]">
-                     Отвечаю в течении рабочего дня
+                     
                   </p>
                 </div> 
               </div>
