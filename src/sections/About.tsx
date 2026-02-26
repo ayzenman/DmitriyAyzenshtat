@@ -167,8 +167,9 @@ const About = () => {
               >
                 <img 
                   src="/expert-photo.jpg" 
-                  alt="Финансовый консультант"
+                  alt="Дмитрий Айзенштат, финансовый консультант"
                   className="w-full h-auto object-cover"
+                  loading="lazy"
                 />
                 
                 {/* Overlay gradient */}
