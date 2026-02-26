@@ -178,12 +178,7 @@ const Contact = () => {
       setIsLoading(false); // выключаем загрузку в любом случае
     }
   };
-  // const handleSubmit = (e: React.FormEvent) => {
-    // e.preventDefault();
-    // setShowSuccess(true);
-   // setFormData({ name: '', phone: '', email: '', company: '' });
- // };
-
+  
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData(prev => ({
       ...prev,
@@ -291,16 +286,7 @@ const Contact = () => {
           )}
         </button>
 
-        {/* Остальная часть формы и контактов без изменений 
-              
-             // <button 
-              //  type="submit"
-              //  className="submit-btn btn-primary w-full opacity-0"
-             // >
-              //  <span>Записаться на диагностику</span>
-              //  <Send className="ml-2 w-5 h-5" />
-             // </button> */}
-            </form>
+              </form>
 
             {/* Divider */}
             <div 
@@ -353,7 +339,7 @@ const Contact = () => {
 
                 {/* <div className="pt-6 border-t border-[var(--color-border)]">
                   <p className="text-sm text-[var(--color-text-muted)]">
-                    // Отвечаю в течении рабочего дня
+                     Отвечаю в течении рабочего дня
                   </p>
                 </div> */}
               </div>
