@@ -1,0 +1,235 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 222 25% 14%;
+    --foreground: 0 0% 96%;
+    --card: 222 20% 19%;
+    --card-foreground: 0 0% 96%;
+    --popover: 222 20% 19%;
+    --popover-foreground: 0 0% 96%;
+    --primary: 42 55% 58%;
+    --primary-foreground: 222 25% 14%;
+    --secondary: 222 25% 25%;
+    --secondary-foreground: 0 0% 96%;
+    --muted: 222 20% 25%;
+    --muted-foreground: 222 15% 73%;
+    --accent: 42 55% 58%;
+    --accent-foreground: 222 25% 14%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 222 20% 32%;
+    --input: 222 20% 25%;
+    --ring: 42 55% 58%;
+    --radius: 0.5rem;
+    
+    /* Custom colors */
+    --color-bg: #1a1f2e;
+    --color-bg-card: #242b3d;
+    --color-border: #3d4663;
+    --color-gold: #d4a853;
+    --color-gold-light: #e4c373;
+    --color-text: #f5f5f5;
+    --color-text-muted: #b0b8c8;
+    --color-success: #4caf7c;
+    
+    /* Animation easings */
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-in-out-cubic: cubic-bezier(0.65, 0, 0.35, 1);
+    --ease-elastic: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    --ease-dramatic: cubic-bezier(0.87, 0, 0.13, 1);
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    @apply bg-[#1a1f2e] text-[#f5f5f5] antialiased;
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    font-weight: 600;
+  }
+  
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply relative inline-flex items-center justify-center px-8 py-4 text-base font-semibold rounded-lg overflow-hidden transition-all duration-300;
+    background: linear-gradient(135deg, var(--color-gold) 0%, #c49a48 100%);
+    color: var(--color-bg);
+  }
+  
+  .btn-primary:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 30px rgba(212, 168, 83, 0.4);
+  }
+  
+  .btn-primary:active {
+    transform: scale(0.98);
+  }
+  
+  .card-glass {
+    @apply rounded-xl p-8;
+    background: rgba(36, 43, 61, 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid var(--color-border);
+  }
+  
+  .text-gradient {
+    background: linear-gradient(135deg, var(--color-gold) 0%, var(--color-gold-light) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .gold-border {
+    border: 1px solid var(--color-gold);
+  }
+  
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-16 2xl:px-24;
+  }
+}
+
+@layer utilities {
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+  
+  .animate-pulse-glow {
+    animation: pulse-glow 4s ease-in-out infinite;
+  }
+  
+  .animate-grid-pulse {
+    animation: grid-pulse 4s ease-in-out infinite;
+  }
+  
+  .animate-shimmer {
+    animation: shimmer 3s linear infinite;
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    box-shadow: 0 0 20px rgba(212, 168, 83, 0.2);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(212, 168, 83, 0.4);
+  }
+}
+
+@keyframes grid-pulse {
+  0%, 100% {
+    opacity: 0.08;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.2;
+    transform: scale(1.5);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes draw-line {
+  from {
+    stroke-dashoffset: 100%;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-border);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
