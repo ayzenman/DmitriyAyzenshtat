@@ -119,46 +119,32 @@ const Contact = () => {
 
     return () => ctx.revert();
   }, []);
+  // ===== ОТПРАВКА ЧЕРЕЗ ПРОКСИ (безопасно) =====
+const sendToTelegram = async (data: typeof formData) => {
+  try {
+    // Отправляем на наш API-эндпоинт вместо прямого запроса к Telegram
+    const response = await fetch('/api/send-telegram', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
 
-   // ===== НОВАЯ ФУНКЦИЯ ОТПРАВКИ В TELEGRAM =====
-  const sendToTelegram = async (data: typeof formData) => {
-    const TOKEN = '8268295506:AAHhFaN0XJqp9r9He39ilJlEcb_ohPLXKTE';        // ⚠️ ЗАМЕНИТЕ НА СВОЙ ТОКЕН
-    const CHAT_ID = '366708878';         // ⚠️ ЗАМЕНИТЕ НА СВОЙ CHAT ID
-
-    // Формируем текст сообщения
-    const message = `
-📩 <b>Новая заявка с сайта</b>
-
-👤 <b>Имя:</b> ${data.name}
-📞 <b>Телефон:</b> ${data.phone}
-✉️ <b>Email:</b> ${data.email}
-🏢 <b>Компания и оборот:</b> ${data.company || 'не указано'}
-    `;
-
-    const url = `https://api.telegram.org/bot${TOKEN}/sendMessage`;
-
-    try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          chat_id: CHAT_ID,
-          text: message,
-          parse_mode: 'HTML', // чтобы жирный текст работал
-        }),
-      });
-
-      return response.ok;
-    } catch (error) {
-      console.error('Ошибка отправки в Telegram:', error);
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('API error:', errorData);
       return false;
     }
-  };
 
-  // Конец вставки
-   // ===== ОБНОВЛЁННЫЙ handleSubmit =====
+    return true;
+  } catch (error) {
+    console.error('Ошибка отправки:', error);
+    return false;
+  }
+};
+// Конец вставки
+  // ===== ОБНОВЛЁННЫЙ handleSubmit =====
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true); // включаем индикатор загрузки
