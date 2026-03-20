@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://dmitriyayzenshtat.vercel.app/sitemap.xml
+Sitemap: https://ayzenshtat.ru/sitemap.xml
