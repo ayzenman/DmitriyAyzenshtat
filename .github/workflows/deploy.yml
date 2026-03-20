@@ -38,9 +38,6 @@ jobs:
           local-dir: ./dist/
           # ВАЖНО: укажите точный путь к корневой папке вашего сайта на Beget
           server-dir: public_html/
-          protocol: ftps
-          security: strict
-          port: 21
           # dangerous-clean-slate: true удалит ВСЕ файлы в server-dir перед загрузкой новых.
           # Это гарантирует, что на сервере не останется старых файлов из неправильных папок.
           dangerous-clean-slate: true
