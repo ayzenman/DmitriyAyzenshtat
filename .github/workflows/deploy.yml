@@ -24,14 +24,14 @@ jobs:
         run: npm run build
 
       - name: Deploy to Beget via FTP
-  uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-  with:
-    server: ${{ secrets.FTP_SERVER }}
-    username: ${{ secrets.FTP_USERNAME }}
-    password: ${{ secrets.FTP_PASSWORD }}
-    local-dir: ./dist/
-    server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
-    protocol: ftps          # <--- добавляем
-    security: strict        # <--- можно добавить (или loose, если сертификат самоподписан)
-    port: 21                # <--- обычно 21 для явного FTPS, но можно не указывать
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+         server: ${{ secrets.FTP_SERVER }}
+         username: ${{ secrets.FTP_USERNAME }}
+         password: ${{ secrets.FTP_PASSWORD }}
+         local-dir: ./dist/
+         server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
+         protocol: ftps          # <--- добавляем
+         security: strict        # <--- можно добавить (или loose, если сертификат самоподписан)
+         port: 21                # <--- обычно 21 для явного FTPS, но можно не указывать
     
