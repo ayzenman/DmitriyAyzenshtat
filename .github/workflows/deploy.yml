@@ -37,7 +37,7 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
           # ВАЖНО: укажите точный путь к корневой папке вашего сайта на Beget
-          server-dir: ./
+          server-dir: public_html/
           protocol: ftps
           security: strict
           port: 21
