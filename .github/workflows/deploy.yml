@@ -1,37 +1,46 @@
 name: Build and Deploy to Beget
 
+# Запускать при пушах в ветку main (измените на вашу основную ветку, если нужно)
 on:
   push:
-    branches: [ main ]   # замените main на вашу основную ветку, если она называется по-другому (например, master)
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
+      # 1. Скачиваем код из репозитория
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      # 2. Устанавливаем Node.js (версия 20)
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: '20'
 
+      # 3. Устанавливаем зависимости (используем npm install вместо ci для избежания ошибок с lock-файлом)
       - name: Install dependencies
         run: npm install
 
+      # 4. Собираем проект (должна появиться папка dist)
       - name: Build project
         run: npm run build
 
+      # 5. Загружаем файлы на Beget по FTP с полной очисткой папки назначения
       - name: Deploy to Beget via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-         server: ${{ secrets.FTP_SERVER }}
-         username: ${{ secrets.FTP_USERNAME }}
-         password: ${{ secrets.FTP_PASSWORD }}
-         local-dir: ./dist/
-         server-dir: ${{ secrets.FTP_REMOTE_DIR }}/
-         protocol: ftps          # <--- добавляем
-         security: strict        # <--- можно добавить (или loose, если сертификат самоподписан)
-         port: 21                # <--- обычно 21 для явного FTPS, но можно не указывать
-    
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          local-dir: ./dist/
+          # ВАЖНО: укажите точный путь к корневой папке вашего сайта на Beget
+          server-dir: /home/m98790uq/ayzenshtat.ru/public_html/
+          protocol: ftps
+          security: strict
+          port: 21
+          # dangerous-clean-slate: true удалит ВСЕ файлы в server-dir перед загрузкой новых.
+          # Это гарантирует, что на сервере не останется старых файлов из неправильных папок.
+          dangerous-clean-slate: true
