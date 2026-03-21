@@ -144,13 +144,41 @@ const sendToTelegram = async (data: typeof formData) => {
   }
 };
 // Конец вставки
+  // Функция отправки почты
+  const sendEmail = async (data: typeof formData) => {
+  try {
+    const response = await fetch('/send-email.php', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams({
+        name: data.name,
+        phone: data.phone,
+        email: data.email,
+        company: data.company,
+      }).toString(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error('API error:', errorData);
+      return false;
+    }
+
+    return true;
+  } catch (error) {
+    console.error('Ошибка отправки:', error);
+    return false;
+  }
+};
   // ===== ОБНОВЛЁННЫЙ handleSubmit =====
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true); // включаем индикатор загрузки
 
     try {
-      const success = await sendToTelegram(formData);
+      const success = await sendEmail(formData);
 
       if (success) {
         setShowSuccess(true);               // показываем диалог успеха
