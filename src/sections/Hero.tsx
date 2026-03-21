@@ -144,10 +144,10 @@ const Hero = () => {
           >
             <span className="word inline-block opacity-0">Превращаю</span>{' '}
             <span className="word inline-block opacity-0">финансовый</span>{' '}
-            <span className="word inline-block opacity-0 text-[var(--color-gold)]">хаос </span>
+            <span className="word inline-block opacity-0 text-[var(--color-gold)]">хаос</span>{' '}
             <br className="hidden sm:block" />
             <span className="word inline-block opacity-0">в </span>{' '}
-            <span className="word inline-block opacity-0">стратегическое </span>
+            <span className="word inline-block opacity-0">стратегическое</span>{' '}
             <br className="hidden sm:block" />
             <span className="word inline-block opacity-0 text-[var(--color-gold)]">преимущество</span>
           </h1>
