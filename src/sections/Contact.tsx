@@ -120,7 +120,8 @@ const Contact = () => {
     return () => ctx.revert();
   }, []);
   // ===== ОТПРАВКА ЧЕРЕЗ ПРОКСИ (безопасно) =====
-const sendToTelegram = async (data: typeof formData) => {
+{/*
+  const sendToTelegram = async (data: typeof formData) => {
   try {
     // Отправляем на наш API-эндпоинт вместо прямого запроса к Telegram
     const response = await fetch('/api/send-telegram', {
@@ -143,6 +144,7 @@ const sendToTelegram = async (data: typeof formData) => {
     return false;
   }
 };
+*/}
 // Конец вставки
   // Функция отправки почты
   const sendEmail = async (data: typeof formData) => {
