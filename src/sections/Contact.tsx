@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
+import emailjs from '@emailjs/browser';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Добавьте Loader в импорт вместе с другими иконками
 import { Mail, Send, MessageCircle, CheckCircle, Loader } from 'lucide-react';
@@ -119,6 +120,34 @@ const Contact = () => {
 
     return () => ctx.revert();
   }, []);
+  
+  const sendEmail = async (data: typeof formData) => {
+  try {
+    // Вставьте сюда ваши ключи
+    const serviceId = 'service_scev2xs';   // ваш Service ID
+    const templateId = 'template_gljljjd'; // ваш Template ID
+    const publicKey = 'qZrXtIof1iTXv0O81';      // ваш Public Key
+
+    const templateParams = {
+      name: data.name,
+      phone: data.phone,
+      email: data.email,
+      company: data.company,
+    };
+
+    const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
+
+    if (response.status === 200) {
+      return true;
+    } else {
+      console.error('EmailJS error:', response);
+      return false;
+    }
+  } catch (error) {
+    console.error('Ошибка отправки:', error);
+    return false;
+  }
+};
   // ===== ОТПРАВКА ЧЕРЕЗ ПРОКСИ (безопасно) =====
 {/*
   const sendToTelegram = async (data: typeof formData) => {
@@ -144,7 +173,7 @@ const Contact = () => {
     return false;
   }
 };
-*/}
+
 // Конец вставки
   // Функция отправки почты
   const sendEmail = async (data: typeof formData) => {
@@ -174,6 +203,7 @@ const Contact = () => {
     return false;
   }
 };
+*/}
   // ===== ОБНОВЛЁННЫЙ handleSubmit =====
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
