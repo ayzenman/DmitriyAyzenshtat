@@ -122,17 +122,27 @@ em{color:var(--rust-d);font-style:italic}
 .toc a{text-decoration:none;color:#2b2820;display:flex;gap:11px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line);font-weight:600;font-size:.92rem}
 .toc a span{font-family:'Spectral',serif;font-weight:800;color:var(--rust);font-size:.98rem;min-width:24px}
 .toc a:hover{color:var(--rust)}
-.toc .ph{font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:800;padding:12px 0 3px;grid-column:1/-1;border-bottom:none}
+.toc .ph{display:block;width:100%;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:800;padding:18px 0 4px;margin-top:6px;grid-column:1/-1;border-bottom:none;line-height:1.4}
+.toc .ph:first-child{padding-top:0;margin-top:0}
 
 footer{background:#1c1810;color:#a89d84;text-align:center;padding:36px 24px;font-size:.85rem;line-height:1.6}
 footer strong{color:#c9bfa9}
 
-/* ── additions for full version ── */
 .dtable{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:11px;overflow:hidden;font-size:.88rem;margin-top:6px}
 .dtable th{background:#211c13;color:#efe6d4;font-family:'Spectral',serif;font-weight:800;text-align:left;padding:9px 12px;font-size:.85rem}
 .dtable td{border-top:1px solid var(--line);padding:9px 12px;color:#332f29;vertical-align:top}
 .dtable tr:nth-child(even) td{background:#f7f1e6}
 .dtable .rh{background:#ede5d4;font-weight:700;white-space:nowrap}
+@media(max-width:700px){
+  .dtable thead{display:none}
+  .dtable, .dtable tbody, .dtable tr, .dtable td{display:block;width:100%}
+  .dtable tr{margin-bottom:12px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+  .dtable tr:first-child{display:none}
+  .dtable td{padding:10px 14px;border-top:1px solid var(--line);white-space:normal}
+  .dtable td:first-child{border-top:none}
+  .dtable td::before{content:attr(data-label);display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--rust);margin-bottom:4px}
+  .dtable .rh{background:transparent;font-weight:700}
+}
 .wheel{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:8px}
 @media(max-width:920px){.wheel{grid-template-columns:1fr}}
 .wlvl{border-radius:12px;padding:16px 16px;color:#fff}
@@ -155,6 +165,21 @@ footer strong{color:#c9bfa9}
 .tmpl .k{color:#d9a441;font-weight:700}
 .tmpl .c{color:#8fae8a}
 
+.ov-hook{font-family:'Spectral',serif;font-style:italic;font-size:clamp(1.25rem,2.5vw,1.75rem);line-height:1.48;color:#211c13;max-width:46ch}
+.ov-banner{background:linear-gradient(165deg,#1d1810 0%,#312a1c 100%);color:#e9dfc8;text-align:center}
+.ov-banner h2{color:#f6efe1}
+.ov-banner .sub2{color:#c9bfa9;font-size:1.08rem;max-width:60ch;margin:14px auto 0}
+.ov-cta{display:inline-block;margin-top:26px;background:var(--rust);color:#fff;font-weight:800;padding:16px 34px;border-radius:50px;text-decoration:none;font-size:1.05rem;letter-spacing:.01em;box-shadow:0 8px 22px rgba(176,70,31,.35)}
+.ov-cta:hover{background:var(--rust-d)}
+.navcard{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:30px 28px;display:flex;flex-direction:column;height:100%}
+.navcard h3{font-size:1.4rem;margin-bottom:8px}
+.navcard p{font-size:.96rem;color:#3f3a2f;flex-grow:1}
+.navcard .meta2{display:flex;gap:16px;margin:14px 0 18px;font-size:.78rem;color:var(--muted);font-weight:700;letter-spacing:.04em;text-transform:uppercase}
+.navcard a.go{display:inline-block;text-align:center;background:var(--ink);color:#f6efe1;font-weight:800;padding:13px 0;border-radius:10px;text-decoration:none;font-size:.96rem}
+.navcard a.go:hover{background:var(--rust-d)}
+.navcard.alt{border-top:5px solid var(--rust)}
+.navcard.full{border-top:5px solid var(--teal)}
+
 </style>
 </head>
 <body>
@@ -167,106 +192,179 @@ footer strong{color:#c9bfa9}
     <p class="sub">Успех — это не пункт назначения, а испытание на прочность. Чем быстрее растёт компания, тем безжалостнее она проверяет своего создателя: готов ли он измениться вместе с ней. Разбор о том, как вырасти из основателя в строителя организации, которая переживёт любой масштаб.</p>
     <div class="book">По книге Eric G. Flamholtz &amp; Yvonne Randle. «Growing Pains: Building Sustainably Successful Organizations». 5-е изд., John Wiley &amp; Sons, 2016.</div>
     <div class="meta"><span>40 лет исследований</span><span>База 5000+ компаний</span><span>3 части · 13 глав</span></div>
-    <div style="margin-top:26px;font-size:.92rem;color:#a89d84;font-family:'Spectral',serif;font-style:italic">Подготовил консультант по управлению Айзенштат Дмитрий совместно с Claude. 
-      <br> <a href="https://ayzenshtat.ru" style="color:var(--gold);font-style:normal;font-weight:600;text-decoration:none">Ayzenshtat.ru</a></div>
+    <div style="margin-top:26px;font-size:.92rem;color:#a89d84;font-family:'Spectral',serif;font-style:italic">Подготовил консультант по управлению Айзенштат Дмитрий совместно с Claude.<br><a href="https://ayzenshtat.ru" style="color:var(--gold);font-style:normal;font-weight:600;text-decoration:none">Ayzenshtat.ru</a></div>
+    <div style="margin-top:12px;font-size:.78rem;color:#7a7060;font-family:'Spectral',serif;font-style:italic;max-width:54ch">Обзорно-образовательный материал. Не является перепечаткой. Права на оригинал — у авторов и John Wiley &amp; Sons. Рекомендуем прочесть оригинал.</div>
   </div>
 </section>
 
-<!-- 2 BIG IDEA -->
-<section class="slide">
-  <div class="snum">02</div><div class="spart">Главная идея</div>
+<!-- 2 NAVIGATION (new two-part format) -->
+<section class="slide" id="snav">
+  <div class="snum">02</div><div class="spart">Навигация</div>
   <div class="deck">
-    <span class="kicker">Главная идея</span>
-    <h2>Рост ломает компанию, если её устройство за ним не успевает</h2>
-    <p class="lead">Когда продажи растут, возникает разрыв между тем, какой бизнес стал <strong>по размеру</strong>, и тем, какие у него системы, структура и люди. Этот разрыв проявляется как набор предсказуемых проблем — <em>«болезни роста»</em>. Они лечатся: компанию нужно сознательно перевести из <strong>предпринимательской</strong> (всё держится на основателе) в <strong>профессионально управляемую</strong> (всё держится на системах) — не теряя предпринимательского духа.</p>
-    <div class="grid g3" style="margin-top:24px">
-      <div class="card a"><span class="tag">Проблема</span><h3>Разрыв развития</h3><p>Бизнес вырос быстрее своего внутреннего устройства. Отсюда хаос, пожары, падение прибыли при росте продаж.</p></div>
-      <div class="card o"><span class="tag">Закон роста</span><h3>Удвоился — стал другим</h3><p>Каждое удвоение (выручка, штат, объём) требует <strong>другой</strong> инфраструктуры, а не «больше того же».</p></div>
-      <div class="card g"><span class="tag">Решение</span><h3>Управляемый переход</h3><p>Есть карта (стадии), диагностика (тесты), инструменты (5 систем управления) и путь внедрения. Это и есть гайд.</p></div>
+    <span class="kicker">Как читать этот документ</span>
+    <h2>Два маршрута — выберите свой</h2>
+    <p class="lead muted">Документ состоит из двух самостоятельных частей в одном файле. Можно прочитать только обзор, только полный гайд — или сначала одно, потом другое.</p>
+    <div class="grid g2" style="margin-top:24px;align-items:stretch">
+      <div class="navcard alt">
+        <span class="tag">5–10 минут</span>
+        <h3>Обзор</h3>
+        <p>Короткий живой рассказ для тех, кто ещё не знаком с темой: что такое болезни роста, откуда они берутся и почему это касается лично вас как руководителя. Без таблиц и инструментов — только суть и мотивация копнуть глубже.</p>
+        <div class="meta2"><span>6 слайдов</span><span>Знакомство с темой</span></div>
+        <a class="go" href="#ov1">Читать обзор →</a>
+      </div>
+      <div class="navcard full">
+        <span class="tag">60–90 минут</span>
+        <h3>Полный гайд</h3>
+        <p>Все инструменты книги: Пирамида развития, семь стадий роста, тест на болезни роста, пять систем управления с шаблонами и заполненными примерами, лидерство, культура, разобранные кейсы. Для тех, кто готов применять.</p>
+        <div class="meta2"><span>64+ слайдов</span><span>Практическое применение</span></div>
+        <a class="go" href="#stoc">Читать полный гайд →</a>
+      </div>
     </div>
-    <p class="note">Эмпирически 6 уровней устройства компании объясняют до <strong>90% финансового результата</strong> (≈80% валовой маржи, 55% EBIT). Остальное — внешние факторы.</p>
+  </div>
+</section>
+<!-- OV1 HOOK -->
+<section class="slide ov-cover" id="ov1">
+  <div class="snum">03</div><div class="spart">Обзор · 1 из 6</div>
+  <div class="deck">
+    <span class="kicker">Узнаёте свою компанию?</span>
+    <p class="ov-hook">Часов в сутках не хватает. Половину дня вы тушите пожары, которые вчера казались мелочью. Один отдел понятия не имеет, чем занят сосед по коридору. Планы, принятые в начале года, к лету никто уже не помнит — и тем более не выполняет. А выручка растёт, но почему-то прибыль — нет.</p>
+    <p class="lead muted" style="margin-top:22px">Если хотя бы половина узнаётся — вы не одиноки. Это не сбой именно вашего управления и не личный провал. Это типовой набор симптомов, который проходит почти каждая растущая компания. У него есть имя — «болезни роста», и есть схема, как их лечить.</p>
   </div>
 </section>
 
-<!-- 3 NAVIGATION -->
-<section class="slide">
-  <div class="snum">03</div><div class="spart">Навигация</div>
+<!-- OV2 WHY -->
+<section class="slide" id="ov2">
+  <div class="snum">04</div><div class="spart">Обзор · 2 из 6</div>
   <div class="deck">
-    <span class="kicker">Как устроен документ</span>
-    <h2>Маршрут гайда</h2>
+    <span class="kicker">Почему так происходит</span>
+    <h2>Дело не в людях. Компания обогнала своё устройство</h2>
+    <p class="lead">Когда бизнес только начинается, всё держится на одном человеке: он лично знает каждого сотрудника, лично решает каждый вопрос, лично чувствует, что происходит. Это работает — пока компания маленькая. Но рост меняет правила игры незаметно: продажи увеличиваются, а внутреннее устройство компании — структура, роли, системы, привычки управления — остаётся прежним.</p>
+    <p class="lead" style="margin-top:14px">Возникает разрыв между тем, каким бизнес <strong>стал по размеру</strong>, и тем, как он по-прежнему <strong>управляется</strong>. Этот разрыв и проявляется как набор предсказуемых симптомов — недостаток часов, пожары, незнание целей, нехватка управленцев. Они не случайны и не говорят о вашей некомпетентности — это сигнал, что инфраструктура компании отстала от её размера.</p>
+  </div>
+</section>
+
+<!-- OV3 MODEL -->
+<section class="slide" id="ov3">
+  <div class="snum">05</div><div class="spart">Обзор · 3 из 6</div>
+  <div class="deck">
+    <span class="kicker">Как устроена компания изнутри</span>
+    <h2>У бизнеса есть «водопровод» — и о нём редко думают, пока не потечёт</h2>
+    <p class="lead">Основателя почти всегда увлекают рынок и продукт — то, ради чего всё затевалось. А вот к операционке, отчётности и системам управления интерес примерно такой же, как у владельца дома к собственному водопроводу: хочется, чтобы просто работало, разбираться в трубах — нет.</p>
+    <p class="lead" style="margin-top:14px">Но именно эти «трубы» — ресурсы компании, её повседневные операционные системы, системы управления и культура — и есть то, на чём держится здание бизнеса. Они выстраиваются друг на друге, как этажи: слабый нижний — рушится всё, что выше. И главный закон роста простой: каждое удвоение компании требует не «больше того же самого», а <strong>другого</strong> устройства.</p>
+    <p class="note">Именно поэтому компания, которая отлично справлялась на $5 млн выручки, может задыхаться на $20 млн — не потому, что стала хуже, а потому, что выросла из старой инфраструктуры, как ребёнок из одежды.</p>
+  </div>
+</section>
+
+<!-- OV4 WHAT CHANGES -->
+<section class="slide" id="ov4">
+  <div class="snum">06</div><div class="spart">Обзор · 4 из 6</div>
+  <div class="deck">
+    <span class="kicker">Что это меняет для руководителя</span>
+    <h2>От музыканта, который играет на всём, — к дирижёру</h2>
+    <p class="lead">Раньше основатель был самым универсальным игроком в оркестре: мог сесть за любой инструмент и сыграть лучше других. Это и было его силой на старте. Но с ростом компании та же черта — стремление лично контролировать всё — превращается в ограничение: он становится «узким горлышком», через которое идут все решения, а вокруг незаметно вырастает команда людей слабее него самого.</p>
+    <p class="lead" style="margin-top:14px">Дирижёр не играет на скрипке лучше скрипача — его работа другая: задать темп, удержать общую партитуру, услышать, где оркестр фальшивит. Так и здесь: руководитель отвечает за <strong>что</strong> должно быть достигнуто — видение, развитие компании, культуру, — но не обязан лично делать <strong>как</strong>. Это не значит меньше ответственности. Это значит — другая ответственность.</p>
+    <p class="note">Хорошая новость: это не приговор и не нужно «просто работать больше». Есть карта — стадии роста, через которые проходит любой бизнес, и понятный набор инструментов для каждой из них.</p>
+  </div>
+</section>
+
+<!-- OV5 BRIDGE -->
+<section class="slide ov-banner" id="ov5">
+  <div class="snum" style="color:#a89d84">07</div><div class="spart" style="color:#bd842a">Обзор · 5 из 6</div>
+  <div class="deck">
+    <span class="kicker" style="color:var(--gold);border-color:var(--gold)">Что дальше</span>
+    <h2>Полный практикум: 64+ слайда инструментов</h2>
+    <p class="sub2">В полном гайде — карта из семи стадий роста с привязкой к выручке вашей компании, тест на 10 болезней роста с подсчётом балла и сравнением с базой 5000+ компаний, Пирамида развития для самооценки по шести опорам, пять систем управления (планирование, структура, эффективность, лидерство, культура) — с шаблонами, заполненными примерами и типичными ошибками. Плюс разобранные кейсы реальных компаний и план действий на ближайший квартал.</p>
+    <a class="ov-cta" href="#stoc">Читать полный гайд →</a>
+  </div>
+</section>
+<!-- OV6 BANNER -->
+<section class="slide ov-banner" id="ov6" style="min-height:60vh">
+  <div class="deck" style="text-align:center">
+    <div class="kicker" style="color:var(--gold);border-color:var(--gold)">Часть II</div>
+    <h1 style="font-size:clamp(1.9rem,4.6vw,3.4rem);color:#f6efe1">Полный практикум</h1>
+    <p class="sub2" style="margin:18px auto 0">Дальше — все шесть опор Пирамиды, все семь стадий, все пять систем управления с шаблонами и заполненными примерами. Документ, к которому можно возвращаться как к справочнику.</p>
+  </div>
+</section>
+<!-- TOC FULL GUIDE -->
+<section class="slide" id="stoc">
+  <div class="snum">09</div><div class="spart">Полный гайд · Оглавление</div>
+  <div class="deck">
+    <span class="kicker">Как устроен полный гайд</span>
+    <h2>Оглавление полного практикума</h2>
     <p class="lead muted">Часть I — почему ломается и что менять (включая личную трансформацию собственника). Часть II — пять систем управления с шаблонами и примерами. Часть III — лидерство, внедрение, доказательства.</p>
     <div class="toc">
       <div class="ph">Часть I · Почему бизнес ломается и что менять</div>
-      <a href="#s4"><span>04</span> Успех — не гарантия выживания</a>
-      <a href="#s5"><span>05</span> Портрет предпринимателя</a>
-      <a href="#s6"><span>06</span> Сила превращается в ограничение</a>
-      <a href="#s7"><span>07</span> Дилемма основателя и 3 идеи</a>
-      <a href="#s8"><span>08</span> Четыре варианта</a>
-      <a href="#s9"><span>09</span> Новая роль: от игрока к дирижёру</a>
-      <a href="#s10"><span>10</span> Пирамида развития: 6 опор</a>
-      <a href="#s11"><span>11</span> Опоры 1–3: рынок, продукт, ресурсы</a>
-      <a href="#s12"><span>12</span> Опоры 4–6: операции, управление, культура</a>
-      <a href="#s13"><span>13</span> Инструмент: самооценка по Пирамиде</a>
-      <a href="#s14"><span>14</span> Бенчмарки: где вы среди компаний</a>
-      <a href="#s15"><span>15</span> Семь стадий роста: обзор</a>
-      <a href="#s16"><span>16</span> Стадии I–II: предпринимательская фаза</a>
-      <a href="#s17"><span>17</span> Стадии III–IV: рождение зрелости</a>
-      <a href="#s18"><span>18</span> Стадии V–VII: после зрелости</a>
-      <a href="#s19"><span>19</span> Предприниматель vs менеджмент</a>
-      <a href="#s20"><span>20</span> 10 болезней роста (симптомы)</a>
-      <a href="#s21"><span>21</span> Инструмент: бланк опроса болезней</a>
-      <a href="#s22"><span>22</span> Интерпретация и бенчмарки болезней</a>
+      <a href="#s10"><span>10</span> Успех — не гарантия выживания</a>
+      <a href="#s11"><span>11</span> Портрет предпринимателя</a>
+      <a href="#s12"><span>12</span> Сила превращается в ограничение</a>
+      <a href="#s13"><span>13</span> Дилемма основателя и 3 идеи</a>
+      <a href="#s14"><span>14</span> Четыре варианта</a>
+      <a href="#s15"><span>15</span> Новая роль: от игрока к дирижёру</a>
+      <a href="#s16"><span>16</span> Пирамида развития: 6 опор</a>
+      <a href="#s17"><span>17</span> Опоры 1–3: рынок, продукт, ресурсы</a>
+      <a href="#s18"><span>18</span> Опоры 4–6: операции, управление, культура</a>
+      <a href="#s19"><span>19</span> Инструмент: самооценка по Пирамиде</a>
+      <a href="#s20"><span>20</span> Бенчмарки: где вы среди компаний</a>
+      <a href="#s21"><span>21</span> Семь стадий роста: обзор</a>
+      <a href="#s22"><span>22</span> Стадии I–II: предпринимательская фаза</a>
+      <a href="#s23"><span>23</span> Стадии III–IV: рождение зрелости</a>
+      <a href="#s24"><span>24</span> Стадии V–VII: после зрелости</a>
+      <a href="#s25"><span>25</span> Предприниматель vs менеджмент</a>
+      <a href="#s26"><span>26</span> 10 болезней роста (симптомы)</a>
+      <a href="#s27"><span>27</span> Инструмент: бланк опроса болезней</a>
+      <a href="#s28"><span>28</span> Интерпретация и бенчмарки болезней</a>
       <div class="ph">Часть II · Пять инструментов</div>
-      <a href="#s23"><span>23</span> Обзор 5 систем управления</a>
-      <a href="#s24"><span>24</span> Планирование: 7 вопросов</a>
-      <a href="#s25"><span>25</span> Планирование: 6 шагов процесса</a>
-      <a href="#s26"><span>26</span> Скан среды: рынок, конкуренты, тренды</a>
-      <a href="#s27"><span>27</span> Стратегическая доска (матрица)</a>
-      <a href="#s28"><span>28</span> Миссия: как формулировать</a>
-      <a href="#s29"><span>29</span> Колесо стратегии: 3 уровня</a>
-      <a href="#s30"><span>30</span> Шаблон документа плана (8 элементов)</a>
-      <a href="#s31"><span>31</span> Цели: objectives → goals → SMART</a>
-      <a href="#s32"><span>32</span> Ритм планирования и обзоры</a>
-      <a href="#s33"><span>33</span> Структура: 3 измерения + поддерж. системы</a>
-      <a href="#s34"><span>34</span> Структура: 3 формы</a>
-      <a href="#s35"><span>35</span> Структура: централизация</a>
-      <a href="#s36"><span>36</span> Структура: 8 критериев + нормативы</a>
-      <a href="#s37"><span>37</span> Полное описание роли (пример)</a>
-      <a href="#s38"><span>38</span> Эффективность: 7 компонентов</a>
-      <a href="#s39"><span>39</span> Scoreboard (табло результатов)</a>
-      <a href="#s40"><span>40</span> Форма оценки сотрудника (кейс SCPH)</a>
-      <a href="#s41"><span>41</span> Награды и ловушки оценки</a>
-      <a href="#s42"><span>42</span> Обзор результатов, ОС, упр. учёт</a>
-      <a href="#s43"><span>43</span> Развитие лидеров: 3 составляющие</a>
-      <a href="#s44"><span>44</span> Пирамида лидерского развития</a>
-      <a href="#s45"><span>45</span> «Внутренняя игра» руководителя</a>
-      <a href="#s46"><span>46</span> Как растить управленцев</a>
-      <a href="#s47"><span>47</span> Культура: 5 параметров</a>
-      <a href="#s48"><span>48</span> Номинальная vs реальная культура</a>
-      <a href="#s49"><span>49</span> Ценности в действии</a>
-      <a href="#s50"><span>50</span> Методика управления культурой</a>
-      <a href="#s51"><span>51</span> Документ ценностей и культ. опрос</a>
+      <a href="#s29"><span>29</span> Обзор 5 систем управления</a>
+      <a href="#s30"><span>30</span> Планирование: 7 вопросов</a>
+      <a href="#s31"><span>31</span> Планирование: 6 шагов процесса</a>
+      <a href="#s32"><span>32</span> Скан среды: рынок, конкуренты, тренды</a>
+      <a href="#s33"><span>33</span> Стратегическая доска (матрица)</a>
+      <a href="#s34"><span>34</span> Миссия: как формулировать</a>
+      <a href="#s35"><span>35</span> Колесо стратегии: 3 уровня</a>
+      <a href="#s36"><span>36</span> Шаблон документа плана (8 элементов)</a>
+      <a href="#s37"><span>37</span> Цели: objectives → goals → SMART</a>
+      <a href="#s38"><span>38</span> Ритм планирования и обзоры</a>
+      <a href="#s39"><span>39</span> Структура: 3 измерения + поддерж. системы</a>
+      <a href="#s40"><span>40</span> Структура: 3 формы</a>
+      <a href="#s41"><span>41</span> Структура: централизация</a>
+      <a href="#s42"><span>42</span> Структура: 8 критериев + нормативы</a>
+      <a href="#s43"><span>43</span> Полное описание роли (пример)</a>
+      <a href="#s44"><span>44</span> Эффективность: 7 компонентов</a>
+      <a href="#s45"><span>45</span> Scoreboard (табло результатов)</a>
+      <a href="#s46"><span>46</span> Форма оценки сотрудника (кейс SCPH)</a>
+      <a href="#s47"><span>47</span> Награды и ловушки оценки</a>
+      <a href="#s48"><span>48</span> Обзор результатов, ОС, упр. учёт</a>
+      <a href="#s49"><span>49</span> Почему работает весь цикл (25→50→80%)</a>
+      <a href="#s50"><span>50</span> Развитие лидеров: 3 составляющие</a>
+      <a href="#s51"><span>51</span> Пирамида лидерского развития</a>
+      <a href="#s52"><span>52</span> «Внутренняя игра» руководителя</a>
+      <a href="#s53"><span>53</span> Как растить управленцев</a>
+      <a href="#s54"><span>54</span> Сколько вкладывать в развитие лидеров</a>
+      <a href="#s55"><span>55</span> Культура: 5 параметров</a>
+      <a href="#s56"><span>56</span> Номинальная vs реальная культура</a>
+      <a href="#s57"><span>57</span> Ценности в действии</a>
+      <a href="#s58"><span>58</span> Методика управления культурой</a>
+      <a href="#s59"><span>59</span> Документ ценностей и культ. опрос</a>
       <div class="ph">Часть III · Лидерство, внедрение, доказательства</div>
-      <a href="#s52"><span>52</span> 6 стилей лидерства</a>
-      <a href="#s53"><span>53</span> Какой стиль когда применять</a>
-      <a href="#s54"><span>54</span> 5 задач операционного лидерства</a>
-      <a href="#s55"><span>55</span> 5 задач стратегического лидерства</a>
-      <a href="#s56"><span>56</span> Молекула лидерства</a>
-      <a href="#s57"><span>57</span> Та же модель для НКО</a>
-      <a href="#s58"><span>58</span> Путь перехода: 4 шага</a>
-      <a href="#s59"><span>59</span> Кейс Medco: диагноз и план</a>
-      <a href="#s60"><span>60</span> Кейс Medco: трансформация Боба</a>
-      <a href="#s61"><span>61</span> Кейс Guangzhou: замеры до/после</a>
-      <a href="#s62"><span>62</span> Доказательства: ещё компании</a>
-      <a href="#s63"><span>63</span> С чего начать в квартал</a>
-      <a href="#s64"><span>64</span> Контакты и авторство</a>
+      <a href="#s60"><span>60</span> 6 стилей лидерства</a>
+      <a href="#s61"><span>61</span> Какой стиль когда применять</a>
+      <a href="#s62"><span>62</span> 5 задач операционного лидерства</a>
+      <a href="#s63"><span>63</span> 5 задач стратегического лидерства</a>
+      <a href="#s64"><span>64</span> Молекула лидерства</a>
+      <a href="#s65"><span>65</span> Та же модель для НКО</a>
+      <a href="#s66"><span>66</span> Путь перехода: 4 шага</a>
+      <a href="#s67"><span>67</span> Кейс Medco: диагноз и план</a>
+      <a href="#s68"><span>68</span> Кейс Medco: трансформация Боба</a>
+      <a href="#s69"><span>69</span> Кейс Guangzhou: замеры до/после</a>
+      <a href="#s70"><span>70</span> Доказательства: ещё компании</a>
+      <a href="#s71"><span>71</span> С чего начать в квартал</a>
+      <a href="#s72"><span>72</span> Контакты и авторство</a>
     </div>
   </div>
 </section>
-
 <!-- 4 -->
-<section class="slide" id="s4">
-  <div class="snum">04</div><div class="spart">Часть I · Точка отсчёта</div>
+<section class="slide" id="s10">
+  <div class="snum">10</div><div class="spart">Часть I · Точка отсчёта</div>
   <div class="deck">
     <span class="kicker">С чего всё начинается</span>
     <h2>Создать бизнес трудно. Удержать — труднее</h2>
@@ -274,15 +372,15 @@ footer strong{color:#c9bfa9}
     <div class="grid g3" style="margin-top:24px">
       <div class="card a"><span class="tag">Первый барьер</span><h3>50% гибнут за 5 лет</h3><p>Создать жизнеспособный стартап — уже достижение. Но это только начало пути.</p></div>
       <div class="card o"><span class="tag">Зрелые тоже падают</span><h3>Примеры</h3><p>Osborne Computer дошла до $100 млн за 3 года и обанкротилась. Myspace уступила Facebook, Diedrich Coffee — Starbucks, Borders — Amazon.</p></div>
-      <div class="card g"><span class="tag">Ориентир</span><h3>Успех «вдолгую»</h3><p>Устойчивость = успех через смену поколений руководителей: GE (с 1878), Heineken (1864), Toyota.</p></div>
+      <div class="card g"><span class="tag">Ориентир</span><h3>Успех «вдолгую»</h3><p>Устойчивость — это успех, который переживает смену поколений руководителей: GE держится с 1878 года, Heineken — с 1864-го.</p></div>
     </div>
     <p class="note">За 15 лет (2000→2015) в топ-10 Nasdaq удержались только Microsoft, Intel и Cisco. Болезни роста переживают все растущие компании — опасно их игнорировать, а не испытывать.</p>
   </div>
 </section>
 
 <!-- 5 -->
-<section class="slide" id="s5">
-  <div class="snum">05</div><div class="spart">Часть I · Кто строит бизнес</div>
+<section class="slide" id="s11">
+  <div class="snum">11</div><div class="spart">Часть I · Кто строит бизнес</div>
   <div class="deck">
     <span class="kicker">Портрет предпринимателя</span>
     <h2>Что даёт силу на старте</h2>
@@ -298,12 +396,12 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 6 -->
-<section class="slide" id="s6">
-  <div class="snum">06</div><div class="spart">Часть I · Поворот</div>
+<section class="slide" id="s12">
+  <div class="snum">12</div><div class="spart">Часть I · Поворот</div>
   <div class="deck">
     <span class="kicker">Оборотная сторона</span>
     <h2>С ростом те же качества превращаются в ограничение</h2>
-    <p class="bridge">Те самые черты со слайда 05 при увеличении размера переворачиваются.</p>
+    <p class="bridge">Те самые черты со слайда 11 при увеличении размера переворачиваются.</p>
     <div class="flip" style="margin-top:6px">
       <div class="fr"><div class="from">Контролирует всё лично, в курсе каждой детали</div><div class="ar">→</div><div class="to">Становится «узким горлышком»: все решения несут к нему, компания тормозит</div></div>
       <div class="fr"><div class="from">Самый сильный специалист в компании</div><div class="ar">→</div><div class="to">Вокруг вырастают люди слабее него — «управленческие пигмеи»; компания не способнее одного человека</div></div>
@@ -317,8 +415,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 7 -->
-<section class="slide" id="s7">
-  <div class="snum">07</div><div class="spart">Часть I · Что менять в голове</div>
+<section class="slide" id="s13">
+  <div class="snum">13</div><div class="spart">Часть I · Что менять в голове</div>
   <div class="deck">
     <span class="kicker">Корневое противоречие</span>
     <h2>Дилемма основателя — и три идеи, которые её снимают</h2>
@@ -336,8 +434,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 8 -->
-<section class="slide" id="s8">
-  <div class="snum">08</div><div class="spart">Часть I · Развилка решений</div>
+<section class="slide" id="s14">
+  <div class="snum">14</div><div class="spart">Часть I · Развилка решений</div>
   <div class="deck">
     <span class="kicker">Выбор собственника</span>
     <h2>Четыре варианта, когда вести «по-старому» нельзя</h2>
@@ -351,8 +449,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 9 -->
-<section class="slide" id="s9">
-  <div class="snum">09</div><div class="spart">Часть I · Новая роль</div>
+<section class="slide" id="s15">
+  <div class="snum">15</div><div class="spart">Часть I · Новая роль</div>
   <div class="deck">
     <span class="kicker">Чем теперь занят собственник</span>
     <h2>От игрока к дирижёру</h2>
@@ -377,8 +475,8 @@ footer strong{color:#c9bfa9}
   </div>
 </section>
 <!-- 10 PYRAMID -->
-<section class="slide" id="s10">
-  <div class="snum">10</div><div class="spart">Часть I · Каркас</div>
+<section class="slide" id="s16">
+  <div class="snum">16</div><div class="spart">Часть I · Каркас</div>
   <div class="deck">
     <span class="kicker">Главная модель</span>
     <h2>Пирамида развития: шесть областей, которыми управляет любой бизнес</h2>
@@ -407,8 +505,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 11 PYRAMID 1-3 -->
-<section class="slide" id="s11">
-  <div class="snum">11</div><div class="spart">Часть I · Пирамида детально</div>
+<section class="slide" id="s17">
+  <div class="snum">17</div><div class="spart">Часть I · Пирамида детально</div>
   <div class="deck">
     <span class="kicker">Опоры 1–3 · предпринимательский фундамент</span>
     <h2>Рынок · Продукт · Ресурсы</h2>
@@ -435,8 +533,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 12 PYRAMID 4-6 -->
-<section class="slide" id="s12">
-  <div class="snum">12</div><div class="spart">Часть I · Пирамида детально</div>
+<section class="slide" id="s18">
+  <div class="snum">18</div><div class="spart">Часть I · Пирамида детально</div>
   <div class="deck">
     <span class="kicker">Опоры 4–6 · устройство зрелой компании</span>
     <h2>Операции · Системы управления · Культура</h2>
@@ -445,7 +543,7 @@ footer strong{color:#c9bfa9}
       <div class="card t">
         <span class="tag">Опора 4</span><h3>Операционные системы</h3>
         <p>Ежедневные процессы: учёт, склад, закупки, доставка, найм, ИТ. «Водопровод» бизнеса. Когда он не развит, компания встаёт.</p>
-        <p style="margin-top:8px"><em>Пример:</em> Walmart обошёл Sears и Kmart логистикой и информационными системами — при тех же товарах побеждает у кого ниже издержки.</p>
+        <p style="margin-top:8px"><em>Пример:</em> Walmart обошёл Kmart не лучшим товаром (товар тот же), а логистикой и информационными системами — у кого ниже издержки на доставку, тот и побеждает в цене.</p>
       </div>
       <div class="card a">
         <span class="tag">Опора 5</span><h3>Системы управления</h3>
@@ -463,8 +561,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 13 PYRAMID SCORE -->
-<section class="slide" id="s13">
-  <div class="snum">13</div><div class="spart">Часть I · ИНСТРУМЕНТ</div>
+<section class="slide" id="s19">
+  <div class="snum">19</div><div class="spart">Часть I · ИНСТРУМЕНТ</div>
   <div class="deck">
     <span class="kicker">Инструмент · самооценка зрелости</span>
     <h2>Оцените силу компании по Пирамиде</h2>
@@ -477,7 +575,7 @@ footer strong{color:#c9bfa9}
       <div>
         <h3 style="margin-bottom:8px">Шкала общего балла</h3>
         <div class="scale">
-          <div class="sc g-green"><span class="rng">4.5 +</span><small>Мировой лидер (Starbucks, Microsoft, IBM)</small></div>
+          <div class="sc g-green"><span class="rng">4.5 +</span><small>Мировой лидер (Starbucks, Microsoft)</small></div>
           <div class="sc" style="background:#4e7a4a"><span class="rng">4.0 +</span><small>Превосходная (Amgen, Nike, Walmart)</small></div>
           <div class="sc" style="background:#7a8a32;color:#1c1810"><span class="rng">3.5 +</span><small>Устойчиво успешная</small></div>
           <div class="sc g-yellow"><span class="rng">3.0–3.4</span><small>Успех есть, но неустойчив (Ford, Sony)</small></div>
@@ -491,27 +589,25 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 14 BENCHMARKS -->
-<section class="slide" id="s14">
-  <div class="snum">14</div><div class="spart">Часть I · ИНСТРУМЕНТ</div>
+<section class="slide" id="s20">
+  <div class="snum">20</div><div class="spart">Часть I · ИНСТРУМЕНТ</div>
   <div class="deck">
     <span class="kicker">Бенчмарки по базе 5000+ компаний</span>
     <h2>Где вы среди других компаний</h2>
     <p class="lead muted">Получив свой балл по Пирамиде, сравните его с распределением реальных компаний из базы исследований.</p>
-    <table class="dtable" style="max-width:640px">
-      <tr><th>Средний балл</th><th>Доля компаний</th><th>Уровень</th></tr>
-      <tr><td>4.5–5.0</td><td>менее 1%</td><td>Мировые лидеры</td></tr>
-      <tr><td>4.0–4.4</td><td>3%</td><td>Превосходные</td></tr>
-      <tr><td>3.5–3.9</td><td>~20%</td><td>Устойчиво успешные</td></tr>
-      <tr><td>3.0–3.4</td><td>~56%</td><td>Маргинально успешные</td></tr>
-      <tr><td>менее 3.0</td><td>~20%</td><td>В зоне риска</td></tr>
-    </table>
+    <table class="dtable" style="max-width:640px"><tr><th>Средний балл</th><th>Доля компаний</th><th>Уровень</th></tr>
+      <tr><td data-label="Средний балл">4.5–5.0</td><td data-label="Доля компаний">менее 1%</td><td data-label="Уровень">Мировые лидеры</td></tr>
+      <tr><td data-label="Средний балл">4.0–4.4</td><td data-label="Доля компаний">3%</td><td data-label="Уровень">Превосходные</td></tr>
+      <tr><td data-label="Средний балл">3.5–3.9</td><td data-label="Доля компаний">~20%</td><td data-label="Уровень">Устойчиво успешные</td></tr>
+      <tr><td data-label="Средний балл">3.0–3.4</td><td data-label="Доля компаний">~56%</td><td data-label="Уровень">Маргинально успешные</td></tr>
+      <tr><td data-label="Средний балл">менее 3.0</td><td data-label="Доля компаний">~20%</td><td data-label="Уровень">В зоне риска</td></tr></table>
     <p class="note">Большинство компаний (около 76%) находятся в диапазоне 3.0–3.9. Меньше 1% достигают 4.5+. Если ваш балл ниже 3.0 — вы в зоне серьёзного риска и нужны срочные изменения.</p>
   </div>
 </section>
 
 <!-- 15 STAGES OVERVIEW -->
-<section class="slide" id="s15">
-  <div class="snum">15</div><div class="spart">Часть I · Карта роста</div>
+<section class="slide" id="s21">
+  <div class="snum">21</div><div class="spart">Часть I · Карта роста</div>
   <div class="deck">
     <span class="kicker">Жизненный цикл компании</span>
     <h2>Семь стадий роста: общая карта</h2>
@@ -530,8 +626,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 16 STAGES I-II -->
-<section class="slide" id="s16">
-  <div class="snum">16</div><div class="spart">Часть I · Стадии I–II</div>
+<section class="slide" id="s22">
+  <div class="snum">22</div><div class="spart">Часть I · Стадии I–II</div>
   <div class="deck">
     <span class="kicker">Предпринимательская фаза</span>
     <h2>Стадия I — новое предприятие · Стадия II — экспансия</h2>
@@ -554,8 +650,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 17 STAGES III-IV -->
-<section class="slide" id="s17">
-  <div class="snum">17</div><div class="spart">Часть I · Стадии III–IV</div>
+<section class="slide" id="s23">
+  <div class="snum">23</div><div class="spart">Часть I · Стадии III–IV</div>
   <div class="deck">
     <span class="kicker">Рождение зрелости · ядро подхода</span>
     <h2>Стадия III — профессионализация · Стадия IV — консолидация</h2>
@@ -577,8 +673,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 18 STAGES V-VII -->
-<section class="slide" id="s18">
-  <div class="snum">18</div><div class="spart">Часть I · Стадии V–VII</div>
+<section class="slide" id="s24">
+  <div class="snum">24</div><div class="spart">Часть I · Стадии V–VII</div>
   <div class="deck">
     <span class="kicker">Жизнь после зрелости</span>
     <h2>Стадии V–VII: что ждёт крупную компанию</h2>
@@ -594,15 +690,15 @@ footer strong{color:#c9bfa9}
       </div>
       <div class="card p">
         <span class="tag">VII · Спад и обновление · любой размер</span><h3>Неизбежен у всех</h3>
-        <p>В спад можно сорваться с любой стадии. Причины: инерция размера, насыщение рынка, эрозия лидерства, дряхлая культура, новые технологии. Kodak, Sears, Borders. Лечится только <strong>полной перестройкой:</strong> Barnes &amp; Noble переосмыслила бизнес и выжила, Borders — нет.</p>
+        <p>В спад можно сорваться с любой стадии. Причины: инерция размера, насыщение рынка, эрозия лидерства, дряхлая культура, новые технологии. Kodak, Borders — яркие примеры. Лечится только <strong>полной перестройкой:</strong> Barnes &amp; Noble переосмыслила бизнес и выжила, Borders — нет.</p>
       </div>
     </div>
   </div>
 </section>
 
 <!-- 19 ENT VS PRO -->
-<section class="slide" id="s19">
-  <div class="snum">19</div><div class="spart">Часть I · Суть перехода</div>
+<section class="slide" id="s25">
+  <div class="snum">25</div><div class="spart">Часть I · Суть перехода</div>
   <div class="deck">
     <span class="kicker">Что значит «стать зрелым»</span>
     <h2>Предпринимательство и профессиональное управление</h2>
@@ -624,8 +720,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 20 PAINS -->
-<section class="slide" id="s20">
-  <div class="snum">20</div><div class="spart">Часть I · Симптомы</div>
+<section class="slide" id="s26">
+  <div class="snum">26</div><div class="spart">Часть I · Симптомы</div>
   <div class="deck">
     <span class="kicker">Как распознать отставание</span>
     <h2>10 болезней роста и их корень</h2>
@@ -647,16 +743,14 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 21 PAINS SURVEY FORM -->
-<section class="slide" id="s21">
-  <div class="snum">21</div><div class="spart">Часть I · ИНСТРУМЕНТ</div>
+<section class="slide" id="s27">
+  <div class="snum">27</div><div class="spart">Часть I · ИНСТРУМЕНТ</div>
   <div class="deck">
     <span class="kicker">Инструмент · опрос болезней роста (бланк)</span>
     <h2>Заполняемый бланк: балл от 10 до 50</h2>
     <p class="lead muted">Раздайте бланк команде. Каждый отмечает по каждому из 10 утверждений, насколько оно про компанию, по шкале 1–5.</p>
-    <table class="dtable" style="margin-top:8px">
-      <tr><th>Шкала ответа</th><th>1<br>совсем не про нас</th><th>2</th><th>3<br>отчасти</th><th>4</th><th>5<br>в очень большой степени</th></tr>
-      <tr><td class="rh">Каждое из 10 утверждений (слайд 20)</td><td>☐</td><td>☐</td><td>☐</td><td>☐</td><td>☐</td></tr>
-    </table>
+    <table class="dtable" style="margin-top:8px"><tr><th>Шкала ответа</th><th>1<br>совсем не про нас</th><th>2</th><th>3<br>отчасти</th><th>4</th><th>5<br>в очень большой степени</th></tr>
+      <tr><td class="rh" data-label="Шкала ответа">Каждое из 10 утверждений (слайд 26)</td><td data-label="1 — совсем не про нас">☐</td><td data-label="2">☐</td><td data-label="3 — отчасти">☐</td><td data-label="4">☐</td><td data-label="5 — в очень большой степени">☐</td></tr></table>
     <div class="grid g2" style="margin-top:16px;align-items:start">
       <div class="card a"><h3>Как считать</h3>
         <ul class="bul" style="margin-top:8px">
@@ -677,8 +771,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 22 PAINS INTERPRET + BENCHMARK -->
-<section class="slide" id="s22">
-  <div class="snum">22</div><div class="spart">Часть I · ИНСТРУМЕНТ</div>
+<section class="slide" id="s28">
+  <div class="snum">28</div><div class="spart">Часть I · ИНСТРУМЕНТ</div>
   <div class="deck">
     <span class="kicker">Интерпретация и бенчмарки</span>
     <h2>Что означает ваш балл болезней роста</h2>
@@ -709,27 +803,27 @@ footer strong{color:#c9bfa9}
   </div>
 </section>
 <!-- 23 TOOLS OVERVIEW -->
-<section class="slide" id="s23">
-  <div class="snum">23</div><div class="spart">Часть II · Обзор</div>
+<section class="slide" id="s29">
+  <div class="snum">29</div><div class="spart">Часть II · Обзор</div>
   <div class="deck">
     <span class="kicker">Чем перестраивать компанию</span>
     <h2>Пять систем управления — верхние опоры Пирамиды</h2>
     <p class="bridge">Диагностика показала отставание. Чинят его этими пятью инструментами — опоры 5 и 6 Пирамиды.</p>
     <p class="lead muted" style="margin-bottom:16px">Каждый инструмент разобран так, чтобы его можно было взять и внедрить: что это, шаблон, шаги, примеры, ошибки. Работают только вместе.</p>
     <div class="grid g3">
-      <div class="card a"><span class="tag">Инструмент 1 · сл. 24–32</span><h3>Стратегическое планирование</h3><p>Письменный план: куда идём и как. 7 вопросов, колесо стратегии, шаблон из 8 элементов.</p></div>
-      <div class="card o"><span class="tag">Инструмент 2 · сл. 33–37</span><h3>Оргструктура</h3><p>Кто за что отвечает, кто кому подчиняется. 3 измерения, 8 критериев, описание ролей.</p></div>
-      <div class="card t"><span class="tag">Инструмент 3 · сл. 38–41</span><h3>Управление эффективностью</h3><p>Связывает цели людей с целями компании. 7 компонентов, scoreboard, форма оценки.</p></div>
-      <div class="card g"><span class="tag">Инструмент 4 · сл. 42–45</span><h3>Развитие менеджеров</h3><p>Растить управленцев планомерно. Пирамида лидерского развития, «внутренняя игра».</p></div>
-      <div class="card p"><span class="tag">Инструмент 5 · сл. 46–50</span><h3>Управление культурой</h3><p>Осознанно управлять ценностями. 5 параметров, методика, документ ценностей.</p></div>
+      <div class="card a"><span class="tag">Инструмент 1 · сл. 30–38</span><h3>Стратегическое планирование</h3><p>Письменный план: куда идём и как. 7 вопросов, колесо стратегии, шаблон из 8 элементов.</p></div>
+      <div class="card o"><span class="tag">Инструмент 2 · сл. 39–43</span><h3>Оргструктура</h3><p>Кто за что отвечает, кто кому подчиняется. 3 измерения, 8 критериев, описание ролей.</p></div>
+      <div class="card t"><span class="tag">Инструмент 3 · сл. 44–49</span><h3>Управление эффективностью</h3><p>Связывает цели людей с целями компании. 7 компонентов, scoreboard, форма оценки.</p></div>
+      <div class="card g"><span class="tag">Инструмент 4 · сл. 50–54</span><h3>Развитие менеджеров</h3><p>Растить управленцев планомерно. Пирамида лидерского развития, «внутренняя игра».</p></div>
+      <div class="card p"><span class="tag">Инструмент 5 · сл. 55–59</span><h3>Управление культурой</h3><p>Осознанно управлять ценностями. 5 параметров, методика, документ ценностей.</p></div>
       <div class="callout" style="display:flex;align-items:center"><div><h3>Как связаны</h3><p style="margin-top:6px">План задаёт цели → структура раздаёт роли → люди исполняют → контроль измеряет → развитие готовит управленцев → культура удерживает поведение.</p></div></div>
     </div>
   </div>
 </section>
 
 <!-- 24 PLANNING — 7 questions -->
-<section class="slide" id="s24">
-  <div class="snum">24</div><div class="spart">Часть II · ИНСТРУМЕНТ 1</div>
+<section class="slide" id="s30">
+  <div class="snum">30</div><div class="spart">Часть II · ИНСТРУМЕНТ 1</div>
   <div class="deck">
     <span class="kicker">Планирование · содержание</span>
     <h2>Семь вопросов, на которые отвечает план</h2>
@@ -747,17 +841,17 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 25 PLANNING — 6 steps -->
-<section class="slide" id="s25">
-  <div class="snum">25</div><div class="spart">Часть II · ИНСТРУМЕНТ 1</div>
+<section class="slide" id="s31">
+  <div class="snum">31</div><div class="spart">Часть II · ИНСТРУМЕНТ 1</div>
   <div class="deck">
     <span class="kicker">Планирование · процесс</span>
     <h2>Шесть шагов процесса</h2>
-    <p class="lead muted">Вопросы (слайд 24) — это содержание. Шаги ниже — процесс, как прийти к плану. Шаги 1–2 заменяют классический SWOT, делая его конкретнее.</p>
+    <p class="lead muted">Вопросы (слайд 30) — это содержание. Шаги ниже — процесс, как прийти к плану. Шаги 1–2 заменяют классический SWOT, делая его конкретнее.</p>
     <div class="steps" style="margin-top:14px">
       <div class="step"><div><h3>Скан внешней среды</h3><p>Рынок, конкуренты, тренды на 3–5 лет (детали на след. слайде). Уточнённые «возможности и угрозы».</p></div></div>
       <div class="step"><div><h3>Оценка организации</h3><p>Сильные и слабые стороны по каждой опоре Пирамиды; тест болезней роста. Уточнённые «силы и слабости».</p></div></div>
       <div class="step"><div><h3>Решить ключевые вопросы</h3><p>Закрыть несколько по-настоящему важных развилок.</p></div></div>
-      <div class="step"><div><h3>Написать план</h3><p>Документ из 8 элементов (слайд 30).</p></div></div>
+      <div class="step"><div><h3>Написать план</h3><p>Документ из 8 элементов (слайд 36).</p></div></div>
       <div class="step"><div><h3>Бюджет под план</h3><p>Деньги следуют за стратегией. Итеративно: не хватает денег — двигают сроки, меняют приоритеты целей.</p></div></div>
       <div class="step"><div><h3>Обзоры исполнения — раз в квартал</h3><p>Самый важный шаг: сверять факт с планом и корректировать. Без него план «лежит в ящике».</p></div></div>
     </div>
@@ -766,8 +860,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 26 ENVIRONMENTAL SCAN -->
-<section class="slide" id="s26">
-  <div class="snum">26</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · ШАГ 1</div>
+<section class="slide" id="s32">
+  <div class="snum">32</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · ШАГ 1</div>
   <div class="deck">
     <span class="kicker">Планирование · скан среды</span>
     <h2>Скан внешней среды: три части</h2>
@@ -782,25 +876,23 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 27 STRATEGIC BOARD -->
-<section class="slide" id="s27">
-  <div class="snum">27</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · ШАБЛОН</div>
+<section class="slide" id="s33">
+  <div class="snum">33</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · ШАБЛОН</div>
   <div class="deck">
     <span class="kicker">Планирование · стратегическая доска</span>
     <h2>Матрица «где вы играете»</h2>
     <p class="lead muted">Инструмент, чтобы увидеть, в каких сегментах и ярусах вы конкурируете — и с кем реально. Разместите себя и конкурентов по сегментам (столбцы) и ярусам (строки). Пример — автоиндустрия.</p>
-    <table class="dtable" style="margin-top:8px">
-      <tr><th>Ярус</th><th>Седаны</th><th>Спорткары</th><th>Внедорожники</th></tr>
-      <tr><td class="rh">Ярус I · качество и престиж (цена вторична)</td><td>Rolls-Royce, Lexus, BMW, Jaguar</td><td>Porsche, Ferrari, Lamborghini</td><td>Range Rover, Mercedes</td></tr>
-      <tr><td class="rh">Ярус II · баланс цены, качества, сервиса</td><td>Honda Accord, Toyota Camry, Ford Taurus</td><td>Toyota Celica, VW</td><td>Honda CR-V, Ford</td></tr>
-      <tr><td class="rh">Ярус III · главное цена (обычно крупнейший)</td><td>Toyota Corolla, Kia, б/у</td><td>MINI Cooper</td><td>бюджетные кроссоверы</td></tr>
-    </table>
+    <table class="dtable" style="margin-top:8px"><tr><th>Ярус</th><th>Седаны</th><th>Спорткары</th><th>Внедорожники</th></tr>
+      <tr><td class="rh" data-label="Ярус">Ярус I · качество и престиж (цена вторична)</td><td data-label="Седаны">Rolls-Royce, Lexus, BMW, Jaguar</td><td data-label="Спорткары">Porsche, Ferrari, Lamborghini</td><td data-label="Внедорожники">Range Rover, Mercedes</td></tr>
+      <tr><td class="rh" data-label="Ярус">Ярус II · баланс цены, качества, сервиса</td><td data-label="Седаны">Honda Accord, Toyota Camry, Ford Taurus</td><td data-label="Спорткары">Toyota Celica, VW</td><td data-label="Внедорожники">Honda CR-V, Ford</td></tr>
+      <tr><td class="rh" data-label="Ярус">Ярус III · главное цена (обычно крупнейший)</td><td data-label="Седаны">Toyota Corolla, Kia, б/у</td><td data-label="Спорткары">MINI Cooper</td><td data-label="Внедорожники">бюджетные кроссоверы</td></tr></table>
     <p class="note">Зачем: понять реальных конкурентов и найти «открытые сегменты». Starbucks видит себя в ярусах I–II и не считает McDonald's (ярус III) конкурентом. Конкурировать сразу во всех трёх ярусах могут лишь немногие гиганты (GM: Chevrolet → Cadillac). Применимо к любым продуктам и услугам (юристы, медицина, ретейл).</p>
   </div>
 </section>
 
 <!-- 28 MISSION -->
-<section class="slide" id="s28">
-  <div class="snum">28</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · КАК ДЕЛАТЬ</div>
+<section class="slide" id="s34">
+  <div class="snum">34</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · КАК ДЕЛАТЬ</div>
   <div class="deck">
     <span class="kicker">Планирование · миссия</span>
     <h2>Как сформулировать стратегическую миссию</h2>
@@ -830,8 +922,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 29 STRATEGY WHEEL -->
-<section class="slide" id="s29">
-  <div class="snum">29</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · ШАБЛОН</div>
+<section class="slide" id="s35">
+  <div class="snum">35</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · ШАБЛОН</div>
   <div class="deck">
     <span class="kicker">Планирование · колесо стратегии</span>
     <h2>Три уровня стратегии</h2>
@@ -841,16 +933,14 @@ footer strong{color:#c9bfa9}
       <div class="wlvl w2"><h4>Уровень 2</h4><div class="big">Поддерживающие стратегии</div><p>Что делать на каждой опоре Пирамиды, чтобы ядро сработало. По 1–2 фразы на опору — «большая картина», не список дел.</p></div>
       <div class="wlvl w3"><h4>Уровень 3</h4><div class="big">Операционные стратегии</div><p>Конкретные «to-do», тактика. Только самые критичные действия для реализации ядра.</p></div>
     </div>
-    <table class="dtable" style="margin-top:16px">
-      <tr><th>Пример: поддерживающие стратегии Southwest</th><th>Пример: операционные стратегии Walmart</th></tr>
-      <tr><td>Рынки: входить только на новые неконкурентные короткие маршруты. Операции: своё бронирование, без передачи багажа между авиакомпаниями. Системы: фокус на быстром развороте самолёта.</td><td>Закупки через центральный компьютер по данным из магазинов. Чёткое число отделов в магазине. Жёсткий контроль логистики и запасов.</td></tr>
-    </table>
+    <table class="dtable" style="margin-top:16px"><tr><th>Пример: поддерживающие стратегии Southwest</th><th>Пример: операционные стратегии Walmart</th></tr>
+      <tr><td data-label="Пример: поддерживающие стратегии Southwest">Рынки: входить только на новые неконкурентные короткие маршруты. Операции: своё бронирование, без передачи багажа между авиакомпаниями. Системы: фокус на быстром развороте самолёта.</td><td data-label="Пример: операционные стратегии Walmart">Закупки через центральный компьютер по данным из магазинов. Чёткое число отделов в магазине. Жёсткий контроль логистики и запасов.</td></tr></table>
   </div>
 </section>
 
 <!-- 30 PLAN TEMPLATE -->
-<section class="slide" id="s30">
-  <div class="snum">30</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · ШАБЛОН</div>
+<section class="slide" id="s36">
+  <div class="snum">36</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · ШАБЛОН</div>
   <div class="deck">
     <span class="kicker">Планирование · шаблон документа</span>
     <h2>Документ плана: 8 элементов</h2>
@@ -870,18 +960,16 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 31 OBJECTIVES GOALS SMART -->
-<section class="slide" id="s31">
-  <div class="snum">31</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · ПРИМЕРЫ</div>
+<section class="slide" id="s37">
+  <div class="snum">37</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · ПРИМЕРЫ</div>
   <div class="deck">
     <span class="kicker">Планирование · цели</span>
     <h2>От размытого намерения к измеримой цели</h2>
     <p class="lead muted">Объектив (objective) — куда хотим в принципе. Цель (goal) — измеримый результат со сроком. Примеры:</p>
-    <table class="dtable" style="margin-top:8px">
-      <tr><th>Область</th><th>Объектив (намерение)</th><th>Цель (SMART)</th></tr>
-      <tr><td class="rh">Продажи</td><td>Увеличить годовой объём продаж</td><td>Поднять продажи со $150 до $180 млн к 20XX году</td></tr>
-      <tr><td class="rh">Мощности</td><td>Нарастить складские возможности</td><td>Обеспечить хранение на 150% больше запасов к 20XX году</td></tr>
-      <tr><td class="rh">Прибыль</td><td>Получать достойную отдачу на вложения</td><td>Не менее 18% ROI до налогов в каждом дивизионе к концу года</td></tr>
-    </table>
+    <table class="dtable" style="margin-top:8px"><tr><th>Область</th><th>Объектив (намерение)</th><th>Цель (SMART)</th></tr>
+      <tr><td class="rh" data-label="Область">Продажи</td><td data-label="Объектив (намерение)">Увеличить годовой объём продаж</td><td data-label="Цель (SMART)">Поднять продажи со $150 до $180 млн к 20XX году</td></tr>
+      <tr><td class="rh" data-label="Область">Мощности</td><td data-label="Объектив (намерение)">Нарастить складские возможности</td><td data-label="Цель (SMART)">Обеспечить хранение на 150% больше запасов к 20XX году</td></tr>
+      <tr><td class="rh" data-label="Область">Прибыль</td><td data-label="Объектив (намерение)">Получать достойную отдачу на вложения</td><td data-label="Цель (SMART)">Не менее 18% ROI до налогов в каждом дивизионе к концу года</td></tr></table>
     <div class="grid g2" style="margin-top:16px">
       <div class="card a"><h3>Правило SMART</h3>
         <ul class="bul" style="margin-top:8px">
@@ -898,8 +986,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 32 PLANNING RHYTHM -->
-<section class="slide" id="s32">
-  <div class="snum">32</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · КАК ВНЕДРИТЬ</div>
+<section class="slide" id="s38">
+  <div class="snum">38</div><div class="spart">Часть II · ИНСТРУМЕНТ 1 · КАК ВНЕДРИТЬ</div>
   <div class="deck">
     <span class="kicker">Планирование · ритм и обзоры</span>
     <h2>Как запустить планирование как процесс</h2>
@@ -930,15 +1018,15 @@ footer strong{color:#c9bfa9}
   </div>
 </section>
 <!-- 33 STRUCTURE — 3 dimensions -->
-<section class="slide" id="s33">
-  <div class="snum">33</div><div class="spart">Часть II · ИНСТРУМЕНТ 2</div>
+<section class="slide" id="s39">
+  <div class="snum">39</div><div class="spart">Часть II · ИНСТРУМЕНТ 2</div>
   <div class="deck">
     <span class="kicker">Структура · три измерения</span>
     <h2>Структура — это не только «оргсхема»</h2>
     <p class="bridge">План задаёт цели. Структура определяет, кто и как их исполняет. У структуры три измерения, а не одно.</p>
     <div class="grid g3" style="margin-top:6px">
       <div class="card a"><span class="tag">Измерение 1</span><h3>Макроструктура</h3><p>Оргсхема: как сгруппированы люди, кто кому подчиняется, как координируются подразделения. Это то, что обычно и называют «структурой».</p></div>
-      <div class="card o"><span class="tag">Измерение 2</span><h3>Микроструктура</h3><p>Устройство отдельной роли: описание роли, её миссия, области результата, распределение времени. Без этого макросхема не работает (шаблон роли — слайд 37).</p></div>
+      <div class="card o"><span class="tag">Измерение 2</span><h3>Микроструктура</h3><p>Устройство отдельной роли: описание роли, её миссия, области результата, распределение времени. Без этого макросхема не работает (шаблон роли — слайд 43).</p></div>
       <div class="card t"><span class="tag">Измерение 3</span><h3>Поддерживающие системы</h3><p>Пять систем, без которых структура «не держит»: операционные системы, процесс развития менеджеров, система управления эффективностью, система планирования и корпоративная культура.</p></div>
     </div>
     <div class="card t" style="margin-top:14px">
@@ -950,13 +1038,13 @@ footer strong{color:#c9bfa9}
         <li><strong>Пример (Design Corporation, ~$3 млн):</strong> макроструктура была нормальной, а проблема — в нехватке управленческих навыков у людей на ключевых позициях (это и есть слабость поддерживающих систем). Лечится не перерисовкой схемы, а развитием людей.</li>
       </ul>
     </div>
-    <p class="note">Главный принцип уровня структуры в целом: <strong>структура следует за стратегией</strong>. Microsoft перестраивался трижды, подстраивая структуру под смену стратегии.</p>
+    <p class="note">Главный принцип уровня структуры в целом: <strong>структура следует за стратегией</strong>. Хороший тест для своей компании: каждый раз, когда стратегия меняется, стоит спросить — а структура за ней действительно успела перестроиться, или просто осталась прежней «по инерции»?</p>
   </div>
 </section>
 
 <!-- 34 STRUCTURE — forms -->
-<section class="slide" id="s34">
-  <div class="snum">34</div><div class="spart">Часть II · ИНСТРУМЕНТ 2</div>
+<section class="slide" id="s40">
+  <div class="snum">40</div><div class="spart">Часть II · ИНСТРУМЕНТ 2</div>
   <div class="deck">
     <span class="kicker">Структура · формы (макроуровень)</span>
     <h2>Формы структуры по мере роста</h2>
@@ -971,8 +1059,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 35 STRUCTURE — centralization -->
-<section class="slide" id="s35">
-  <div class="snum">35</div><div class="spart">Часть II · ИНСТРУМЕНТ 2</div>
+<section class="slide" id="s41">
+  <div class="snum">41</div><div class="spart">Часть II · ИНСТРУМЕНТ 2</div>
   <div class="deck">
     <span class="kicker">Структура · степень централизации</span>
     <h2>Сколько свободы давать подразделениям</h2>
@@ -987,8 +1075,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 36 STRUCTURE — 8 criteria + norms -->
-<section class="slide" id="s36">
-  <div class="snum">36</div><div class="spart">Часть II · ИНСТРУМЕНТ 2 · КАК ДЕЛАТЬ</div>
+<section class="slide" id="s42">
+  <div class="snum">42</div><div class="spart">Часть II · ИНСТРУМЕНТ 2 · КАК ДЕЛАТЬ</div>
   <div class="deck">
     <span class="kicker">Структура · как оценить и спроектировать</span>
     <h2>Восемь критериев и нормативы</h2>
@@ -1016,8 +1104,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 37 ROLE DESCRIPTION TEMPLATE -->
-<section class="slide" id="s37">
-  <div class="snum">37</div><div class="spart">Часть II · ИНСТРУМЕНТ 2 · ШАБЛОН</div>
+<section class="slide" id="s43">
+  <div class="snum">43</div><div class="spart">Часть II · ИНСТРУМЕНТ 2 · ШАБЛОН</div>
   <div class="deck">
     <span class="kicker">Структура · описание роли (микроуровень)</span>
     <h2>Полное описание роли: пример</h2>
@@ -1063,8 +1151,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 38 PERFORMANCE — 7 components -->
-<section class="slide" id="s38">
-  <div class="snum">38</div><div class="spart">Часть II · ИНСТРУМЕНТ 3</div>
+<section class="slide" id="s44">
+  <div class="snum">44</div><div class="spart">Часть II · ИНСТРУМЕНТ 3</div>
   <div class="deck">
     <span class="kicker">Управление эффективностью · суть</span>
     <h2>Контроль, который согласует цели людей и компании</h2>
@@ -1100,27 +1188,25 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 39 SCOREBOARD -->
-<section class="slide" id="s39">
-  <div class="snum">39</div><div class="spart">Часть II · ИНСТРУМЕНТ 3 · ШАБЛОН</div>
+<section class="slide" id="s45">
+  <div class="snum">45</div><div class="spart">Часть II · ИНСТРУМЕНТ 3 · ШАБЛОН</div>
   <div class="deck">
     <span class="kicker">Управление эффективностью · scoreboard</span>
     <h2>Табло результатов: что вешают на стену</h2>
     <p class="lead muted">Scoreboard сводит цели и факт в одну таблицу, видимую команде. Строки — области результата, столбцы — цель года, прошлый год и факт по месяцам. Пример производственного цеха:</p>
-    <table class="dtable" style="margin-top:8px">
-      <tr><th>Область результата</th><th>Цель года</th><th>Прошлый год</th><th>Янв</th><th>Фев</th><th>Мар</th><th>…</th></tr>
-      <tr><td class="rh">Объём производства</td><td>120 000 ед.</td><td>104 000</td><td>9 800</td><td>10 100</td><td>10 300</td><td>…</td></tr>
-      <tr><td class="rh">Качество (брак)</td><td>&lt; 1,5%</td><td>2,3%</td><td>1,9%</td><td>1,7%</td><td>1,5%</td><td>…</td></tr>
-      <tr><td class="rh">Безопасность (происшествия)</td><td>0</td><td>4</td><td>0</td><td>1</td><td>0</td><td>…</td></tr>
-      <tr><td class="rh">Энергозатраты</td><td>−8%</td><td>база</td><td>−3%</td><td>−5%</td><td>−6%</td><td>…</td></tr>
-      <tr><td class="rh">Отходы / списание</td><td>&lt; 2%</td><td>3,1%</td><td>2,6%</td><td>2,4%</td><td>2,1%</td><td>…</td></tr>
-    </table>
+    <table class="dtable" style="margin-top:8px"><tr><th>Область результата</th><th>Цель года</th><th>Прошлый год</th><th>Янв</th><th>Фев</th><th>Мар</th><th>…</th></tr>
+      <tr><td class="rh" data-label="Область результата">Объём производства</td><td data-label="Цель года">120 000 ед.</td><td data-label="Прошлый год">104 000</td><td data-label="Янв">9 800</td><td data-label="Фев">10 100</td><td data-label="Мар">10 300</td><td data-label="…">…</td></tr>
+      <tr><td class="rh" data-label="Область результата">Качество (брак)</td><td data-label="Цель года">&lt; 1,5%</td><td data-label="Прошлый год">2,3%</td><td data-label="Янв">1,9%</td><td data-label="Фев">1,7%</td><td data-label="Мар">1,5%</td><td data-label="…">…</td></tr>
+      <tr><td class="rh" data-label="Область результата">Безопасность (происшествия)</td><td data-label="Цель года">0</td><td data-label="Прошлый год">4</td><td data-label="Янв">0</td><td data-label="Фев">1</td><td data-label="Мар">0</td><td data-label="…">…</td></tr>
+      <tr><td class="rh" data-label="Область результата">Энергозатраты</td><td data-label="Цель года">−8%</td><td data-label="Прошлый год">база</td><td data-label="Янв">−3%</td><td data-label="Фев">−5%</td><td data-label="Мар">−6%</td><td data-label="…">…</td></tr>
+      <tr><td class="rh" data-label="Область результата">Отходы / списание</td><td data-label="Цель года">&lt; 2%</td><td data-label="Прошлый год">3,1%</td><td data-label="Янв">2,6%</td><td data-label="Фев">2,4%</td><td data-label="Мар">2,1%</td><td data-label="…">…</td></tr></table>
     <p class="note">Зачем: команда в любой момент видит, где отстаёт, пока ещё можно скорректировать. Меряйте <strong>результат</strong> (что достигнуто), а не активность. Что не оцифровать — оценивайте экспертно, но честно.</p>
   </div>
 </section>
 
 <!-- 40 APPRAISAL FORM (SCPH) -->
-<section class="slide" id="s40">
-  <div class="snum">40</div><div class="spart">Часть II · ИНСТРУМЕНТ 3 · КЕЙС</div>
+<section class="slide" id="s46">
+  <div class="snum">46</div><div class="spart">Часть II · ИНСТРУМЕНТ 3 · КЕЙС</div>
   <div class="deck">
     <span class="kicker">Управление эффективностью · форма оценки</span>
     <h2>Как сделать оценку рабочей: кейс SCPH</h2>
@@ -1142,8 +1228,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 41 REWARDS -->
-<section class="slide" id="s41">
-  <div class="snum">41</div><div class="spart">Часть II · ИНСТРУМЕНТ 3 · НАГРАДЫ</div>
+<section class="slide" id="s47">
+  <div class="snum">47</div><div class="spart">Часть II · ИНСТРУМЕНТ 3 · НАГРАДЫ</div>
   <div class="deck">
     <span class="kicker">Управление эффективностью · награды</span>
     <h2>Награда — это подкрепление поведения</h2>
@@ -1163,8 +1249,8 @@ footer strong{color:#c9bfa9}
 
 
 <!-- 42 PERFORMANCE — review cadence + management accounting -->
-<section class="slide" id="s42">
-  <div class="snum">42</div><div class="spart">Часть II · ИНСТРУМЕНТ 3 · РЕГУЛЯРНЫЙ ОБЗОР</div>
+<section class="slide" id="s48">
+  <div class="snum">48</div><div class="spart">Часть II · ИНСТРУМЕНТ 3 · РЕГУЛЯРНЫЙ ОБЗОР</div>
   <div class="deck">
     <span class="kicker">Управление эффективностью · обзор и учёт</span>
     <h2>Где и как часто смотреть результаты</h2>
@@ -1191,9 +1277,26 @@ footer strong{color:#c9bfa9}
   </div>
 </section>
 
+
+<!-- NEW: PM SYSTEM PROBABILITY MODEL -->
+<section class="slide" id="s49">
+  <div class="snum">49</div><div class="spart">Часть II · ИНСТРУМЕНТ 3 · ПОЧЕМУ ЭТО РАБОТАЕТ</div>
+  <div class="deck">
+    <span class="kicker">Управление эффективностью · сила полного цикла</span>
+    <h2>Почему стоит выстроить все семь компонентов, а не часть</h2>
+    <p class="lead muted">Каждый добавленный компонент системы эффективности заметно повышает шанс, что цель действительно будет достигнута — это не интуиция, а закономерность, которую видно на практике консультантов.</p>
+    <div class="grid g3" style="margin-top:14px">
+      <div class="card a"><span class="tag">Только цели</span><h3>≈ 25%</h3><p>Если есть только области результата, объективы и цели — без измерения и обратной связи — вероятность достижения близка к случайной.</p></div>
+      <div class="card o"><span class="tag">+ измерение и обратная связь</span><h3>≈ 50%</h3><p>Добавили регулярное измерение и фидбэк — вероятность удваивается. Люди видят, где они находятся относительно цели, и могут скорректироваться.</p></div>
+      <div class="card g"><span class="tag">+ оценка и награда</span><h3>≈ 80%</h3><p>Полный цикл из всех семи компонентов, включая итоговую оценку и привязанную к ней награду, даёт наибольший шанс на результат.</p></div>
+    </div>
+    <p class="note">Практический вывод: если в компании есть только цели «на бумаге», но нет регулярного измерения, обратной связи и привязки наград к результату — система работает на четверть своей возможной силы. Достроить оставшиеся компоненты обычно дешевле, чем кажется, и эффект заметен быстро.</p>
+  </div>
+</section>
+
 <!-- 42 LEADERSHIP DEV — 3 dimensions -->
-<section class="slide" id="s43">
-  <div class="snum">43</div><div class="spart">Часть II · ИНСТРУМЕНТ 4</div>
+<section class="slide" id="s50">
+  <div class="snum">50</div><div class="spart">Часть II · ИНСТРУМЕНТ 4</div>
   <div class="deck">
     <span class="kicker">Развитие менеджеров и лидеров · суть</span>
     <h2>Три составляющие эффективного руководителя</h2>
@@ -1202,15 +1305,15 @@ footer strong{color:#c9bfa9}
     <div class="grid g3" style="margin-top:14px">
       <div class="card a"><span class="tag">≈ ⅓ успеха</span><h3>1. Понимание своей роли</h3><p>Как человек видит свою работу и на что тратит время. Новый менеджер часто продолжает «делать руками» вместо того, чтобы руководить. Лечится чётким описанием роли и ожиданий.</p></div>
       <div class="card o"><span class="tag">≈ ⅓ успеха</span><h3>2. Навыки</h3><p>Конкретные умения по уровню должности — от базовых (постановка целей, обратная связь) до стратегических (развитие организации, управление культурой). Пирамида навыков — на след. слайде.</p></div>
-      <div class="card t"><span class="tag">≈ ⅓ успеха</span><h3>3. «Внутренняя игра»</h3><p>Психология руководителя. Часто решающий фактор — и самый недооценённый. Подробно на слайде 44.</p></div>
+      <div class="card t"><span class="tag">≈ ⅓ успеха</span><h3>3. «Внутренняя игра»</h3><p>Психология руководителя. Часто решающий фактор — и самый недооценённый. Подробно на слайде 52.</p></div>
     </div>
     <p class="note">Когда руководитель не принимает «непрямой контроль», он лезет во всё и перепроверяет каждое решение — и тонет в чужой работе, тормозя команду.</p>
   </div>
 </section>
 
 <!-- 43 LEADERSHIP DEV PYRAMID -->
-<section class="slide" id="s44">
-  <div class="snum">44</div><div class="spart">Часть II · ИНСТРУМЕНТ 4 · МОДЕЛЬ</div>
+<section class="slide" id="s51">
+  <div class="snum">51</div><div class="spart">Часть II · ИНСТРУМЕНТ 4 · МОДЕЛЬ</div>
   <div class="deck">
     <span class="kicker">Развитие лидеров · пирамида навыков</span>
     <h2>Пирамида управленческого и лидерского развития</h2>
@@ -1236,8 +1339,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 44 INNER GAME -->
-<section class="slide" id="s45">
-  <div class="snum">45</div><div class="spart">Часть II · ИНСТРУМЕНТ 4 · ПСИХОЛОГИЯ</div>
+<section class="slide" id="s52">
+  <div class="snum">52</div><div class="spart">Часть II · ИНСТРУМЕНТ 4 · ПСИХОЛОГИЯ</div>
   <div class="deck">
     <span class="kicker">Развитие лидеров · «внутренняя игра»</span>
     <h2>Три внутренние установки, которые надо перенастроить</h2>
@@ -1252,8 +1355,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 45 HOW TO GROW MANAGERS -->
-<section class="slide" id="s46">
-  <div class="snum">46</div><div class="spart">Часть II · ИНСТРУМЕНТ 4 · КАК ДЕЛАТЬ</div>
+<section class="slide" id="s53">
+  <div class="snum">53</div><div class="spart">Часть II · ИНСТРУМЕНТ 4 · КАК ДЕЛАТЬ</div>
   <div class="deck">
     <span class="kicker">Развитие лидеров · как растить</span>
     <h2>Как выращивать управленцев системно</h2>
@@ -1267,7 +1370,7 @@ footer strong{color:#c9bfa9}
             <li><strong>Обратная связь</strong> по реальной работе.</li>
           </ul>
         </div>
-        <p class="note">В Medco сделали <strong>две программы</strong> — отдельно для топ-менеджеров и отдельно для средних. Под разные уровни — разные навыки из пирамиды (слайд 43).</p>
+        <p class="note">В Medco сделали <strong>две программы</strong> — отдельно для топ-менеджеров и отдельно для средних. Под разные уровни — разные навыки из пирамиды (слайд 51).</p>
       </div>
       <div>
         <div class="card t"><h3>С чего начать собственнику</h3>
@@ -1284,9 +1387,25 @@ footer strong{color:#c9bfa9}
   </div>
 </section>
 
+
+<!-- NEW: LEADERSHIP DEV INVESTMENT NORM -->
+<section class="slide" id="s54">
+  <div class="snum">54</div><div class="spart">Часть II · ИНСТРУМЕНТ 4 · СКОЛЬКО ВКЛАДЫВАТЬ</div>
+  <div class="deck">
+    <span class="kicker">Развитие лидеров · бюджет на развитие</span>
+    <h2>Сколько стоит не растить управленцев</h2>
+    <p class="lead">Развитие руководителей — не «приятный бонус», а инвестиция того же порядка, что покупка оборудования. Ориентир: вкладывать в обучение и развитие управленцев <strong>5–10% годового фонда оплаты труда</strong> управленческого состава.</p>
+    <div class="grid g2" style="margin-top:16px;align-items:start">
+      <div class="card a"><h3>Если вкладывать меньше</h3><p>Растёт риск управленческого брака: квалифицированные специалисты увольняются из-за слабого руководителя, или неэффективного руководителя приходится менять — а это всегда дороже превентивного обучения.</p></div>
+      <div class="card g"><h3>Окупаемость видна быстро</h3><p>Авторы приводят характерный случай: компания среднего размера сэкономила на программе развития менеджеров — и эта экономия обернулась многократно большими потерями от одного неэффективного руководителя в группе.</p></div>
+    </div>
+    <p class="note">Практический ориентир для собственника: если на развитие управленцев в этом году не заложено вообще ничего — это не экономия, а отложенный счёт, который компания оплатит текучкой или управленческими ошибками.</p>
+  </div>
+</section>
+
 <!-- 46 CULTURE — 5 dimensions -->
-<section class="slide" id="s47">
-  <div class="snum">47</div><div class="spart">Часть II · ИНСТРУМЕНТ 5</div>
+<section class="slide" id="s55">
+  <div class="snum">55</div><div class="spart">Часть II · ИНСТРУМЕНТ 5</div>
   <div class="deck">
     <span class="kicker">Управление культурой · суть</span>
     <h2>Культура — актив, который нельзя скопировать</h2>
@@ -1312,25 +1431,23 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 47 NOMINAL VS REAL -->
-<section class="slide" id="s48">
-  <div class="snum">48</div><div class="spart">Часть II · ИНСТРУМЕНТ 5 · ДИАГНОСТИКА</div>
+<section class="slide" id="s56">
+  <div class="snum">56</div><div class="spart">Часть II · ИНСТРУМЕНТ 5 · ДИАГНОСТИКА</div>
   <div class="deck">
     <span class="kicker">Управление культурой · номинальная vs реальная</span>
     <h2>Что на плакате — и что на самом деле</h2>
     <p class="lead muted">Главная диагностическая идея: заявленная культура часто не совпадает с реальной. Управлять можно только реальной. Сравните, что декларируется, с тем, как люди ведут себя на деле.</p>
-    <table class="dtable" style="margin-top:8px">
-      <tr><th>Параметр</th><th>Номинальная (на плакате)</th><th>Реальная (как живут)</th></tr>
-      <tr><td class="rh">Качество (пример автопрома)</td><td>«Мы делаем лучшие машины»</td><td>«Если выехало за ворота — продадим»</td></tr>
-      <tr><td class="rh">Инновации (пример)</td><td>«Поощряем новые идеи»</td><td>На деле — избегание конфликта и ответственности</td></tr>
-      <tr><td class="rh">Прибыль</td><td>«Мы прибыльно-ориентированы»</td><td>На деле — продажи любой ценой, без учёта маржи</td></tr>
-    </table>
+    <table class="dtable" style="margin-top:8px"><tr><th>Параметр</th><th>Номинальная (на плакате)</th><th>Реальная (как живут)</th></tr>
+      <tr><td class="rh" data-label="Параметр">Качество (пример автопрома)</td><td data-label="Номинальная (на плакате)">«Мы делаем лучшие машины»</td><td data-label="Реальная (как живут)">«Если выехало за ворота — продадим»</td></tr>
+      <tr><td class="rh" data-label="Параметр">Инновации (пример)</td><td data-label="Номинальная (на плакате)">«Поощряем новые идеи»</td><td data-label="Реальная (как живут)">На деле — избегание конфликта и ответственности</td></tr>
+      <tr><td class="rh" data-label="Параметр">Прибыль</td><td data-label="Номинальная (на плакате)">«Мы прибыльно-ориентированы»</td><td data-label="Реальная (как живут)">На деле — продажи любой ценой, без учёта маржи</td></tr></table>
     <p class="note">Как проверить: посмотрите, за что реально награждают и наказывают, какие истории рассказывают, кого считают «героями». Это и есть настоящая культура. Расхождение — первая цель для работы.</p>
   </div>
 </section>
 
 <!-- 48 VALUES IN ACTION -->
-<section class="slide" id="s49">
-  <div class="snum">49</div><div class="spart">Часть II · ИНСТРУМЕНТ 5 · ПРИМЕРЫ</div>
+<section class="slide" id="s57">
+  <div class="snum">57</div><div class="spart">Часть II · ИНСТРУМЕНТ 5 · ПРИМЕРЫ</div>
   <div class="deck">
     <span class="kicker">Управление культурой · ценности в действии</span>
     <h2>Как ценность превращается в поведение</h2>
@@ -1345,8 +1462,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 49 CULTURE METHOD -->
-<section class="slide" id="s50">
-  <div class="snum">50</div><div class="spart">Часть II · ИНСТРУМЕНТ 5 · МЕТОДИКА</div>
+<section class="slide" id="s58">
+  <div class="snum">58</div><div class="spart">Часть II · ИНСТРУМЕНТ 5 · МЕТОДИКА</div>
   <div class="deck">
     <span class="kicker">Управление культурой · методика</span>
     <h2>Шесть шагов управления культурой</h2>
@@ -1363,8 +1480,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 50 CULTURE STATEMENT + SURVEY -->
-<section class="slide" id="s51">
-  <div class="snum">51</div><div class="spart">Часть II · ИНСТРУМЕНТ 5 · ШАБЛОН</div>
+<section class="slide" id="s59">
+  <div class="snum">59</div><div class="spart">Часть II · ИНСТРУМЕНТ 5 · ШАБЛОН</div>
   <div class="deck">
     <span class="kicker">Управление культурой · документ и опрос</span>
     <h2>Документ ценностей и культурный опрос</h2>
@@ -1388,8 +1505,8 @@ footer strong{color:#c9bfa9}
   </div>
 </section>
 <!-- 51 LEADERSHIP STYLES -->
-<section class="slide" id="s52">
-  <div class="snum">52</div><div class="spart">Часть III · Лидерство</div>
+<section class="slide" id="s60">
+  <div class="snum">60</div><div class="spart">Часть III · Лидерство</div>
   <div class="deck">
     <span class="kicker">Шесть стилей лидерства</span>
     <h2>От «делай как сказал» до «решайте сами»</h2>
@@ -1408,8 +1525,8 @@ footer strong{color:#c9bfa9}
 
 
 <!-- 53 LEADERSHIP — situational styles -->
-<section class="slide" id="s53">
-  <div class="snum">53</div><div class="spart">Часть III · Лидерство</div>
+<section class="slide" id="s61">
+  <div class="snum">61</div><div class="spart">Часть III · Лидерство</div>
   <div class="deck">
     <span class="kicker">Какой стиль когда применять</span>
     <h2>Выбор стиля: это решение, а не характер</h2>
@@ -1426,21 +1543,19 @@ footer strong{color:#c9bfa9}
         <p style="margin-top:8px"><strong>Высокий</strong> потенциал → недирективный стиль (консенсус/невмешательство). <strong>Низкий</strong> → директивный. Среднее → промежуточный (консультативный/партисипативный).</p>
       </div>
     </div>
-    <table class="dtable" style="margin-top:14px">
-      <tr><th>Ситуация</th><th>Подходящий стиль</th></tr>
-      <tr><td class="rh">Программируемая задача + низкий потенциал автономии</td><td>Директивный (автократический / благосклонно-автократический)</td></tr>
-      <tr><td class="rh">Непрограммируемая задача + высокий потенциал автономии</td><td>Недирективный (консенсус / невмешательство)</td></tr>
-      <tr><td class="rh">Промежуточные случаи</td><td>Интерактивный (консультативный / партисипативный)</td></tr>
-      <tr><td class="rh">Кризис, мало времени на решение</td><td>Директивный (даже с автономной командой: «вижу дым — выходим»)</td></tr>
-      <tr><td class="rh">Новый / неопытный сотрудник</td><td>Более директивный, пока не наберётся опыта</td></tr>
-    </table>
+    <table class="dtable" style="margin-top:14px"><tr><th>Ситуация</th><th>Подходящий стиль</th></tr>
+      <tr><td class="rh" data-label="Ситуация">Программируемая задача + низкий потенциал автономии</td><td data-label="Подходящий стиль">Директивный (автократический / благосклонно-автократический)</td></tr>
+      <tr><td class="rh" data-label="Ситуация">Непрограммируемая задача + высокий потенциал автономии</td><td data-label="Подходящий стиль">Недирективный (консенсус / невмешательство)</td></tr>
+      <tr><td class="rh" data-label="Ситуация">Промежуточные случаи</td><td data-label="Подходящий стиль">Интерактивный (консультативный / партисипативный)</td></tr>
+      <tr><td class="rh" data-label="Ситуация">Кризис, мало времени на решение</td><td data-label="Подходящий стиль">Директивный (даже с автономной командой: «вижу дым — выходим»)</td></tr>
+      <tr><td class="rh" data-label="Ситуация">Новый / неопытный сотрудник</td><td data-label="Подходящий стиль">Более директивный, пока не наберётся опыта</td></tr></table>
     <p class="note">Ещё 4 фактора (влияют меньше): стиль руководителя выше, стиль коллег, запас времени на решение, культура организации. Главная мысль: <strong>стиль — осознанный выбор под ситуацию</strong>; неверный стиль снижает шанс получить нужный результат.</p>
   </div>
 </section>
 
 <!-- 52 OPERATIONAL LEADERSHIP TASKS -->
-<section class="slide" id="s54">
-  <div class="snum">54</div><div class="spart">Часть III · Лидерство</div>
+<section class="slide" id="s62">
+  <div class="snum">62</div><div class="spart">Часть III · Лидерство</div>
   <div class="deck">
     <span class="kicker">Лидерство на каждый день</span>
     <h2>Пять задач операционного лидерства</h2>
@@ -1456,17 +1571,17 @@ footer strong{color:#c9bfa9}
         <div class="step"><div><h3>Развитие людей</h3><p>Помогать каждому расти: вместе разобрать его потребности в развитии и ставить хотя бы одну годовую цель на рост навыков.</p></div></div>
       </div>
     </div>
-    <p class="note">Каждую задачу можно выполнять в любом из шести стилей (слайд 51) — от директивного до недирективного, в зависимости от человека и ситуации.</p>
+    <p class="note">Каждую задачу можно выполнять в любом из шести стилей (слайд 60) — от директивного до недирективного, в зависимости от человека и ситуации.</p>
   </div>
 </section>
 
 <!-- 53 STRATEGIC LEADERSHIP TASKS -->
-<section class="slide" id="s55">
-  <div class="snum">55</div><div class="spart">Часть III · Лидерство</div>
+<section class="slide" id="s63">
+  <div class="snum">63</div><div class="spart">Часть III · Лидерство</div>
   <div class="deck">
     <span class="kicker">Лидерство «вдолгую»</span>
     <h2>Пять задач стратегического лидерства</h2>
-    <p class="lead muted">Это то, чем занимается лидер «над» ежедневной операционкой — работа CEO в новой роли (слайд 09). На старте все пять тянет основатель; с ростом их делит команда.</p>
+    <p class="lead muted">Это то, чем занимается лидер «над» ежедневной операционкой — работа CEO в новой роли (слайд 15). На старте все пять тянет основатель; с ростом их делит команда.</p>
     <div class="grid g3" style="margin-top:14px">
       <div class="card a"><h3>1. Стратегическое видение</h3><p>Определить и донести, куда идёт компания на годы вперёд.</p></div>
       <div class="card o"><h3>2. Управление культурой</h3><p>Определять ценности и быть их ролевой моделью.</p></div>
@@ -1478,8 +1593,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 54 MOLECULE -->
-<section class="slide" id="s56">
-  <div class="snum">56</div><div class="spart">Часть III · Лидерство</div>
+<section class="slide" id="s64">
+  <div class="snum">64</div><div class="spart">Часть III · Лидерство</div>
   <div class="deck">
     <span class="kicker">Лидерство командой</span>
     <h2>«Молекула лидерства»: команда вместо героя</h2>
@@ -1504,8 +1619,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 55 NONPROFIT -->
-<section class="slide" id="s57">
-  <div class="snum">57</div><div class="spart">Часть III · Охват модели</div>
+<section class="slide" id="s65">
+  <div class="snum">65</div><div class="spart">Часть III · Охват модели</div>
   <div class="deck">
     <span class="kicker">Универсальность</span>
     <h2>Та же модель работает и для НКО</h2>
@@ -1520,8 +1635,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 56 TRANSITION 4 STEPS -->
-<section class="slide" id="s58">
-  <div class="snum">58</div><div class="spart">Часть III · Как внедрять</div>
+<section class="slide" id="s66">
+  <div class="snum">66</div><div class="spart">Часть III · Как внедрять</div>
   <div class="deck">
     <span class="kicker">Путь внедрения</span>
     <h2>Четыре шага перехода для любого размера</h2>
@@ -1537,8 +1652,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 57 MEDCO part 1 -->
-<section class="slide" id="s59">
-  <div class="snum">59</div><div class="spart">Часть III · Кейс Medco</div>
+<section class="slide" id="s67">
+  <div class="snum">67</div><div class="spart">Часть III · Кейс Medco</div>
   <div class="deck">
     <span class="kicker">Живой пример всего пути · часть 1</span>
     <h2>Medco: диагноз и план</h2>
@@ -1564,8 +1679,8 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 58 MEDCO part 2 -->
-<section class="slide" id="s60">
-  <div class="snum">60</div><div class="spart">Часть III · Кейс Medco</div>
+<section class="slide" id="s68">
+  <div class="snum">68</div><div class="spart">Часть III · Кейс Medco</div>
   <div class="deck">
     <span class="kicker">Живой пример всего пути · часть 2</span>
     <h2>Medco: трансформация собственника и результат</h2>
@@ -1589,45 +1704,44 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 59 GUANGZHOU -->
-<section class="slide" id="s61">
-  <div class="snum">61</div><div class="spart">Часть III · Кейс Guangzhou</div>
+<section class="slide" id="s69">
+  <div class="snum">69</div><div class="spart">Часть III · Кейс Guangzhou</div>
   <div class="deck">
     <span class="kicker">Доказательство с замерами</span>
     <h2>Guangzhou Construction: цифры до и после</h2>
     <p class="lead muted">Строительная компания из Китая. CEO Джордж Ли прошёл диагностику по Пирамиде дважды — до и после года изменений. Все опоры выросли.</p>
-    <table class="dtable" style="margin-top:8px;max-width:620px">
-      <tr><th>Уровень Пирамиды</th><th>2009</th><th>2010</th><th>Δ</th></tr>
-      <tr><td class="rh">Рынки</td><td>3.5</td><td>3.8</td><td>+</td></tr>
-      <tr><td class="rh">Продукты/услуги</td><td>3.1</td><td>3.7</td><td>+</td></tr>
-      <tr><td class="rh">Ресурсы</td><td>3.2</td><td>3.8</td><td>+</td></tr>
-      <tr><td class="rh">Операционные системы</td><td>3.2</td><td>3.8</td><td>+</td></tr>
-      <tr><td class="rh">Системы управления</td><td>3.3</td><td>3.8</td><td>+</td></tr>
-      <tr><td class="rh">Культура</td><td>3.5</td><td>3.8</td><td>+</td></tr>
-      <tr><td class="rh"><strong>Общий балл</strong></td><td><strong>3.3</strong></td><td><strong>3.8</strong></td><td>+</td></tr>
-    </table>
+    <table class="dtable" style="margin-top:8px;max-width:620px"><tr><th>Уровень Пирамиды</th><th>2009</th><th>2010</th><th>Δ</th></tr>
+      <tr><td class="rh" data-label="Уровень Пирамиды">Рынки</td><td data-label="2009">3.5</td><td data-label="2010">3.8</td><td data-label="Δ">+</td></tr>
+      <tr><td class="rh" data-label="Уровень Пирамиды">Продукты/услуги</td><td data-label="2009">3.1</td><td data-label="2010">3.7</td><td data-label="Δ">+</td></tr>
+      <tr><td class="rh" data-label="Уровень Пирамиды">Ресурсы</td><td data-label="2009">3.2</td><td data-label="2010">3.8</td><td data-label="Δ">+</td></tr>
+      <tr><td class="rh" data-label="Уровень Пирамиды">Операционные системы</td><td data-label="2009">3.2</td><td data-label="2010">3.8</td><td data-label="Δ">+</td></tr>
+      <tr><td class="rh" data-label="Уровень Пирамиды">Системы управления</td><td data-label="2009">3.3</td><td data-label="2010">3.8</td><td data-label="Δ">+</td></tr>
+      <tr><td class="rh" data-label="Уровень Пирамиды">Культура</td><td data-label="2009">3.5</td><td data-label="2010">3.8</td><td data-label="Δ">+</td></tr>
+      <tr><td class="rh" data-label="Уровень Пирамиды"><strong>Общий балл</strong></td><td data-label="2009"><strong>3.3</strong></td><td data-label="2010"><strong>3.8</strong></td><td data-label="Δ">+</td></tr></table>
     <p class="note">За год — из «маргинально успешной» (3.3) в «устойчиво успешную» (3.8). Что сделал CEO: сформулировал и «приземлил» миссию, ввёл ценности и культурный приём «прощение за честные ошибки, увольнение за нечестность». Рост статистически значим.</p>
   </div>
 </section>
 
 <!-- 60 PROOF -->
-<section class="slide" id="s62">
-  <div class="snum">62</div><div class="spart">Часть III · Доказательства</div>
+<section class="slide" id="s70">
+  <div class="snum">70</div><div class="spart">Часть III · Доказательства</div>
   <div class="deck">
     <span class="kicker">Не теория одного кейса</span>
     <h2>Получилось не у одной компании</h2>
-    <div class="grid g4" style="margin-top:18px">
+    <div class="grid g3" style="margin-top:18px">
       <div class="card g"><span class="tag">Масштабирование</span><h3>Starbucks</h3><p>$0 → $15 млрд+, 21 000+ точек в 63 странах. Планирование, новая структура, документ культуры, «молекула» H₂O.</p></div>
       <div class="card o"><span class="tag">Смена фазы</span><h3>99 Cents Only</h3><p>Из семейного бизнеса в публичную профессионально управляемую компанию. Продажа 2012 — $1,6 млрд при выручке ~$1,5 млрд.</p></div>
       <div class="card t"><span class="tag">Профессионализация</span><h3>American Century</h3><p>$100 тыс. и 24 пайщика (1958) → &gt;$6 млрд активов. Прошли Стадию III: планирование, бюджет, развитие менеджеров.</p></div>
       <div class="card a"><span class="tag">Новая ниша</span><h3>Infogix / Unitech</h3><p>Выросли до $20 млн и создали новое рыночное пространство, перестроив фундамент по Пирамиде.</p></div>
+      <div class="card p"><span class="tag">Партнёрство на грани разрыва</span><h3>SmileSaver</h3><p>Стоматологическая страховая компания: два совладельца почти не разговаривали друг с другом из-за конфликтов. Перестроили структуру по навыкам (а не по тому, «кто что любит»), внедрили планирование — конфликты стихли, компанию позже купил крупный финансовый холдинг.</p></div>
     </div>
     <div class="callout" style="margin-top:18px;text-align:center"><p>Общий рецепт во всех случаях: <strong>диагностика → план → построение систем → мониторинг.</strong> Не «работать больше», а перестроить устройство компании под новый размер.</p></div>
   </div>
 </section>
 
 <!-- 61 ACTION -->
-<section class="slide" id="s63">
-  <div class="snum">63</div><div class="spart">Действия</div>
+<section class="slide" id="s71">
+  <div class="snum">71</div><div class="spart">Действия</div>
   <div class="deck">
     <span class="kicker">С чего начать</span>
     <h2>План на ближайший квартал</h2>
@@ -1658,18 +1772,19 @@ footer strong{color:#c9bfa9}
 </section>
 
 <!-- 62 CREDIT -->
-<section class="slide cover" id="s64">
-  <div class="snum" style="color:#a89d84">64</div>
+<section class="slide cover" id="s72">
+  <div class="snum" style="color:#a89d84">72</div>
   <div class="deck">
     <span class="kicker">Контакты</span>
     <h1 style="font-size:clamp(1.7rem,4.2vw,3.2rem);max-width:24ch">Готовы пройти этот путь с поддержкой?</h1>
     <p class="sub">Диагностика стадии и болезней роста, разработка стратегического плана, наведение порядка в ролях и системах управления, сопровождение перехода — на практике, под вашу компанию.</p>
+    <p style="margin-top:18px;font-family:'Spectral',serif;font-style:italic;color:#bd842a;font-size:1.02rem;max-width:58ch">Кстати: вы только что осилили 72 слайда о том, как меняться без хаоса. Если хватило терпения дочитать до этой строки — значит, и в компании вам по силам довести изменения до конца. Не откладывайте: выберите одну строку из чек-листа выше и сделайте её на этой неделе — лучшая трансформация начинается с первого маленького шага, а не с идеального плана.</p>
     <div style="margin-top:34px;font-family:'Spectral',serif">
       <div style="font-size:1.5rem;color:#f6efe1;font-weight:700">Дмитрий Айзенштат</div>
       <div style="color:#c9bfa9;font-size:1.05rem;margin-top:4px">Консультант по управлению</div>
       <div style="margin-top:14px"><a href="https://ayzenshtat.ru" style="color:var(--gold);font-size:1.15rem;font-weight:600;font-family:'Manrope',sans-serif;text-decoration:none">Ayzenshtat.ru</a></div>
     </div>
-    <p style="margin-top:32px;color:#a89d84;font-size:.9rem;max-width:62ch;font-style:italic;font-family:'Spectral',serif">Гайд подготовлен по книге Eric G. Flamholtz &amp; Yvonne Randle «Growing Pains: Building Sustainably Successful Organizations» (5-е изд., John Wiley &amp; Sons, 2016) совместно с Claude. Обзорно-образовательный материал; не заменяет прочтение оригинала.</p>
+    <p style="margin-top:32px;color:#a89d84;font-size:.9rem;max-width:62ch;font-style:italic;font-family:'Spectral',serif">Гайд подготовлен по книге Eric G. Flamholtz &amp; Yvonne Randle «Growing Pains: Building Sustainably Successful Organizations» (5-е изд., John Wiley &amp; Sons, 2016) совместно с Claude. Обзорно-образовательный материал; не является перепечаткой книги. Права на оригинал принадлежат авторам и издательству John Wiley &amp; Sons. Рекомендуем прочесть оригинал.</p>
   </div>
 </section>
 
