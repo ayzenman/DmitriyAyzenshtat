@@ -40,7 +40,7 @@ const Footer = () => {
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
             {/* Copyright */}
             <div className="text-sm text-[var(--color-text-muted)]">
-              © {currentYear} Финансовый консалтинг. Все права защищены.
+              © {currentYear} Дмитрий Айзенштат. Все права защищены.
             </div>
 
             {/* Links */}
