@@ -1,6 +1,6 @@
-name: Build and Deploy to Beget
+name: Build and Deploy
 
-# Запускать при пушах в ветку  main (измените на вашу основную ветку, если нужно)
+# Запускать при пушах в ветку main (измените на вашу основную ветку, если нужно)
 on:
   push:
     branches: [ main ]
@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      # 1. Скачиваем код из репозитория 
+      # 1. Скачиваем код из репозитория
       - name: Checkout repository
         uses: actions/checkout@v4
 
@@ -20,24 +20,37 @@ jobs:
         with:
           node-version: '20'
 
-      # 3. Устанавливаем зависимости (используем npm install вместо ci для избежания ошибок с lock-файлом)
+      # 3. Устанавливаем зависимости
       - name: Install dependencies
         run: npm install
 
-      # 4. Собираем проект (должна появиться папка dist)
+      # 4. Собираем проект (появляется папка dist)
       - name: Build project
         run: npm run build
 
-      # 5. Загружаем файлы на Beget по FTP с полной очисткой папки назначения
-      - name: Deploy to Beget via FTP
+      # 5. НОВЫЙ ШАГ: создаём secrets.php из GitHub Secret и кладём в dist.
+      #    Токен берётся из защищённого хранилища GitHub (Settings → Secrets),
+      #    в коде репозитория его нет. Файл попадает на сервер вместе со сборкой.
+      - name: Create secrets.php for MAX
+        run: |
+          cat > ./dist/secrets.php << 'PHP'
+          <?php
+          return [
+            'bot_token' => '${{ secrets.MAX_BOT_TOKEN }}',
+            'chat_id' => 345527149,
+          ];
+          PHP
+
+      # 6. Загружаем файлы на хостинг по FTP с полной очисткой папки назначения
+      - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: ./dist/
-          # ВАЖНО: укажите точный путь к корневой папке вашего сайта на Beget
+          # Укажите точный путь к корневой папке вашего сайта на хостинге
           server-dir: public_html/
-          # dangerous-clean-slate: true удалит ВСЕ файлы в server-dir перед загрузкой новых.
-          # Это гарантирует, что на сервере не останется старых файлов из неправильных папок.
+          # Удаляет все файлы в server-dir перед загрузкой новых.
+          # Теперь это безопасно: secrets.php создаётся заново на каждом деплое (шаг 5).
           dangerous-clean-slate: true
