@@ -134,7 +134,7 @@ const Hero = () => {
             ref={preTitleRef}
             className="inline-block text-xs sm:text-sm tracking-[0.2em] uppercase text-[var(--color-gold)] mb-6 opacity-0"
           >
-            Финансовый консалтинг для бизнеса
+            Системы управления для бизнеса
           </span>
 
           {/* Title */}
@@ -143,7 +143,7 @@ const Hero = () => {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-semibold leading-tight mb-8 perspective-1000"
           >
             <span className="word inline-block opacity-0">Превращаю</span>{' '}
-            <span className="word inline-block opacity-0">финансовый</span>{' '}
+            <span className="word inline-block opacity-0">управленческий</span>{' '}
             <span className="word inline-block opacity-0 text-[var(--color-gold)]">хаос</span>{' '}
             <br className="hidden sm:block" />
             <span className="word inline-block opacity-0">в </span>{' '}
@@ -157,8 +157,8 @@ const Hero = () => {
             ref={subtitleRef}
             className="text-base sm:text-lg lg:text-xl text-[var(--color-text-muted)] max-w-2xl mb-10 leading-relaxed opacity-0"
           >
-            Для собственников компаний с оборотом от 500 млн рублей, 
-            которые хотят видеть реальную картину бизнеса и принимать взвешенные решения
+            Для собственников компаний с оборотом от 200 млн рублей, 
+            которые хотят управлять бизнесом, а не тушить в нём пожары
           </p>
 
           {/* CTA Button */}
@@ -182,7 +182,7 @@ const Hero = () => {
               <TrendingUp className="w-6 h-6 text-[var(--color-gold)]" />
             </div>
             <div>
-              <div className="font-mono text-2xl lg:text-3xl font-semibold text-[var(--color-gold)]">15+</div>
+              <div className="font-mono text-2xl lg:text-3xl font-semibold text-[var(--color-gold)]">19+</div>
               <div className="text-sm text-[var(--color-text-muted)]">лет опыта</div>
             </div>
           </div>
