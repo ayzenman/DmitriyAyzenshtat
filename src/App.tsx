@@ -11,6 +11,7 @@ import Results from './sections/Results';
 import ForWhom from './sections/ForWhom';
 import Contact from './sections/Contact';
 import Footer from './sections/Footer';
+import CookieBanner from './sections/CookieBanner';
 
 // Register GSAP plugins
 gsap.registerPlugin(ScrollTrigger);
@@ -45,6 +46,7 @@ function App() {
         <Contact />
       </main>
       <Footer />
+      <CookieBanner />
     </div>
   );
 }
