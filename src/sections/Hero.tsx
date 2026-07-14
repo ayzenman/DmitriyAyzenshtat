@@ -157,7 +157,7 @@ const Hero = () => {
             ref={subtitleRef}
             className="text-base sm:text-lg lg:text-xl text-[var(--color-text-muted)] max-w-2xl mb-10 leading-relaxed opacity-0"
           >
-            Для собственников компаний с оборотом от 200 млн рублей, 
+            Для собственников компаний с оборотом от 500 млн рублей, 
             которые хотят управлять бизнесом, а не тушить в нём пожары
           </p>
 
