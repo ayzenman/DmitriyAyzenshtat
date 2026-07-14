@@ -390,7 +390,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-[var(--color-text-muted)]">Telegram-канал</div>
-                    <a href="telegram.me/AyzenshtatProBiznes" className="text-lg hover:text-[var(--color-gold)] transition-colors">
+                    <a href="https://telegram.me/AyzenshtatProBiznes" className="text-lg hover:text-[var(--color-gold)] transition-colors">
                       Айзенштат | Системы управления бизнесом
                     </a>
                   </div>
