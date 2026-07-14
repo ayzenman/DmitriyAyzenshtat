@@ -38,15 +38,19 @@ const Footer = () => {
       <div className="section-padding">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
-            {/* Copyright */}
-            <div className="text-sm text-[var(--color-text-muted)]">
+            {/* Copyright + реквизиты владельца сайта (152-ФЗ) */}
+            <div className="text-sm text-[var(--color-text-muted)] text-center sm:text-left">
               © {currentYear} Дмитрий Айзенштат. Все права защищены.
+              {/* TODO: указать реквизиты владельца — ИП/ФИО, ИНН, ОГРНИП, контакт для связи */}
+              <div className="mt-1 text-xs opacity-80">
+                ИП Айзенштат Дмитрий Александрович · ИНН 744916201645 · ОГРНИП 325745600093550
+              </div>
             </div>
 
             {/* Links */}
             <div className="flex items-center gap-6">
               <a 
-                href="#" 
+                href="/privacy.html" 
                 className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-gold)] transition-colors"
               >
                 Политика конфиденциальности
