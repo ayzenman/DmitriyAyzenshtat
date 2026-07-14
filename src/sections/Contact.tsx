@@ -337,20 +337,19 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-[var(--color-text-muted)]">Telegram</div>
-                    <a href="https://telegram.me/DmitriyAyzenshtat" className="text-lg hover:text-[var(--color-gold)] transition-colors">
+                    <a href="https://telegram.me/DmitriyAyzenshtat" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-[var(--color-gold)] transition-colors">
                       @DmitriyAyzenshtat
                     </a>
                   </div>
                 </div>
 
-                {/* TODO: заменить href на реальную ссылку канала, когда он будет создан */}
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] flex items-center justify-center">
                     <Rss className="w-5 h-5 text-[var(--color-gold)]" />
                   </div>
                   <div>
                     <div className="text-sm text-[var(--color-text-muted)]">Telegram-канал</div>
-                    <a href="https://telegram.me/AyzenshtatProBiznes" className="text-lg hover:text-[var(--color-gold)] transition-colors">
+                    <a href="https://telegram.me/AyzenshtatProBiznes" target="_blank" rel="noopener noreferrer" className="text-lg hover:text-[var(--color-gold)] transition-colors">
                       Айзенштат | Системы управления бизнесом
                     </a>
                   </div>
