@@ -1,8 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
-import emailjs from '@emailjs/browser';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-// Добавьте Loader в импорт вместе с другими иконками
 import { Mail, Send, MessageCircle, CheckCircle, Loader, Rss } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 
@@ -122,90 +120,26 @@ const Contact = () => {
     return () => ctx.revert();
   }, []);
   
-  const sendEmail = async (data: typeof formData) => {
-  try {
-    // Вставьте сюда ваши ключи
-    const serviceId = 'service_scev2xs';   // ваш Service ID
-    const templateId = 'template_gljljjd'; // ваш Template ID
-    const publicKey = 'qZrXtIof1iTXv0O81';      // ваш Public Key
+  // Отправка заявки на наш серверный скрипт (send-max.php),
+  // который пересылает её в MAX. Токен и логика — на сервере, не в браузере.
+  const sendLead = async (data: typeof formData) => {
+    try {
+      const response = await fetch('/send-max.php', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
 
-    const templateParams = {
-      name: data.name,
-      phone: data.phone,
-      email: data.email,
-      company: data.company,
-    };
+      if (!response.ok) return false;
 
-    const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
-
-    if (response.status === 200) {
-      return true;
-    } else {
-      console.error('EmailJS error:', response);
+      const result = await response.json().catch(() => null);
+      return !!(result && result.ok);
+    } catch (error) {
+      console.error('Ошибка отправки:', error);
       return false;
     }
-  } catch (error) {
-    console.error('Ошибка отправки:', error);
-    return false;
-  }
-};
-  // ===== ОТПРАВКА ЧЕРЕЗ ПРОКСИ (безопасно) =====
-{/*
-  const sendToTelegram = async (data: typeof formData) => {
-  try {
-    // Отправляем на наш API-эндпоинт вместо прямого запроса к Telegram
-    const response = await fetch('/api/send-telegram', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+  };
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('API error:', errorData);
-      return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.error('Ошибка отправки:', error);
-    return false;
-  }
-};
-
-// Конец вставки
-  // Функция отправки почты
-  const sendEmail = async (data: typeof formData) => {
-  try {
-    const response = await fetch('/send-email.php', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: new URLSearchParams({
-        name: data.name,
-        phone: data.phone,
-        email: data.email,
-        company: data.company,
-      }).toString(),
-    });
-
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('API error:', errorData);
-      return false;
-    }
-
-    return true;
-  } catch (error) {
-    console.error('Ошибка отправки:', error);
-    return false;
-  }
-};
-*/}
-  // ===== ОБНОВЛЁННЫЙ handleSubmit =====
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -217,7 +151,7 @@ const Contact = () => {
     setIsLoading(true); // включаем индикатор загрузки
 
     try {
-      const success = await sendEmail(formData);
+      const success = await sendLead(formData);
 
       if (success) {
         setShowSuccess(true);               // показываем диалог успеха
@@ -403,7 +337,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-[var(--color-text-muted)]">Telegram</div>
-                    <a href="https://t.me/DmitriyAyzenshtat" className="text-lg hover:text-[var(--color-gold)] transition-colors">
+                    <a href="https://telegram.me/DmitriyAyzenshtat" className="text-lg hover:text-[var(--color-gold)] transition-colors">
                       @DmitriyAyzenshtat
                     </a>
                   </div>
@@ -416,7 +350,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-[var(--color-text-muted)]">Telegram-канал</div>
-                    <a href="#TODO-channel-link" className="text-lg hover:text-[var(--color-gold)] transition-colors">
+                    <a href="https://telegram.me/AyzenshtatProBiznes" className="text-lg hover:text-[var(--color-gold)] transition-colors">
                       Айзенштат | Системы управления бизнесом
                     </a>
                   </div>
