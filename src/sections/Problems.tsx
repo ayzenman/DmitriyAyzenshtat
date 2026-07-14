@@ -1,30 +1,30 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Wallet, TrendingDown, CalendarX, EyeOff } from 'lucide-react';
+import { Wallet, TrendingDown, Users, EyeOff } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const problems = [
   {
     icon: Wallet,
-    title: '«Куда уходят деньги?»',
-    description: 'Отсутствие прозрачной отчётности по движению денежных средств'
+    title: '«Не верю своим цифрам»',
+    description: 'Отчёты говорят одно, ощущения — другое. Непонятно, кому верить'
   },
   {
     icon: TrendingDown,
-    title: '«Прибыль есть, а денег нет»',
-    description: 'Путаница между бухгалтерской прибылью и реальным cash flow'
+    title: '«Узнаю о проблемах последним»',
+    description: 'Кассовый разрыв или провал становится сюрпризом, а не тем, что было видно заранее'
   },
   {
-    icon: CalendarX,
-    title: '«Планирование наугад»',
-    description: 'Нет точных прогнозов, бюджеты составляются "на глазок"'
+    icon: Users,
+    title: '«Всё держится на мне»',
+    description: 'Без вашего решения ничего не происходит — и так не может продолжаться вечно'
   },
   {
     icon: EyeOff,
     title: '«Решения вслепую»',
-    description: 'Нет ключевых показателей для оценки эффективности'
+    description: 'Нет данных и показателей, на которые можно опереться'
   }
 ];
 
@@ -144,7 +144,7 @@ const Problems = () => {
                 className="text-base lg:text-lg text-[var(--color-text-muted)] leading-relaxed opacity-0"
               >
                 Когда бизнес растёт быстрее, чем успевают выстраиваться процессы, 
-                финансовая картина размывается. Собственник принимает решения вслепую — 
+                управленческая картина размывается. Собственник принимает решения вслепую — 
                 по интуиции или по тем данным, которые не отражают реальность.
               </p>
             </div>
@@ -193,3 +193,4 @@ const Problems = () => {
 };
 
 export default Problems;
+
