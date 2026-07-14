@@ -5,9 +5,9 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 // Добавьте Loader в импорт вместе с другими иконками
 import { Mail, Send, MessageCircle, CheckCircle, Loader, Rss } from 'lucide-react';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
- 
+
 gsap.registerPlugin(ScrollTrigger);
- 
+
 const Contact = () => {
   const sectionRef = useRef<HTMLElement>(null);
   const titleRef = useRef<HTMLHeadingElement>(null);
@@ -17,13 +17,14 @@ const Contact = () => {
   
   const [showSuccess, setShowSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false); // новое состояние для кнопки
+  const [consent, setConsent] = useState(false); // согласие на обработку ПДн (152-ФЗ)
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
     company: ''
   });
- 
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       // Title
@@ -41,7 +42,7 @@ const Contact = () => {
           }
         }
       );
- 
+
       // Divider line
       gsap.fromTo(dividerRef.current,
         { scaleY: 0 },
@@ -57,7 +58,7 @@ const Contact = () => {
           delay: 0.3
         }
       );
- 
+
       // Form fields
       const fields = formRef.current?.querySelectorAll('.form-field');
       if (fields) {
@@ -78,7 +79,7 @@ const Contact = () => {
           }
         );
       }
- 
+
       // Submit button
       const submitBtn = formRef.current?.querySelector('.submit-btn');
       if (submitBtn) {
@@ -98,7 +99,7 @@ const Contact = () => {
           }
         );
       }
- 
+
       // Contact info
       gsap.fromTo(contactsRef.current,
         { x: 50, opacity: 0 },
@@ -115,9 +116,9 @@ const Contact = () => {
           delay: 0.5
         }
       );
- 
+
     }, sectionRef);
- 
+
     return () => ctx.revert();
   }, []);
   
@@ -127,16 +128,16 @@ const Contact = () => {
     const serviceId = 'service_scev2xs';   // ваш Service ID
     const templateId = 'template_gljljjd'; // ваш Template ID
     const publicKey = 'qZrXtIof1iTXv0O81';      // ваш Public Key
- 
+
     const templateParams = {
       name: data.name,
       phone: data.phone,
       email: data.email,
       company: data.company,
     };
- 
+
     const response = await emailjs.send(serviceId, templateId, templateParams, publicKey);
- 
+
     if (response.status === 200) {
       return true;
     } else {
@@ -160,20 +161,20 @@ const Contact = () => {
       },
       body: JSON.stringify(data),
     });
- 
+
     if (!response.ok) {
       const errorData = await response.json();
       console.error('API error:', errorData);
       return false;
     }
- 
+
     return true;
   } catch (error) {
     console.error('Ошибка отправки:', error);
     return false;
   }
 };
- 
+
 // Конец вставки
   // Функция отправки почты
   const sendEmail = async (data: typeof formData) => {
@@ -190,13 +191,13 @@ const Contact = () => {
         company: data.company,
       }).toString(),
     });
- 
+
     if (!response.ok) {
       const errorData = await response.json();
       console.error('API error:', errorData);
       return false;
     }
- 
+
     return true;
   } catch (error) {
     console.error('Ошибка отправки:', error);
@@ -207,14 +208,21 @@ const Contact = () => {
   // ===== ОБНОВЛЁННЫЙ handleSubmit =====
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!consent) {
+      alert('Пожалуйста, подтвердите согласие на обработку персональных данных.');
+      return;
+    }
+
     setIsLoading(true); // включаем индикатор загрузки
- 
+
     try {
       const success = await sendEmail(formData);
- 
+
       if (success) {
         setShowSuccess(true);               // показываем диалог успеха
         setFormData({ name: '', phone: '', email: '', company: '' }); // очищаем поля
+        setConsent(false);                  // сбрасываем согласие
       } else {
         alert('Не удалось отправить заявку. Попробуйте позже или свяжитесь напрямую.');
       }
@@ -231,7 +239,7 @@ const Contact = () => {
       [e.target.name]: e.target.value
     }));
   };
- 
+
   return (
     <section 
       ref={sectionRef}
@@ -254,7 +262,7 @@ const Contact = () => {
               есть ли смысл работать дальше.
             </p>
           </div>
- 
+
           {/* Content Grid */}
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-0 relative">
             {/* Form */}
@@ -275,7 +283,7 @@ const Contact = () => {
                   placeholder="Ваше имя"
                 />
               </div>
- 
+
               <div className="form-field opacity-0">
                 <label className="block text-sm text-[var(--color-text-muted)] mb-2">Телефон</label>
                 <input
@@ -288,7 +296,7 @@ const Contact = () => {
                   placeholder="+7 (___) ___-__-__"
                 />
               </div>
- 
+
               <div className="form-field opacity-0">
                 <label className="block text-sm text-[var(--color-text-muted)] mb-2">Email</label>
                 <input
@@ -301,7 +309,7 @@ const Contact = () => {
                   placeholder="your@email.com"
                 />
               </div>
- 
+
               <div className="form-field opacity-0">
                 <label className="block text-sm text-[var(--color-text-muted)] mb-2">Компания и оборот</label>
                 <textarea
@@ -313,11 +321,29 @@ const Contact = () => {
                   placeholder="Название компании, сфера, годовой оборот"
                 />
               </div>
- 
+
+              <div className="form-field opacity-0 flex items-start gap-3">
+                <input
+                  type="checkbox"
+                  id="consent"
+                  name="consent"
+                  checked={consent}
+                  onChange={(e) => setConsent(e.target.checked)}
+                  required
+                  className="mt-1 w-4 h-4 shrink-0 accent-[var(--color-gold)] cursor-pointer"
+                />
+                <label htmlFor="consent" className="text-sm text-[var(--color-text-muted)] leading-snug cursor-pointer">
+                  Я даю согласие на обработку моих персональных данных в соответствии с{' '}
+                  <a href="/privacy.html" target="_blank" rel="noopener noreferrer" className="text-[var(--color-gold)] underline hover:no-underline">
+                    Политикой обработки персональных данных
+                  </a>.
+                </label>
+              </div>
+
                <button 
           type="submit"
-          className="submit-btn btn-primary w-full opacity-0 flex items-center justify-center"
-          disabled={isLoading} // блокируем кнопку во время отправки
+          className="submit-btn btn-primary w-full opacity-0 flex items-center justify-center disabled:opacity-50 disabled:cursor-not-allowed"
+          disabled={isLoading || !consent} // блокируем во время отправки и без согласия
         >
           {isLoading ? (
             <>
@@ -331,15 +357,15 @@ const Contact = () => {
             </>
           )}
         </button>
- 
+
               </form>
- 
+
             {/* Divider */}
             <div 
               ref={dividerRef}
               className="hidden lg:block absolute left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-transparent via-[var(--color-gold)] to-transparent origin-top"
             />
- 
+
             {/* Contact Info */}
             <div 
               ref={contactsRef}
@@ -370,19 +396,19 @@ const Contact = () => {
                     </a>
                   </div>
                 </div>
- 
+
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] flex items-center justify-center">
                     <MessageCircle className="w-5 h-5 text-[var(--color-gold)]" />
                   </div>
                   <div>
                     <div className="text-sm text-[var(--color-text-muted)]">Telegram</div>
-                    <a href="https://telegram.me/DmitriyAyzenshtat" className="text-lg hover:text-[var(--color-gold)] transition-colors">
+                    <a href="https://t.me/DmitriyAyzenshtat" className="text-lg hover:text-[var(--color-gold)] transition-colors">
                       @DmitriyAyzenshtat
                     </a>
                   </div>
                 </div>
- 
+
                 {/* TODO: заменить href на реальную ссылку канала, когда он будет создан */}
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-lg bg-[var(--color-bg-card)] border border-[var(--color-border)] flex items-center justify-center">
@@ -390,12 +416,12 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-[var(--color-text-muted)]">Telegram-канал</div>
-                    <a href="https://telegram.me/AyzenshtatProBiznes" className="text-lg hover:text-[var(--color-gold)] transition-colors">
+                    <a href="#TODO-channel-link" className="text-lg hover:text-[var(--color-gold)] transition-colors">
                       Айзенштат | Системы управления бизнесом
                     </a>
                   </div>
                 </div>
- 
+
                  <div className="pt-6 border-t border-[var(--color-border)]">
                   <p className="text-sm text-[var(--color-text-muted)]">
                      
@@ -406,7 +432,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
- 
+
       {/* Success Dialog */}
       <Dialog open={showSuccess} onOpenChange={setShowSuccess}>
         <DialogContent className="bg-[var(--color-bg-card)] border-[var(--color-border)] text-[var(--color-text)]">
@@ -424,5 +450,5 @@ const Contact = () => {
     </section>
   );
 };
- 
+
 export default Contact;
