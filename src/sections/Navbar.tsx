@@ -59,7 +59,7 @@ const Navbar = () => {
               onClick={(e) => handleLinkClick(e, '#hero')}
               className="text-lg font-semibold text-[var(--color-gold)]"
             >
-              FC
+              DA
             </a>
 
             {/* Desktop Navigation */}
