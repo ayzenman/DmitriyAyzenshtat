@@ -377,7 +377,7 @@ const Contact = () => {
                   </div>
                   <div>
                     <div className="text-sm text-[var(--color-text-muted)]">Telegram</div>
-                    <a href="https://t.me/DmitriyAyzenshtat" className="text-lg hover:text-[var(--color-gold)] transition-colors">
+                    <a href="https://telegram.me/DmitriyAyzenshtat" className="text-lg hover:text-[var(--color-gold)] transition-colors">
                       @DmitriyAyzenshtat
                     </a>
                   </div>
