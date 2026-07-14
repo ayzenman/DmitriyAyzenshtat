@@ -6,7 +6,7 @@ import { GraduationCap, Briefcase, TrendingUp } from 'lucide-react';
 gsap.registerPlugin(ScrollTrigger);
 
 const metrics = [
-  { icon: Briefcase, value: '19', label: 'лет в финансовом руководстве' },
+  { icon: Briefcase, value: '19', label: 'лет в финансовом управлении' },
   { icon: GraduationCap, value: 'EMBA', label: '+ 2 высших образования' },
   { icon: TrendingUp, value: '1 млрд+', label: 'средний оборот клиентов' }
 ];
@@ -190,16 +190,15 @@ const About = () => {
                 ref={titleRef}
                 className="text-3xl sm:text-4xl lg:text-5xl font-semibold mb-8 opacity-0 leading-tight"
               >
-                Помогаю бизнесу перейти от ручного управления
+                Помогаю перейти от ручного управления
                 <br />
                 к <span className="text-[var(--color-gold)]">системному</span>.
               </h2>
 
               <div className="space-y-6 mb-10">
                 <p className="bio-paragraph text-base lg:text-lg text-[var(--color-text-muted)] leading-relaxed opacity-0">
-                  Привет! Меня зовут Дмитрий Айзенштат. 19 лет проработал в финансовом руководстве 
-                  крупных промышленных холдингов — АвтоВАЗ, ЧТПЗ, Римера, из них 10 лет — в должности 
-                  финансового директора. Выстраивал системы управления с нуля, готовил компании к масштабированию.
+                  Привет! Меня зовут Дмитрий Айзенштат. 10 лет работал финансовым директором в крупных производственных и торговых компаниях.
+                  Выстраивал системы управления с нуля, готовил компании к масштабированию.
                 </p>
                 
                 <p className="bio-paragraph text-base lg:text-lg text-[var(--color-text-muted)] leading-relaxed opacity-0">
