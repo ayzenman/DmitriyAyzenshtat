@@ -1,0 +1,826 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Тест: готова ли компания к следующему уровню — Дмитрий Айзенштат</title>
+<meta name="description" content="Диагностический тест по методологии Эрика Флэмхольца: стадия роста компании, профиль по шести опорам управления, балл болезней роста со сравнением с 5000+ компаний." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #1a1f2e;
+    --bg-card: #242b3d;
+    --bg-card2: #2c3448;
+    --border: #3a4258;
+    --gold: #d4a853;
+    --gold-light: #e4c373;
+    --text: #f5f5f5;
+    --text-muted: #b0b8c8;
+    --green: #5fa87a;
+    --yellow: #d4b545;
+    --orange: #cf8a4a;
+    --red: #c1594d;
+    --purple: #8f6aa3;
+  }
+  * { box-sizing: border-box; }
+  html, body {
+    margin: 0; padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', sans-serif;
+    font-weight: 300;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, .display { font-family: 'Playfair Display', serif; font-weight: 600; }
+  .mono { font-family: 'JetBrains Mono', monospace; }
+  a { color: var(--gold); }
+
+  .wrap {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 100px;
+  }
+
+  /* ---------- Шапка / прогресс ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 20;
+    background: rgba(26,31,46,0.92);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--border);
+    padding: 14px 24px;
+  }
+  .topbar-inner { max-width: 720px; margin: 0 auto; display: flex; align-items: center; gap: 16px; }
+  .topbar-label { font-size: 13px; color: var(--text-muted); white-space: nowrap; font-family: 'JetBrains Mono', monospace; }
+  .progress-track { flex: 1; height: 4px; background: var(--border); border-radius: 4px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--gold); border-radius: 4px; transition: width .4s ease; width: 0%; }
+
+  /* ---------- Экраны ---------- */
+  .screen { display: none; animation: fadeIn .35s ease; }
+  .screen.active { display: block; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+
+  .eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 14px; display: block;
+  }
+  h1.title { font-size: 34px; line-height: 1.25; margin: 0 0 20px; }
+  h2.step-title { font-size: 26px; margin: 0 0 12px; }
+  p.lead { font-size: 17px; color: var(--text-muted); margin: 0 0 24px; }
+
+  .fact-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    border-radius: 6px;
+    padding: 18px 20px;
+    margin: 20px 0 28px;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+  .fact-box b { color: var(--text); }
+
+  .method-box {
+    background: var(--bg-card2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 20px 22px;
+    margin: 24px 0;
+    font-size: 15px;
+    color: var(--text-muted);
+  }
+  .method-box .label { color: var(--gold); font-weight: 600; font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; display:block; margin-bottom: 8px;}
+
+  /* ---------- Пирамида (сигнатурный элемент) ---------- */
+  .pyramid { display: flex; flex-direction: column; align-items: center; gap: 4px; margin: 36px auto 0; max-width: 320px; }
+  .pyramid-tier {
+    height: 38px; border-radius: 6px;
+    background: linear-gradient(180deg, var(--bg-card2), var(--bg-card));
+    border: 1px solid var(--border);
+    box-shadow: 0 2px 6px rgba(0,0,0,0.25);
+    display: grid; grid-template-columns: 22px 1fr; align-items: center;
+    padding: 0 10px;
+    font-size: 13px; color: var(--text); font-family: 'Inter', sans-serif; font-weight: 500;
+    transition: all .3s ease;
+    white-space: nowrap;
+  }
+  .pyramid-tier .tier-num {
+    font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gold); opacity: .85;
+    text-align: left;
+  }
+  .pyramid-tier .tier-label { text-align: center; }
+  .pyramid-tier.weak { border-color: var(--red); color: var(--red); background: rgba(193,89,77,0.12); }
+  .pyramid-foundation {
+    width: 100%; margin-top: 10px; padding: 12px 16px;
+    background: linear-gradient(180deg, rgba(212,168,83,0.14), rgba(212,168,83,0.04));
+    border: 1px solid var(--gold); border-radius: 6px;
+    display: flex; align-items: center; justify-content: center; text-align: center;
+    font-size: 12px; color: var(--gold-light); font-family: 'JetBrains Mono', monospace;
+    letter-spacing: .02em; line-height: 1.5;
+  }
+
+  /* ---------- Кнопки ---------- */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--gold); color: #1a1f2e;
+    font-family: 'Inter', sans-serif; font-weight: 600; font-size: 16px;
+    border: none; border-radius: 6px;
+    padding: 14px 28px; cursor: pointer;
+    transition: background .2s ease, transform .1s ease;
+    text-decoration: none;
+  }
+  .btn:hover { background: var(--gold-light); }
+  .btn:active { transform: scale(0.98); }
+  .btn.secondary {
+    background: transparent; color: var(--gold);
+    border: 1px solid var(--gold);
+  }
+  .btn.secondary:hover { background: rgba(212,168,83,0.1); }
+  .btn:disabled { opacity: .4; cursor: not-allowed; }
+  .btn-row { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+
+  /* ---------- Поля ввода ---------- */
+  .field { margin-bottom: 28px; }
+  .field label.field-label { display: block; font-size: 14px; color: var(--text-muted); margin-bottom: 10px; }
+  select, input[type=text] {
+    width: 100%; background: var(--bg-card); color: var(--text);
+    border: 1px solid var(--border); border-radius: 6px;
+    padding: 13px 14px; font-size: 16px; font-family: 'Inter', sans-serif;
+  }
+  select:focus, input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+
+  .radio-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .radio-card {
+    border: 1px solid var(--border); background: var(--bg-card);
+    border-radius: 6px; padding: 14px 14px; cursor: pointer;
+    font-size: 15px; text-align: left; transition: all .15s ease;
+    display: flex; flex-direction: column; gap: 5px;
+  }
+  .radio-card b { font-weight: 600; }
+  .radio-card .card-hint { font-size: 12px; color: var(--text-muted); line-height: 1.4; }
+  .radio-card:hover { border-color: var(--gold); }
+  .radio-card.selected { border-color: var(--gold); background: rgba(212,168,83,0.12); }
+  .radio-card.selected b { color: var(--gold-light); }
+
+  /* ---------- Вопросы (шкала 1-5) ---------- */
+  .question-block { margin-bottom: 36px; padding-bottom: 32px; border-bottom: 1px solid var(--border); }
+  .question-block:last-child { border-bottom: none; }
+  .q-num { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: var(--gold); margin-bottom: 8px; }
+  .q-text { font-size: 18px; margin-bottom: 16px; line-height: 1.5; }
+  .scale-row { display: flex; gap: 8px; }
+  .scale-btn {
+    flex: 1; height: 52px; border-radius: 6px;
+    border: 1px solid var(--border); background: var(--bg-card);
+    color: var(--text-muted); font-family: 'JetBrains Mono', monospace; font-size: 18px;
+    cursor: pointer; transition: all .15s ease;
+  }
+  .scale-btn:hover { border-color: var(--gold); }
+  .scale-btn.selected { background: var(--gold); color: #1a1f2e; border-color: var(--gold); font-weight: 700; }
+  .scale-caption { display: flex; justify-content: space-between; font-size: 11px; color: var(--text-muted); margin-top: 6px; }
+  .section-divider {
+    display: flex; align-items: center; gap: 14px;
+    margin: 44px 0 28px; color: var(--gold); font-family: 'JetBrains Mono', monospace;
+    font-size: 13px; letter-spacing: .08em; text-transform: uppercase;
+  }
+  .section-divider::before, .section-divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* ---------- Результат ---------- */
+  .result-hero { text-align: center; padding: 20px 0 32px; }
+  .score-circle {
+    width: 168px; height: 168px; border-radius: 50%;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    margin: 0 auto 20px; border: 3px solid var(--zone-color, var(--gold));
+    background: var(--bg-card);
+  }
+  .score-circle .num { font-family: 'JetBrains Mono', monospace; font-size: 48px; font-weight: 700; color: var(--zone-color, var(--gold)); line-height: 1; }
+  .score-circle .max { font-size: 12px; color: var(--text-muted); margin-top: 2px; }
+  .zone-label {
+    display: inline-block; padding: 6px 16px; border-radius: 20px;
+    font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .05em;
+    background: color-mix(in srgb, var(--zone-color, var(--gold)) 18%, transparent);
+    color: var(--zone-color, var(--gold));
+    border: 1px solid var(--zone-color, var(--gold));
+  }
+
+  .bench-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 28px 0; }
+  .bench-card {
+    background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px;
+    padding: 18px; text-align: center;
+  }
+  .bench-card .big { font-family: 'JetBrains Mono', monospace; font-size: 26px; color: var(--gold); font-weight: 700; }
+  .bench-card .small { font-size: 12px; color: var(--text-muted); margin-top: 6px; line-height: 1.4; }
+
+  .opora-row { display: flex; align-items: center; gap: 12px; margin-bottom: 14px; }
+  .opora-name { width: 150px; font-size: 14px; flex-shrink: 0; }
+  .opora-bar-track { flex: 1; height: 10px; background: var(--bg-card2); border-radius: 5px; overflow: hidden; }
+  .opora-bar-fill { height: 100%; border-radius: 5px; background: var(--gold); }
+  .opora-bar-fill.weak { background: var(--red); }
+  .opora-val { width: 24px; text-align: right; font-family: 'JetBrains Mono', monospace; font-size: 14px; color: var(--text-muted); }
+
+  .insight-card {
+    background: var(--bg-card2); border-left: 3px solid var(--gold);
+    border-radius: 6px; padding: 20px 22px; margin: 24px 0; font-size: 15px;
+  }
+  .insight-card .label { color: var(--gold); font-family: 'JetBrains Mono', monospace; font-size: 12px; text-transform: uppercase; letter-spacing: .08em; display: block; margin-bottom: 10px; }
+
+  .brands-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .brand-chip { font-size: 12px; padding: 5px 12px; border-radius: 20px; border: 1px solid var(--border); color: var(--text-muted); }
+
+  .cta-box {
+    background: var(--bg-card); border: 1px solid var(--gold); border-radius: 10px;
+    padding: 28px 24px; text-align: center; margin: 36px 0 24px;
+  }
+  .cta-box h3 { margin: 0 0 10px; font-size: 22px; }
+  .cta-box p { color: var(--text-muted); margin: 0 0 20px; font-size: 15px; }
+
+  .share-box {
+    background: var(--bg-card2); border: 1px dashed var(--border); border-radius: 8px;
+    padding: 16px 18px; margin: 20px 0; font-size: 14px; color: var(--text-muted);
+  }
+  .share-text-preview { background: var(--bg); border-radius: 6px; padding: 12px 14px; margin: 10px 0; font-size: 14px; color: var(--text); }
+
+  .disclaimer { font-size: 12px; color: var(--text-muted); opacity: .8; margin-top: 6px; }
+
+  footer.page-footer { text-align: center; padding: 40px 24px; color: var(--text-muted); font-size: 13px; }
+  footer.page-footer a { color: var(--text-muted); text-decoration: underline; }
+
+  @media (max-width: 480px) {
+    h1.title { font-size: 27px; }
+    .radio-grid { grid-template-columns: 1fr; }
+    .bench-grid { grid-template-columns: 1fr; }
+    .opora-name { width: 110px; font-size: 12.5px; }
+    .scale-row { gap: 5px; }
+    .scale-btn { height: 46px; font-size: 15px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .screen { animation: none; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-inner">
+    <span class="topbar-label mono" id="topbarLabel">Начало</span>
+    <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+  </div>
+</div>
+
+<div class="wrap">
+
+  <!-- ЭКРАН 0 — ВХОД -->
+  <section class="screen active" id="screen-intro">
+    <span class="eyebrow">Диагностика · по методологии Эрика Флэмхольца</span>
+    <h1 class="title">Готова ли ваша компания к следующему уровню роста?</h1>
+    <p class="lead">Короткий тест — стадия роста, профиль по шести опорам управления и балл «болезней роста» со сравнением с базой 5000+ компаний по всему миру. Занимает 3–4 минуты.</p>
+
+    <div class="pyramid" aria-hidden="true">
+      <div class="pyramid-tier" style="width:38%"><span class="tier-num">6</span><span class="tier-label">Культура</span></div>
+      <div class="pyramid-tier" style="width:55%"><span class="tier-num">5</span><span class="tier-label">Системы управления</span></div>
+      <div class="pyramid-tier" style="width:62%"><span class="tier-num">4</span><span class="tier-label">Операционные системы</span></div>
+      <div class="pyramid-tier" style="width:74%"><span class="tier-num">3</span><span class="tier-label">Ресурсы</span></div>
+      <div class="pyramid-tier" style="width:86%"><span class="tier-num">2</span><span class="tier-label">Продукты и услуги</span></div>
+      <div class="pyramid-tier" style="width:100%"><span class="tier-num">1</span><span class="tier-label">Рынки</span></div>
+      <div class="pyramid-foundation">Фундамент: в каком мы бизнесе · чего хотим достичь · как победим</div>
+    </div>
+    <p class="disclaimer" style="text-align:center; margin-top:10px;">Шесть опор растут снизу вверх, от рынка до культуры, — и опираются на фундамент из трёх ответов о бизнесе, целях и стратегии.</p>
+
+    <div class="fact-box">
+      <b>Почему это не просто тест ради интереса:</b> исследования показали, что переменными этой модели объясняется до <b>80% валовой маржи</b> и <b>55% операционной прибыли</b> компании, плюс подтверждена значимая связь с отдачей на вложенный капитал.
+    </div>
+
+    <div class="method-box">
+      <span class="label">Как получить точный результат</span>
+      Пройдите тест сами — а затем пришлите эту же ссылку 3–5 ключевым руководителям и сравните ответы. Расхождение между тем, как ситуацию видит собственник, и тем, как её видят руководители, — само по себе диагностика: если оценки сильно разошлись, дело чаще не в цифрах, а в том, что в компании нет общего взгляда на положение дел.
+    </div>
+
+    <div class="btn-row">
+      <button class="btn" onclick="goTo('screen-company')">Начать тест →</button>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 1 — ВЫРУЧКА И ОТРАСЛЬ -->
+  <section class="screen" id="screen-company">
+    <span class="eyebrow">Шаг 1 из 3</span>
+    <h2 class="step-title">Компания</h2>
+    <p class="lead">Это определит вашу стадию роста и с какими компаниями сравнивать результат.</p>
+
+    <div class="field">
+      <label class="field-label">Годовая выручка, млн ₽</label>
+      <input type="text" inputmode="numeric" id="revenueInput" placeholder="Например, 700" />
+      <div class="disclaimer">Введите примерную цифру — точность до миллиона не нужна.</div>
+    </div>
+
+    <div class="field">
+      <label class="field-label">Тип бизнеса</label>
+      <div class="radio-grid" id="industryGrid">
+        <div class="radio-card" data-value="1" data-name="Производство">
+          <b>Производство</b>
+          <span class="card-hint">Выпускаем продукцию из сырья и комплектующих</span>
+        </div>
+        <div class="radio-card" data-value="1" data-name="Торговля">
+          <b>Торговля</b>
+          <span class="card-hint">Закупаем и продаём: опт, розница, сети, маркетплейсы</span>
+        </div>
+        <div class="radio-card" data-value="3" data-name="Услуги">
+          <b>Услуги</b>
+          <span class="card-hint">Строительство, логистика, IT, консалтинг, реклама, медицина</span>
+        </div>
+        <div class="radio-card" data-value="3" data-name="Финансы">
+          <b>Финансы</b>
+          <span class="card-hint">Банк, страхование, лизинг, инвестиции</span>
+        </div>
+      </div>
+      <div class="disclaimer">Одна и та же выручка означает разную сложность управления. Компания услуг на 500 млн сложнее в управлении, чем производство на 500 млн: у неё больше людей и нет закупленного сырья внутри выручки. Поэтому Флэмхольц приводит выручку к «производственному» эквиваленту: услуги и финансы — ×3. Производство и торговля идут без коэффициента: в их выручке заметную долю занимает стоимость закупленного сырья или товара, а не собственная работа.</div>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn secondary" onclick="goTo('screen-intro')">← Назад</button>
+      <button class="btn" id="toQuestionsBtn" disabled onclick="startQuestions()">Дальше →</button>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 2 — ВСЕ ВОПРОСЫ -->
+  <section class="screen" id="screen-questions">
+    <span class="eyebrow">Шаг 2 из 3</span>
+    <h2 class="step-title" id="questionsHeading">Оцените компанию</h2>
+    <div id="questionsContainer"></div>
+    <div class="btn-row">
+      <button class="btn secondary" onclick="goTo('screen-company')">← Назад</button>
+      <button class="btn" id="toResultBtn" disabled onclick="showResult()">Показать результат →</button>
+    </div>
+  </section>
+
+  <!-- ЭКРАН 3 — РЕЗУЛЬТАТ -->
+  <section class="screen" id="screen-result">
+    <span class="eyebrow">Ваш результат</span>
+    <h2 class="step-title">Полная картина</h2>
+
+    <div id="stageBlock"></div>
+
+    <h3 style="margin-top:40px;">Профиль по шести опорам</h3>
+    <p class="lead" style="font-size:15px;">Самооценка 1–5. Самая слабая опора — то, с чего имеет смысл начинать.</p>
+    <div id="oporaBlock"></div>
+
+    <div class="section-divider">Болезни роста</div>
+
+    <div class="result-hero">
+      <div class="score-circle" id="scoreCircle">
+        <div class="num mono" id="scoreNum">—</div>
+        <div class="max">из 50</div>
+      </div>
+      <div class="zone-label" id="zoneLabel">—</div>
+    </div>
+
+    <div class="bench-grid">
+      <div class="bench-card">
+        <div class="small" style="margin-bottom:6px;">Лучше, чем</div>
+        <div class="big mono" id="benchWorld">—</div>
+        <div class="small">компаний в мире — у них балл такой же или выше (то есть хуже)<br><span class="disclaimer">база 5000+ компаний, Э. Флэмхольц</span></div>
+      </div>
+      <div class="bench-card">
+        <div class="small" style="margin-bottom:6px;">Средний балл</div>
+        <div class="big mono" id="benchSize">—</div>
+        <div class="small">у компаний вашего размера<br><span class="disclaimer">по данным той же базы</span></div>
+      </div>
+    </div>
+
+    <div class="insight-card" id="rootCauseBlock"></div>
+
+    <h3 style="margin-top:36px;">Компании на разных уровнях пирамиды</h3>
+    <div id="brandsBlock"></div>
+
+    <div class="cta-box">
+      <h3>Хотите обсудить вашу ситуацию?</h3>
+      <p>Первая встреча — бесплатно, 60–90 минут. Разберём вашу ситуацию предметно.</p>
+      <a class="btn" href="https://ayzenshtat.ru/#contact">Записаться на встречу</a>
+    </div>
+
+    <div class="share-box">
+      <b>Поделиться результатом:</b>
+      <div class="share-text-preview" id="shareTextPreview"></div>
+      <button class="btn secondary" style="margin-top:10px;" onclick="copyShareText()">Скопировать текст</button>
+    </div>
+
+    <div class="btn-row">
+      <button class="btn secondary" onclick="restartTest()">Пройти заново</button>
+    </div>
+  </section>
+
+</div>
+
+<footer class="page-footer">
+  Тест — адаптация методологии Эрика Флэмхольца (книга «Growing Pains: Building Sustainably Successful Organizations»).
+  Стадии в рублях, чек-листы по стадиям и связка с шестью опорами — адаптация Дмитрия Айзенштата для российского рынка, не оригинальный инструмент.
+  <br><a href="https://ayzenshtat.ru">← На сайт Ayzenshtat.ru</a> · <a href="https://t.me/AyzenshtatProBiznes" target="_blank" rel="noopener noreferrer">Telegram-канал</a>
+</footer>
+
+<script>
+/* ===================== ДАННЫЕ ===================== */
+
+const OPORA_QUESTIONS = [
+  { key: 'markets', name: 'Рынки', text: 'Мы точно понимаем, кто наши клиенты и какие у них реальные потребности.' },
+  { key: 'products', name: 'Продукты и услуги', text: 'Наше предложение даёт понятное конкурентное преимущество на рынке.' },
+  { key: 'resources', name: 'Ресурсы', text: 'У нас достаточно нужных людей, денег и мощностей для текущих задач.' },
+  { key: 'ops', name: 'Операционные системы', text: 'Учёт, склад, закупки, логистика и ИТ работают предсказуемо, без ручного тушения.' },
+  { key: 'management', name: 'Системы управления', text: 'Есть письменный план, понятная структура ролей и регулярный контроль исполнения.' },
+  { key: 'culture', name: 'Культура', text: 'Ценности и нормы поведения в компании реальны, а не только на стене в переговорной.' },
+];
+
+const PAIN_QUESTIONS = [
+  { text: 'Людям не хватает часов в сутках, все перегружены.', root: 'нет полноценного планирования, структуры или ресурсов', opora: 'management' },
+  { text: 'Все постоянно «тушат пожары».', root: 'нет стратегического плана, слабая операционка', opora: 'management' },
+  { text: 'Люди не знают, кто чем занимается.', root: 'нет структуры и описанных ролей', opora: 'management' },
+  { text: 'Непонятно, куда движется компания.', root: 'слабое планирование, нет донесённого видения', opora: 'management' },
+  { text: 'Слишком мало по-настоящему хороших менеджеров.', root: 'нет системного развития управленцев', opora: 'management' },
+  { text: '«Хочешь сделать нормально — делай сам».', root: 'роли размыты, не выстроено делегирование', opora: 'management' },
+  { text: 'Совещания — это в основном трата времени.', root: 'нет повестки и дисциплины встреч', opora: 'management' },
+  { text: 'Планы составляются, но потом не исполняются.', root: 'нет системы управления эффективностью', opora: 'management' },
+  { text: 'Люди не уверены в своём месте в компании.', root: 'тревожная, непрозрачная культура', opora: 'culture' },
+  { text: 'Продажи растут, а прибыль — нет.', root: 'культура продаж без фокуса на итоговой марже', opora: 'culture' },
+];
+
+const STAGES = [
+  { code: 'I', name: 'Новое предприятие', focus: 'Рынок и продукт', maxRevenue: 50, checklist: [
+      'Есть клиенты, которые реально платят — не просто интерес к идее',
+      'Понятно, чем вы лучше или дешевле альтернатив для клиента',
+      'Все решения — на собственнике, и на этом этапе так и должно быть',
+    ]},
+  { code: 'II', name: 'Экспансия', focus: 'Ресурсы и операционные системы', maxRevenue: 500, checklist: [
+      'В компании есть сильные люди, а не только рабочие руки',
+      'Учёт, склад, закупки и доставка не «сыпятся» при росте продаж',
+      'Хотя бы простая система есть — не всё держится в голове одного человека',
+    ]},
+  { code: 'III', name: 'Профессионализация', focus: 'Системы управления', maxRevenue: 5000, checklist: [
+      'Есть план на год в письменном виде, не только в голове у собственника',
+      'У каждой роли понятно, за какой результат она отвечает',
+      'Есть регулярные встречи, на которых обсуждают цифры и приоритеты',
+      'Собственник может не участвовать в решении — и оно всё равно будет принято',
+    ]},
+  { code: 'IV', name: 'Консолидация', focus: 'Культура', maxRevenue: 25000, checklist: [
+      'Ценности компании записаны и понятны, а не существуют только «в воздухе»',
+      'Новый сотрудник может понять «как у нас принято» не только от старожилов',
+      'Найм, оценка и премии реально поддерживают то, что компания декларирует',
+    ]},
+  { code: 'V', name: 'Диверсификация', focus: 'Новые направления', maxRevenue: 50000, checklist: [
+      'Есть работа над вторым продуктом или направлением — не только текущий',
+      'В компании есть люди, которые умеют растить новое, а не только вести текущее',
+    ]},
+  { code: 'VI', name: 'Интеграция', focus: 'Единая стратегия и координация', maxRevenue: Infinity, checklist: [
+      'Разные направления компании понимают общую цель, а не живут порознь',
+      'Есть реальный механизм, который соединяет части компании, а не просто общий владелец',
+    ]},
+];
+
+const BENCH_BY_STAGE = {
+  I:  { score: 27, zone: 'orange' },
+  II: { score: 29, zone: 'orange' },
+  III:{ score: 29, zone: 'orange' },
+  IV: { score: 32, zone: 'red' },
+  V:  { score: 34, zone: 'red' },
+  VI: { score: 27, zone: 'orange' },
+};
+
+const ZONES = [
+  { max: 14, key: 'green',  color: 'var(--green)',  label: 'Зелёная зона',  share: 3,
+    text: 'Здоровое состояние. Система управления в целом справляется с текущим размером компании — редкий повод выдохнуть, а не хвататься за руль ещё крепче.' },
+  { max: 19, key: 'yellow', color: 'var(--yellow)', label: 'Жёлтая зона',   share: 7,
+    text: 'В целом устойчиво, но есть моменты, за которыми стоит последить — как повышенный, но ещё не критичный холестерин.' },
+  { max: 29, key: 'orange', color: 'var(--orange)', label: 'Оранжевая зона', share: 50,
+    text: 'Есть зоны, которые требуют действий в обозримом будущем. Пока не критично, но откладывать не стоит. Это самая населённая зона: в ней каждая вторая компания в мире.' },
+  { max: 39, key: 'red',    color: 'var(--red)',    label: 'Красная зона',  share: 38,
+    text: 'Явный сигнал: устройство компании отстаёт от её размера. Изменения нужны не когда-нибудь, а в ближайшее время.' },
+  { max: 50, key: 'purple', color: 'var(--purple)', label: 'Фиолетовая зона', share: 2,
+    text: 'Компания в зоне серьёзного риска. Если причины, которые дают такой балл, не лечить, обычно есть 12–18 месяцев до тяжёлых экономических последствий. Это не приговор — но это и не то, что откладывают «до следующего квартала».' },
+];
+
+// Точные данные из книги (Табл. 5.4): распределение баллов болезней роста
+// 10–14: 3% · 15–19: 7% · 20–29: 50% · 30–39: 38% · 40+: 2%
+// Ниже — накопленный процент компаний с баллом НЕ ВЫШЕ указанного.
+const PAIN_CUMULATIVE = [[14,3],[19,10],[29,60],[39,98],[50,100]];
+
+// Точные данные из книги (Табл. 2.4): распределение баллов Пирамиды
+// <3.0: 20% · 3.0–3.4: 50% · 3.5–3.9: 26% · 4.0–4.4: 3% · 4.5+: <1%
+// Ниже — накопленный процент компаний с баллом НЕ ВЫШЕ указанного.
+const PYRAMID_CUMULATIVE = [[2.99,20],[3.4,70],[3.9,96],[4.4,99],[5.0,100]];
+
+function interpolate(points, x) {
+  if (x <= points[0][0]) return points[0][1];
+  for (let i = 0; i < points.length - 1; i++) {
+    const [x1, y1] = points[i], [x2, y2] = points[i+1];
+    if (x > x1 && x <= x2) {
+      return y1 + (y2 - y1) * (x - x1) / (x2 - x1);
+    }
+  }
+  return points[points.length-1][1];
+}
+
+// Болезни роста: НИЖЕ балл = лучше. «Лучше, чем X%» = доля компаний с более высоким баллом.
+function painBetterThanPercent(score) {
+  return Math.round(100 - interpolate(PAIN_CUMULATIVE, score));
+}
+// Пирамида: ВЫШЕ балл = лучше. «Лучше, чем X%» = доля компаний с более низким баллом.
+function pyramidBetterThanPercent(score) {
+  return Math.round(interpolate(PYRAMID_CUMULATIVE, score));
+}
+
+const PYRAMID_LEVELS = [
+  { min: 4.5, label: 'Мировой лидер', brands: 'Starbucks, Microsoft, IBM, Caterpillar' },
+  { min: 4.0, label: 'Превосходная компания', brands: 'Amgen, Nike, Walmart' },
+  { min: 3.5, label: 'Устойчиво успешная', brands: 'Mövenpick, Komatsu, Li Ning' },
+  { min: 3.0, label: 'Успех есть, но неустойчив', brands: 'Nokia, Ford, Sony' },
+  { min: 0,   label: 'В зоне риска', brands: 'Sears, Radio Shack, Kmart' },
+];
+function pyramidLevelFor(score) {
+  return PYRAMID_LEVELS.find(l => score >= l.min);
+}
+
+/* ===================== СОСТОЯНИЕ ===================== */
+
+let state = {
+  revenue: null,
+  industryMultiplier: null,
+  answers: {}, // key -> 1..5, ключи: markets,products,resources,ops,management,culture, pain0..pain9
+};
+
+const TOTAL_QUESTIONS = OPORA_QUESTIONS.length + PAIN_QUESTIONS.length;
+
+/* ===================== НАВИГАЦИЯ ===================== */
+
+const screenOrder = ['screen-intro', 'screen-company', 'screen-questions', 'screen-result'];
+const screenLabels = { 'screen-intro': 'Начало', 'screen-company': 'Шаг 1 из 3', 'screen-questions': 'Шаг 2 из 3', 'screen-result': 'Результат' };
+
+function goTo(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  document.getElementById('topbarLabel').textContent = screenLabels[id] || '';
+  updateProgress();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateProgress() {
+  const answered = Object.keys(state.answers).length;
+  const activeScreen = document.querySelector('.screen.active').id;
+  let pct = 0;
+  if (activeScreen === 'screen-intro') pct = 0;
+  else if (activeScreen === 'screen-company') pct = 8;
+  else if (activeScreen === 'screen-questions') pct = 15 + (answered / TOTAL_QUESTIONS) * 70;
+  else if (activeScreen === 'screen-result') pct = 100;
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+/* ---- шаг: компания ---- */
+document.getElementById('revenueInput').addEventListener('input', checkCompanyStep);
+document.getElementById('industryGrid').addEventListener('click', (e) => {
+  const card = e.target.closest('.radio-card');
+  if (!card) return;
+  document.querySelectorAll('#industryGrid .radio-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  state.industryMultiplier = Number(card.dataset.value);
+  state.industryName = card.dataset.name;
+  checkCompanyStep();
+});
+function checkCompanyStep() {
+  const raw = document.getElementById('revenueInput').value.replace(/\s/g,'').replace(',','.');
+  const val = parseFloat(raw);
+  state.revenue = (!isNaN(val) && val > 0) ? val : null;
+  document.getElementById('toQuestionsBtn').disabled = !(state.revenue !== null && state.industryMultiplier);
+}
+
+/* ---- шаг: вопросы ---- */
+function startQuestions() {
+  renderQuestions();
+  goTo('screen-questions');
+}
+
+function renderQuestions() {
+  const container = document.getElementById('questionsContainer');
+  container.innerHTML = '';
+
+  const scaleLabelsOpora = ['1 — слабо', '', '', '', '5 — сильно'];
+  const scaleLabelsPain = ['1 — совсем не про нас', '', '', '', '5 — в очень большой степени'];
+
+  OPORA_QUESTIONS.forEach((q, i) => {
+    container.appendChild(buildQuestionBlock('opora_' + q.key, i + 1, q.text, scaleLabelsOpora));
+  });
+
+  const divider = document.createElement('div');
+  divider.className = 'section-divider';
+  divider.textContent = 'Часть 2 · Болезни роста';
+  container.appendChild(divider);
+
+  PAIN_QUESTIONS.forEach((q, i) => {
+    container.appendChild(buildQuestionBlock('pain_' + i, OPORA_QUESTIONS.length + i + 1, q.text, scaleLabelsPain));
+  });
+}
+
+function buildQuestionBlock(key, num, text, scaleLabels) {
+  const block = document.createElement('div');
+  block.className = 'question-block';
+  block.innerHTML = `
+    <div class="q-num mono">Вопрос ${num} из ${TOTAL_QUESTIONS}</div>
+    <div class="q-text">${text}</div>
+    <div class="scale-row" data-key="${key}">
+      ${[1,2,3,4,5].map(v => `<button type="button" class="scale-btn" data-value="${v}">${v}</button>`).join('')}
+    </div>
+    <div class="scale-caption"><span>${scaleLabels[0]}</span><span>${scaleLabels[4]}</span></div>
+  `;
+  block.querySelectorAll('.scale-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      block.querySelectorAll('.scale-btn').forEach(b => b.classList.remove('selected'));
+      btn.classList.add('selected');
+      state.answers[key] = Number(btn.dataset.value);
+      document.getElementById('toResultBtn').disabled = Object.keys(state.answers).length < TOTAL_QUESTIONS;
+      updateProgress();
+    });
+  });
+  return block;
+}
+
+/* ===================== РАСЧЁТ И РЕЗУЛЬТАТ ===================== */
+
+function getEffectiveRevenue() {
+  return state.revenue * state.industryMultiplier;
+}
+function getStageIndex() {
+  const eff = getEffectiveRevenue();
+  for (let i = 0; i < STAGES.length; i++) {
+    if (eff <= STAGES[i].maxRevenue) return i;
+  }
+  return STAGES.length - 1;
+}
+function industryLabel() {
+  return state.industryName;
+}
+
+function showResult() {
+  const stageIdx = getStageIndex();
+  const stage = STAGES[stageIdx];
+  const eff = getEffectiveRevenue();
+
+  // --- блок стадии: с явной, проверяемой формулой ---
+  const stageBlock = document.getElementById('stageBlock');
+  const calcLine = state.industryMultiplier === 1
+    ? `Выручка ${fmtMln(state.revenue)} млн ₽ · ${state.industryName.toLowerCase()} — коэффициент не применяется.`
+    : `${fmtMln(state.revenue)} млн ₽ × ${state.industryMultiplier} (${state.industryName.toLowerCase()}) ≈ ${fmtMln(eff)} млн ₽ в «производственном» эквиваленте.`;
+  stageBlock.innerHTML = `
+    <div class="insight-card">
+      <span class="label">Стадия ${stage.code}</span>
+      <h3 style="margin:0 0 6px;">${stage.name}</h3>
+      <p style="margin:0 0 6px; color:var(--text-muted); font-size:13px;" class="mono">${calcLine}</p>
+      <p style="margin:0 0 14px; color:var(--text-muted);">Фокус на этой стадии — <b>${stage.focus}</b>.</p>
+      <span class="label" style="margin-top:16px;">Что обычно уже должно быть построено</span>
+      <ul style="margin:8px 0 0; padding-left: 20px; color: var(--text-muted);">
+        ${stage.checklist.map(c => `<li style="margin-bottom:6px;">${c}</li>`).join('')}
+      </ul>
+    </div>
+  `;
+
+  // --- профиль по опорам + средний балл Пирамиды ---
+  const oporaBlock = document.getElementById('oporaBlock');
+  let minVal = 6, minKey = null, oporaSum = 0;
+  OPORA_QUESTIONS.forEach(q => {
+    const v = state.answers['opora_' + q.key];
+    oporaSum += v;
+    if (v < minVal) { minVal = v; minKey = q.key; }
+  });
+  const pyramidAvg = oporaSum / OPORA_QUESTIONS.length;
+  const pyramidPct = pyramidBetterThanPercent(pyramidAvg);
+  const pLevel = pyramidLevelFor(pyramidAvg);
+
+  oporaBlock.innerHTML = OPORA_QUESTIONS.map(q => {
+    const v = state.answers['opora_' + q.key];
+    const isWeak = q.key === minKey;
+    return `
+      <div class="opora-row">
+        <div class="opora-name">${q.name}</div>
+        <div class="opora-bar-track"><div class="opora-bar-fill ${isWeak ? 'weak' : ''}" style="width:${v/5*100}%"></div></div>
+        <div class="opora-val mono">${v}</div>
+      </div>`;
+  }).join('') + `
+    <div class="bench-grid" style="margin-top:20px;">
+      <div class="bench-card">
+        <div class="small" style="margin-bottom:6px;">Средний балл</div>
+        <div class="big mono">${pyramidAvg.toFixed(1)}</div>
+        <div class="small">«${pLevel.label}»<br><span class="disclaimer">компании такого уровня: ${pLevel.brands}</span></div>
+      </div>
+      <div class="bench-card">
+        <div class="small" style="margin-bottom:6px;">Лучше, чем</div>
+        <div class="big mono">${pyramidPct}%</div>
+        <div class="small">компаний в мире по этому баллу<br><span class="disclaimer">чем выше балл Пирамиды, тем он лучше</span></div>
+      </div>
+    </div>
+    <div class="insight-card" style="margin-top:14px;">
+      <span class="label">Пороги</span>
+      <p style="margin:0 0 8px;"><b>3.5</b> — граница, выше которой у компании наибольшие шансы на устойчивый успех вдолгую. Ниже <b>3.0</b> — зона, где в течение двух лет у трети компаний начинаются серьёзные трудности вплоть до краха.</p>
+      <p style="margin:0; color: var(--text-muted);">${pyramidAvg >= 3.5
+        ? `Ваш балл ${pyramidAvg.toFixed(1)} — <b style="color:var(--green)">выше</b> этой границы.`
+        : pyramidAvg >= 3.0
+        ? `Ваш балл ${pyramidAvg.toFixed(1)} — между 3.0 и 3.5: <b>успех есть, но фундамент ещё не гарантирует устойчивости</b>.`
+        : `Ваш балл ${pyramidAvg.toFixed(1)} — <b style="color:var(--red)">ниже 3.0</b>. Это зона, где стоит заняться системой всерьёз.`}</p>
+    </div>
+  `;
+
+  // --- балл болезней роста ---
+  let painSum = 0;
+  const painScores = PAIN_QUESTIONS.map((q, i) => {
+    const v = state.answers['pain_' + i];
+    painSum += v;
+    return { ...q, value: v };
+  });
+  const zone = ZONES.find(z => painSum <= z.max);
+  const painPct = painBetterThanPercent(painSum); // % компаний с более высоким (худшим) баллом
+
+  document.getElementById('scoreNum').textContent = painSum;
+  document.getElementById('scoreCircle').style.setProperty('--zone-color', zone.color);
+  const zoneLabelEl = document.getElementById('zoneLabel');
+  zoneLabelEl.textContent = zone.label;
+  zoneLabelEl.style.setProperty('--zone-color', zone.color);
+  document.getElementById('benchWorld').textContent = painPct + '%';
+
+  const bench = BENCH_BY_STAGE[stage.code];
+  document.getElementById('benchSize').textContent = bench.score;
+
+  // Явное объяснение хорошо/плохо: для болезней роста ниже = лучше
+  const diff = bench.score - painSum;
+  const vsSizeText = diff > 2
+    ? `Это <b style="color:var(--green)">лучше</b> среднего для компаний вашего размера (у них в среднем ${bench.score} баллов) — управленческая система сейчас справляется лучше, чем у большинства компаний такого масштаба.`
+    : diff < -2
+    ? `Это <b style="color:var(--red)">хуже</b> среднего для компаний вашего размера (у них в среднем ${bench.score} баллов): да, этой стадии вообще свойственны трудности, но у вас они выражены сильнее — стоит заняться этим не откладывая.`
+    : `Это <b>примерно на уровне</b> среднего для компаний вашего размера (${bench.score} баллов) — типичная картина для этой стадии роста, не хуже и не лучше большинства.`;
+
+  // --- корневая причина: топ-2 боли + сопоставление с самой слабой опорой ---
+  const topPains = [...painScores].sort((a,b) => b.value - a.value).slice(0, 2);
+  const weakOporaName = OPORA_QUESTIONS.find(q => q.key === minKey).name;
+  const alignsWithWeak = topPains.some(p => p.opora === minKey) ||
+    (minKey === 'management' && topPains.some(p => p.opora === 'management')) ||
+    (minKey === 'culture' && topPains.some(p => p.opora === 'culture'));
+
+  const doItYourselfIsTop = topPains.some(p => p.text.includes('делай сам'));
+  const wryAside = doItYourselfIsTop
+    ? `<p style="margin:10px 0 0; color: var(--text-muted); font-style: italic;">«Хочешь сделать нормально — делай сам» — если это откликнулось, вы не одиноки: это, кажется, самый узнаваемый пункт теста у собственников вообще. Именно поэтому он и в тесте.</p>`
+    : '';
+
+  document.getElementById('rootCauseBlock').innerHTML = `
+    <span class="label">Что означает балл ${painSum}</span>
+    <p style="margin:0 0 10px;">${zone.text}</p>
+    <p style="margin:0 0 10px;">${vsSizeText}</p>
+    <p style="margin:0 0 10px;">Сильнее всего проявились: <b>«${topPains[0].text}»</b> и <b>«${topPains[1].text}»</b> — их обычный корень: ${topPains[0].root}.</p>
+    ${alignsWithWeak
+      ? `<p style="margin:0; color: var(--gold-light);">Это совпадает с вашей самой слабой опорой — <b>${weakOporaName}</b>. Оба независимых замера указывают в одну точку, это стоит проверить в первую очередь.</p>`
+      : `<p style="margin:0;">При этом самой слабой опорой вы сами отметили <b>${weakOporaName}</b> — стоит сверить, не расходится ли ощущение с тем, что показывают конкретные симптомы.</p>`
+    }
+    ${wryAside}
+  `;
+
+  // --- бренды: подсвечиваем уровень пользователя среди уровней ---
+  document.getElementById('brandsBlock').innerHTML = PYRAMID_LEVELS.map(l => {
+    const isYours = l.label === pLevel.label;
+    return `
+    <div style="margin-bottom:10px; ${isYours ? 'padding:10px 12px; background:rgba(212,168,83,0.1); border-radius:6px; border:1px solid var(--gold);' : ''}">
+      <span class="mono" style="color:var(--gold); font-size:13px;">${l.min > 0 ? l.min + '+' : '< 3.0'}</span>
+      <span style="color:var(--text-muted); font-size:13px;"> · ${l.label}${isYours ? ' — ваш уровень' : ''}</span>
+      <div class="brands-row"><span class="brand-chip">${l.brands}</span></div>
+    </div>`;
+  }).join('');
+
+  // --- текст для шаринга: ярче и с процентилем ---
+  const shareText = painPct >= 50
+    ? `Прошёл тест по методологии Флэмхольца: мой балл болезней роста лучше, чем у ${painPct}% компаний в мире (${zone.label.toLowerCase()}), стадия — «${stage.name}». Проверьте свою компанию: ${window.location.href}`
+    : `Прошёл тест по методологии Флэмхольца: у меня ${zone.label.toLowerCase()} по болезням роста — как у ${zone.share}% компаний в мире. Стадия — «${stage.name}». Честный диагноз — уже половина дела. Проверьте свою компанию: ${window.location.href}`;
+  document.getElementById('shareTextPreview').textContent = shareText;
+  window._shareText = shareText;
+
+  goTo('screen-result');
+}
+
+function fmtMln(n) {
+  return n >= 1000 ? Math.round(n).toLocaleString('ru-RU') : Math.round(n * 10) / 10;
+}
+
+function copyShareText() {
+  navigator.clipboard.writeText(window._shareText || '').then(() => {
+    const btn = event.target;
+    const old = btn.textContent;
+    btn.textContent = 'Скопировано ✓';
+    setTimeout(() => { btn.textContent = old; }, 2000);
+  });
+}
+
+function restartTest() {
+  state = { revenue: null, industryMultiplier: null, industryName: null, answers: {} };
+  document.getElementById('revenueInput').value = '';
+  document.querySelectorAll('#industryGrid .radio-card').forEach(c => c.classList.remove('selected'));
+  document.getElementById('toQuestionsBtn').disabled = true;
+  document.getElementById('toResultBtn').disabled = true;
+  goTo('screen-intro');
+}
+</script>
+
+</body>
+</html>
