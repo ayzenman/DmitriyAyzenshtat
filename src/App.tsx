@@ -27,6 +27,28 @@ function App() {
     // Refresh ScrollTrigger on load
     ScrollTrigger.refresh();
 
+    // Переход по прямой ссылке с якорем (например, /#contact с другой страницы)
+    // Браузер пытается проскроллить к якорю ещё до того, как шрифты, GSAP
+    // и раскладка секций устоятся — из-за этого страница остаётся наверху.
+    // Ждём, пока всё осядет, и прокручиваем вручную.
+    if (window.location.hash) {
+      const scrollToHash = () => {
+        const target = document.querySelector(window.location.hash);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      };
+      // Двойной таймаут: сначала даём осесть шрифтам/изображениям,
+      // затем — самому GSAP/ScrollTrigger после его refresh().
+      const timer = setTimeout(() => {
+        requestAnimationFrame(scrollToHash);
+      }, 400);
+      return () => {
+        clearTimeout(timer);
+        ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      };
+    }
+
     // Cleanup
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
