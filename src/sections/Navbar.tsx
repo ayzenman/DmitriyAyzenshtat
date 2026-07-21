@@ -2,11 +2,12 @@ import { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { Menu, X } from 'lucide-react';
 
-const navLinks = [
+const navLinks: { label: string; href: string; external?: boolean }[] = [
   { label: 'Проблемы', href: '#problems' },
   { label: 'Обо мне', href: '#about' },
   { label: 'Услуги', href: '#services' },
   { label: 'Результаты', href: '#results' },
+  { label: 'Библиотека', href: '/library/', external: true },
   { label: 'Контакты', href: '#contact' }
 ];
 
@@ -31,10 +32,11 @@ const Navbar = () => {
     );
   }, []);
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault();
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string, external?: boolean) => {
     setIsMobileMenuOpen(false);
-    
+    if (external) return; // обычный переход на другую страницу, не перехватываем
+
+    e.preventDefault();
     const target = document.querySelector(href);
     if (target) {
       target.scrollIntoView({ behavior: 'smooth' });
@@ -68,7 +70,7 @@ const Navbar = () => {
                 <a
                   key={link.href}
                   href={link.href}
-                  onClick={(e) => handleLinkClick(e, link.href)}
+                  onClick={(e) => handleLinkClick(e, link.href, link.external)}
                   className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-gold)] transition-colors"
                 >
                   {link.label}
@@ -114,7 +116,7 @@ const Navbar = () => {
             <a
               key={link.href}
               href={link.href}
-              onClick={(e) => handleLinkClick(e, link.href)}
+              onClick={(e) => handleLinkClick(e, link.href, link.external)}
               className="text-2xl font-semibold text-[var(--color-text)] hover:text-[var(--color-gold)] transition-colors"
             >
               {link.label}
