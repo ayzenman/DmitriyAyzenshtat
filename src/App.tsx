@@ -42,7 +42,7 @@ function App() {
       // затем — самому GSAP/ScrollTrigger после его refresh().
       const timer = setTimeout(() => {
         requestAnimationFrame(scrollToHash);
-      }, 400);
+      }, 500);
       return () => {
         clearTimeout(timer);
         ScrollTrigger.getAll().forEach(trigger => trigger.kill());
