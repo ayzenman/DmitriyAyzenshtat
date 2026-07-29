@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Эволюция и революция в росте организаций</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+:root{
+  --ink:#181510;--paper:#f3eee4;--card:#fbf8f1;
+  --rust:#b0461f;--rust-d:#8a3413;--gold:#bd842a;--green:#3d6644;--teal:#2c5a60;--plum:#6a3a72;
+  --line:#d9cfba;--muted:#5f5847;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;overflow-x:hidden}
+body{font-family:'Manrope',sans-serif;background:var(--paper);color:var(--ink);line-height:1.55;overflow-x:hidden}
+.deck{max-width:1180px;margin:0 auto;padding:0 24px;width:100%}
+
+.slide{min-height:100vh;display:flex;flex-direction:column;justify-content:center;padding:84px 0;border-bottom:1px solid var(--line);position:relative}
+.slide:last-child{border-bottom:none}
+.snum{position:absolute;top:28px;left:24px;font-size:.7rem;letter-spacing:.22em;color:var(--muted);font-weight:800;text-transform:uppercase}
+.spart{position:absolute;top:28px;right:24px;font-size:.7rem;letter-spacing:.22em;color:var(--rust);font-weight:800;text-transform:uppercase;text-align:right;max-width:60%}
+
+.kicker{display:inline-block;font-size:.74rem;font-weight:800;letter-spacing:.18em;text-transform:uppercase;color:var(--rust);margin-bottom:14px;border-bottom:2px solid var(--rust);padding-bottom:5px}
+h1{font-family:'Spectral',serif;font-weight:800;line-height:1.05;letter-spacing:-.01em;overflow-wrap:break-word;word-break:break-word;hyphens:auto}
+h2{font-family:'Spectral',serif;font-weight:800;font-size:clamp(1.6rem,3.4vw,2.6rem);line-height:1.12;letter-spacing:-.01em;margin-bottom:10px;overflow-wrap:break-word}
+h3{font-family:'Spectral',serif;font-weight:700;font-size:1.18rem;margin-bottom:5px}
+h4{font-size:.97rem;font-weight:800}
+p{font-size:1.01rem;color:#2b2820}
+.lead{font-size:1.14rem;color:#352f27;max-width:68ch;line-height:1.52}
+.muted{color:var(--muted)}
+strong{font-weight:800;color:var(--ink)}
+em{color:var(--rust-d);font-style:italic}
+.note{font-size:.92rem;color:#4a4538;margin-top:14px;max-width:82ch;line-height:1.5;padding-left:14px;border-left:3px solid var(--line)}
+.bridge{font-size:1.02rem;color:var(--rust-d);font-weight:600;margin-bottom:16px;display:flex;align-items:center;gap:9px}
+.bridge::before{content:"";min-width:22px;height:2px;background:var(--rust)}
+
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}
+@media(max-width:920px){.g2,.g3{grid-template-columns:1fr}}
+@media(max-width:920px){.g4{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.g4{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:13px;padding:20px 20px}
+.card.a{border-left:5px solid var(--rust)}.card.g{border-left:5px solid var(--green)}
+.card.o{border-left:5px solid var(--gold)}.card.t{border-left:5px solid var(--teal)}.card.p{border-left:5px solid var(--plum)}
+.card p{font-size:.95rem;color:#3f3a2f}.card h3{font-size:1.06rem}
+.tag{display:inline-block;font-size:.67rem;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--rust);margin-bottom:8px}
+
+.callout{background:linear-gradient(135deg,#211c13,#312a1c);color:#e9dfc8;border-radius:15px;padding:26px 30px}
+.callout h3{color:var(--gold)}.callout p{color:#c9bfa9}.callout strong{color:#f3ead4}
+.quote{font-family:'Spectral',serif;font-style:italic;font-size:clamp(1.2rem,2.3vw,1.65rem);line-height:1.42;color:#211c13;border-left:5px solid var(--rust);padding-left:22px;max-width:52ch}
+
+.bul{display:grid;gap:8px;margin-top:4px}
+.bul li{list-style:none;padding-left:19px;position:relative;font-size:.94rem;color:#332f29}
+.bul li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--rust)}
+
+.cover{background:linear-gradient(165deg,#1d1810 0%,#241f15 55%,#1d1810 100%);color:var(--paper);border-bottom:none;position:relative;overflow:hidden}
+.cover::before{content:"";position:absolute;inset:0;background:radial-gradient(90% 70% at 78% 12%,rgba(189,132,42,.16),transparent 60%),radial-gradient(80% 60% at 8% 92%,rgba(61,102,68,.14),transparent 60%);pointer-events:none}
+.cover .deck{position:relative;z-index:1}
+.cover .kicker{color:var(--gold);border-color:var(--gold)}
+.cover h1{font-size:clamp(2rem,5.4vw,4.4rem);color:#f6efe1;max-width:20ch}
+.cover .sub{font-size:clamp(1rem,2vw,1.18rem);color:#cdc3ad;margin-top:22px;max-width:62ch}
+.cover .book{margin-top:26px;font-family:'Spectral',serif;font-style:italic;color:#b3a98f;font-size:.98rem;max-width:60ch}
+.cover .meta{margin-top:36px;display:flex;gap:14px 28px;flex-wrap:wrap;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:#a89d84;font-weight:700}
+.cover .meta span{border-left:2px solid var(--rust);padding-left:11px}
+
+.toc{display:grid;grid-template-columns:1fr 1fr;gap:4px 40px;margin-top:8px}
+@media(max-width:920px){.toc{grid-template-columns:1fr}}
+.toc a{text-decoration:none;color:#2b2820;display:flex;gap:11px;align-items:baseline;padding:7px 0;border-bottom:1px solid var(--line);font-weight:600;font-size:.92rem}
+.toc a span{font-family:'Spectral',serif;font-weight:800;color:var(--rust);font-size:.98rem;min-width:24px}
+.toc a:hover{color:var(--rust)}
+.toc .ph{display:block;width:100%;font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:800;padding:18px 0 4px;margin-top:6px;grid-column:1/-1;border-bottom:none;line-height:1.4}
+.toc .ph:first-child{padding-top:0;margin-top:0}
+
+.dtable{width:100%;border-collapse:collapse;border:1px solid var(--line);border-radius:11px;overflow:hidden;font-size:.86rem;margin-top:6px}
+.dtable th{background:#211c13;color:#efe6d4;font-family:'Spectral',serif;font-weight:800;text-align:left;padding:9px 12px;font-size:.82rem}
+.dtable td{border-top:1px solid var(--line);padding:9px 12px;color:#332f29;vertical-align:top}
+.dtable tr:nth-child(even) td{background:#f7f1e6}
+.dtable .rh{background:#ede5d4;font-weight:700;white-space:nowrap}
+@media(max-width:700px){
+  .dtable thead{display:none}
+  .dtable, .dtable tbody, .dtable tr, .dtable td{display:block;width:100%}
+  .dtable tr{margin-bottom:12px;border-radius:8px;overflow:hidden;border:1px solid var(--line)}
+  .dtable td{padding:10px 14px;border-top:1px solid var(--line);white-space:normal}
+  .dtable td:first-child{border-top:none}
+  .dtable td::before{content:attr(data-label);display:block;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:var(--rust);margin-bottom:4px}
+  .dtable .rh{background:transparent;font-weight:700}
+}
+
+.check{display:grid;gap:9px}
+.chk{display:flex;gap:12px;align-items:flex-start;font-size:.96rem;color:#332f29}
+.chk::before{content:"";min-width:23px;height:23px;border-radius:6px;background:var(--green);flex-shrink:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='20 6 9 17 4 12'/%3E%3C/svg%3E");background-size:14px;background-repeat:no-repeat;background-position:center;margin-top:1px}
+
+.hook{font-family:'Spectral',serif;font-style:italic;font-size:clamp(1.2rem,2.4vw,1.6rem);line-height:1.48;color:#211c13;max-width:50ch}
+
+/* Phase model diagram */
+.pmodel{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-top:18px}
+@media(max-width:920px){.pmodel{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.pmodel{grid-template-columns:1fr}}
+.pm{background:var(--card);border:1px solid var(--line);border-radius:11px;padding:14px 13px;text-align:center}
+.pm .pn{font-family:'Spectral',serif;font-weight:800;font-size:1.15rem;color:var(--rust)}
+.pm h4{font-size:.84rem;margin:4px 0 2px}
+.pm .crisis{font-size:.72rem;color:var(--muted);font-weight:700;text-transform:uppercase;letter-spacing:.04em;margin-top:6px;border-top:1px dashed var(--line);padding-top:6px}
+
+/* Phase detail slide */
+.phase-wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:22px;margin-top:16px}
+@media(max-width:920px){.phase-wrap{grid-template-columns:1fr}}
+.crisisbox{border-radius:14px;padding:20px 22px;color:#fff;height:fit-content}
+.crisisbox h4{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;opacity:.9;margin-bottom:6px}
+.crisisbox .big{font-family:'Spectral',serif;font-weight:800;font-size:1.3rem;line-height:1.2;margin-bottom:8px}
+.crisisbox p{color:#fff;opacity:.96;font-size:.92rem}
+.cb-a{background:linear-gradient(135deg,#8a3413,#b0461f)}
+.cb-o{background:linear-gradient(135deg,#96681f,#bd842a)}
+.cb-g{background:linear-gradient(135deg,#2c4a33,#3d6644)}
+.cb-t{background:linear-gradient(135deg,#1e3f44,#2c5a60)}
+.cb-p{background:linear-gradient(135deg,#4d2b53,#6a3a72)}
+
+.cta{display:inline-block;background:var(--rust);color:#fff;font-weight:800;padding:17px 38px;border-radius:50px;text-decoration:none;font-size:1.08rem;box-shadow:0 8px 24px rgba(176,70,31,.4);transition:background .2s}
+.cta:hover{background:var(--rust-d)}
+.cta-note{margin-top:12px;font-size:.88rem;color:#a89d84}
+.ask{display:grid;gap:7px;margin-top:16px;max-width:56ch}
+.ask li{list-style:none;padding-left:20px;position:relative;font-size:.97rem;color:#cdc3ad}
+.ask li::before{content:"";position:absolute;left:0;top:9px;width:6px;height:6px;border-radius:50%;background:var(--gold)}
+
+</style>
+</head>
+<body>
+
+<!-- 1 COVER -->
+<section class="slide cover">
+  <div class="deck">
+    <div class="kicker">Классика менеджмента · HBR Classic, 1998</div>
+    <h1>Эволюция и революция в росте организаций</h1>
+    <p style="font-family:'Spectral',serif;font-style:italic;color:#cdc3ad;font-size:clamp(1.05rem,2.2vw,1.35rem);margin-top:10px">Evolution and Revolution as Organizations Grow</p>
+    <p class="sub">Будущее компании определяется не рынком, а её собственной историей. Каждое решение, которое сегодня вывело вас из кризиса, завтра станет причиной следующего. Ларри Грейнер показал, что рост — это чередование спокойных периодов и управленческих кризисов с предсказуемой логикой, а спустя четверть века сам проверил, что из этого выдержало испытание временем.</p>
+    <p class="book">Greiner L.E. Evolution and Revolution as Organizations Grow // Harvard Business Review, July–August 1972; переиздано как HBR Classic с авторским комментарием «Revolution Is Still Inevitable» в номере May–June 1998.</p>
+    <div class="meta">
+      <span>5 фаз роста</span><span>5 управленческих кризисов</span><span>Проверено 25 годами практики</span>
+    </div>
+    <p style="margin-top:34px;font-size:.92rem;color:#c9bfa9;font-family:'Spectral',serif">Подготовил консультант по управлению Айзенштат Дмитрий совместно с Claude.</p>
+    <p style="margin-top:6px"><a href="https://ayzenshtat.ru" style="color:var(--gold);font-weight:700;text-decoration:none;font-size:1.05rem">Ayzenshtat.ru</a></p>
+    <p style="margin-top:26px;color:#a89d84;font-size:.82rem;max-width:62ch;font-style:italic;font-family:'Spectral',serif">Обзорно-образовательный материал по статье Larry E. Greiner «Evolution and Revolution as Organizations Grow» (Harvard Business Review, 1972/1998). Не является перепечаткой. Права на оригинал — у автора и Harvard Business Review. Рекомендуем прочесть оригинал.</p>
+  </div>
+</section>
+
+<!-- 2 TOC -->
+<section class="slide" id="toc">
+  <div class="snum">02</div><div class="spart">Оглавление</div>
+  <div class="deck">
+    <span class="kicker">Как устроен гайд</span>
+    <h2>Оглавление</h2>
+    <p class="lead muted">Сначала — модель целиком: понятия, факторы роста, все пять фаз с их кризисами и диагностическая таблица. Затем — то, что показала проверка временем: авторский пересмотр модели спустя 25 лет и её расширение на компании иного типа.</p>
+    <div class="toc">
+      <div class="ph">Модель целиком</div>
+      <a href="#s03"><span>03</span> Узнаёте свою компанию?</a>
+      <a href="#s04"><span>04</span> Пять факторов, формирующих рост</a>
+      <a href="#s05"><span>05</span> Эволюция и революция: логика модели</a>
+      <div class="ph">Пять фаз роста</div>
+      <a href="#s06"><span>06</span> Фаза 1 · Творчество → кризис лидерства</a>
+      <a href="#s07"><span>07</span> Фаза 2 · Директивность → кризис автономии</a>
+      <a href="#s08"><span>08</span> Фаза 3 · Делегирование → кризис контроля</a>
+      <a href="#s09"><span>09</span> Фаза 4 · Координация → кризис волокиты</a>
+      <a href="#s10"><span>10</span> Фаза 5 · Сотрудничество и кризис «?»</a>
+      <a href="#s11"><span>11</span> Таблица: определите свою фазу</a>
+      <div class="ph">Проверено временем — обновление 1998 года</div>
+      <a href="#s12"><span>12</span> Что подтвердилось за 25 лет</a>
+      <a href="#s13"><span>13</span> Что изменилось: реальность жёстче</a>
+      <a href="#s14"><span>14</span> Фаза 5 и кризис «?» — пересмотрены</a>
+      <a href="#s15"><span>15</span> Та же модель — в консалтинге, праве, инвестициях</a>
+      <div class="ph">Диагностика и действия</div>
+      <a href="#s16"><span>16</span> Три правила + план на квартал</a>
+    </div>
+  </div>
+</section>
+
+<!-- S03 HOOK + WHY -->
+<section class="slide" id="s03">
+  <div class="snum">03</div><div class="spart">Узнаёте свою компанию?</div>
+  <div class="deck">
+    <span class="kicker">Две истории, одна логика</span>
+    <p class="hook">Ключевые управленцы розничной сети держатся за организационную структуру ещё долго после того, как та выполнила свою задачу, — просто потому, что именно на ней держится их власть. Компания в итоге разоряется. Крупный банк наказывает «неудобного» менеджера, обвиняя его в проблемах с контролем, хотя настоящая причина — централизованные процедуры, которые тормозят выход на новые рынки. Часть молодых менеджеров после этого уходит из банка, конкуренты заходят на освободившееся место, прибыль падает.</p>
+    <p class="lead" style="margin-top:20px">Две разные отрасли — одна и та же логика: проблемы этих компаний коренятся не в сегодняшнем рынке, а в решениях, принятых намного раньше. Менеджмент, торопясь расти, смотрит наружу — на рынок, на прогнозы, — а ключевые ответы прячутся внутри: откуда пришла компания, где она сейчас и что это значит для того, куда она движется.</p>
+    <p class="note">Грейнер отталкивается здесь от логики европейских психологов: поведение определяется прежде всего прошлым опытом, а не тем, что впереди. Перенесённая на организации, эта идея даёт ряд предсказуемых фаз развития.</p>
+  </div>
+</section>
+
+<!-- S04 FIVE FACTORS -->
+<section class="slide" id="s04">
+  <div class="snum">04</div><div class="spart">Модель · Факторы</div>
+  <div class="deck">
+    <span class="kicker">Что формирует траекторию роста</span>
+    <h2>Пять факторов, которые вместе рисуют историю компании</h2>
+    <p class="lead">Исследования в этой области долго оставались чисто эмпирическими — без единой модели процесса. При их анализе, однако, выделяются пять ключевых измерений.</p>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card o"><span class="tag">1</span><h3>Возраст организации</h3><p>Одни и те же управленческие практики не могут работать в компании на всём протяжении её жизни. С возрастом закрепляются установки менеджмента — сотрудники становятся предсказуемее, но и труднее поддаются изменению, когда эти установки устаревают.</p></div>
+      <div class="card o"><span class="tag">2</span><h3>Размер организации</h3><p>Проблемы и решения компании заметно меняются по мере роста числа сотрудников и объёма продаж: усложняются координация и коммуникация, появляются новые функции, растут уровни иерархии.</p></div>
+      <div class="card o"><span class="tag">3</span><h3>Стадии эволюции</h3><p>Компании, пережившие кризис, обычно получают четыре-восемь лет непрерывного роста без крупного экономического спада или серьёзного внутреннего разлада — это и есть эволюционный период.</p></div>
+      <div class="card o"><span class="tag">4</span><h3>Стадии революции</h3><p>Плавный рост не гарантирован и не бесконечен. Периоды серьёзной турбулентности неизбежно перемежают спокойные эволюционные отрезки в истории почти любой растущей компании.</p></div>
+      <div class="card o"><span class="tag">5</span><h3>Темп роста отрасли</h3><p>Скорость смены фаз напрямую зависит от рынка: в быстрорастущей отрасли компания вынуждена набирать людей стремительно, и эволюционные периоды короче. На медленном рынке та же фаза может растянуться на годы.</p></div>
+    </div>
+    <p class="note">Отдельное наблюдение: если прибыль даётся легко, компания может годами избегать смены управленческой практики, даже накапливая серьёзные ошибки, — революция откладывается, а не отменяется. Пример из статьи — авиакосмическая отрасль на прибыльном раннем этапе.</p>
+  </div>
+</section>
+
+<!-- S05 CONCEPTS + MODEL DIAGRAM -->
+<section class="slide" id="s05">
+  <div class="snum">05</div><div class="spart">Модель · Понятия и логика</div>
+  <div class="deck">
+    <span class="kicker">Базовые термины</span>
+    <h2>Эволюция и революция: как устроена модель пяти фаз</h2>
+    <div class="grid g2" style="margin-top:14px">
+      <div class="card g"><span class="tag">Спокойный период</span><h3>Эволюция</h3><p>Устойчивый рост и стабильность. Компания живёт по одним и тем же правилам управления, и этого достаточно для продолжения роста тем же курсом.</p></div>
+      <div class="card a"><span class="tag">Период слома</span><h3>Революция</h3><p>Существенная организационная турбулентность. Прежние практики управления попадают под сомнение — от исхода этого периода зависит, перейдёт ли компания в следующую фазу роста.</p></div>
+    </div>
+    <p class="lead" style="margin-top:16px">Каждая фаза — это пара «эволюция → революция»: период с определённым доминирующим стилем управления, который приводит к росту, и кризис — доминирующая управленческая проблема, которую нужно решить, чтобы рост продолжился.</p>
+    <div class="pmodel">
+      <div class="pm"><div class="pn">1</div><h4>Творчество</h4><div class="crisis">Кризис лидерства</div></div>
+      <div class="pm"><div class="pn">2</div><h4>Директивность</h4><div class="crisis">Кризис автономии</div></div>
+      <div class="pm"><div class="pn">3</div><h4>Делегирование</h4><div class="crisis">Кризис контроля</div></div>
+      <div class="pm"><div class="pn">4</div><h4>Координация</h4><div class="crisis">Кризис волокиты</div></div>
+      <div class="pm"><div class="pn">5</div><h4>Сотрудничество</h4><div class="crisis">Кризис «?»</div></div>
+    </div>
+    <p class="note" style="margin-top:16px">Каждая фаза одновременно и результат предыдущей, и причина следующей — решение, найденное в конце одной революции, становится нормой следующего периода и спустя годы порождает следующий кризис. Компания, переживающая кризис автономии в фазе 2, не может вернуться к директивному управлению — нужен именно следующий шаг. Фазы нельзя перескакивать, и решение нового кризиса не повторяет решение предыдущего.</p>
+  </div>
+</section>
+
+<!-- S06 PHASE 1 -->
+<section class="slide" id="s06">
+  <div class="snum">06</div><div class="spart">Фаза 1 · Творчество</div>
+  <div class="deck">
+    <div class="bridge">Первая остановка на пути роста — момент, когда компания только находит свой продукт и рынок.</div>
+    <span class="kicker">Эволюция → Революция</span>
+    <h2>Фаза 1: рост через творчество → кризис лидерства</h2>
+    <div class="phase-wrap">
+      <div>
+        <h3 style="margin-bottom:10px">Что характерно для этого периода</h3>
+        <ul class="bul">
+          <li>Основатели — технари или предприниматели по складу, управленческую работу обычно недолюбливают; вся энергия уходит на создание и продажу продукта.</li>
+          <li>Коммуникация между сотрудниками частая и неформальная.</li>
+          <li>Долгие часы работы вознаграждаются скромной зарплатой и обещанием доли в будущем успехе.</li>
+          <li>Решения и мотивация сильно зависят от обратной связи рынка: менеджмент реагирует на то, как отвечают покупатели.</li>
+        </ul>
+      </div>
+      <div class="crisisbox cb-a">
+        <h4>Кризис лидерства</h4>
+        <div class="big">Кто поведёт компанию дальше?</div>
+        <p>Рост требует знаний об эффективности производства. Растущий штат уже нельзя вести через неформальное общение — новые сотрудники не разделяют личной преданности продукту. Нужны дополнительный капитал и новые учётные процедуры финансового контроля. Основатели тяготятся управленческой рутиной, тоскуют по «старым добрым временам», конфликты между уставшими лидерами обостряются. Нужен сильный управленец, приемлемый для основателей, — но именно сейчас отдать штурвал труднее всего.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S07 PHASE 2 -->
+<section class="slide" id="s07">
+  <div class="snum">07</div><div class="spart">Фаза 2 · Директивность</div>
+  <div class="deck">
+    <div class="bridge">Компания нашла сильного руководителя — и входит в период уверенного, управляемого роста.</div>
+    <span class="kicker">Эволюция → Революция</span>
+    <h2>Фаза 2: рост через директивность → кризис автономии</h2>
+    <div class="phase-wrap">
+      <div>
+        <h3 style="margin-bottom:10px">Что характерно для этого периода</h3>
+        <ul class="bul">
+          <li>Вводится функциональная структура, отделяющая производство от продаж; задания сотрудников становятся более специализированными.</li>
+          <li>Появляются учётные системы для запасов и закупок.</li>
+          <li>Внедряются стимулирующие схемы, бюджеты и нормативы труда.</li>
+          <li>Коммуникация становится более формальной и обезличенной по мере роста иерархии титулов и должностей.</li>
+          <li>Новый руководитель и его ключевые заместители берут на себя почти всю ответственность за направление развития, а супервайзеры на местах остаются функциональными специалистами, а не самостоятельными менеджерами.</li>
+        </ul>
+      </div>
+      <div class="crisisbox cb-o">
+        <h4>Кризис автономии</h4>
+        <div class="big">Управляемый рост душит инициативу</div>
+        <p>Директивные методы эффективно направляют энергию сотрудников на рост, но со временем перестают годиться для более крупной и разнообразной компании. Менеджеры на местах располагают более прямым знанием о рынках и производстве, чем руководство наверху, и разрываются между следованием процедурам и собственной инициативой. Решение требует настоящего делегирования — но директивным лидерам, преуспевшим именно в директивности, тяжело его отпустить, а менеджеры на местах ещё не привыкли принимать решения самостоятельно.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S08 PHASE 3 -->
+<section class="slide" id="s08">
+  <div class="snum">08</div><div class="spart">Фаза 3 · Делегирование</div>
+  <div class="deck">
+    <div class="bridge">Компания решается на децентрализацию — и получает второе дыхание роста.</div>
+    <span class="kicker">Эволюция → Революция</span>
+    <h2>Фаза 3: рост через делегирование → кризис контроля</h2>
+    <div class="phase-wrap">
+      <div>
+        <h3 style="margin-bottom:10px">Что характерно для этого периода</h3>
+        <ul class="bul">
+          <li>Значительно больше ответственности передаётся руководителям заводов и территориальных рынков.</li>
+          <li>Для стимулирования мотивации используются центры прибыли и бонусы.</li>
+          <li>Топ-менеджмент в штаб-квартире ограничивается управлением «по исключениям» на основе периодических отчётов с мест.</li>
+          <li>Руководство часто концентрируется на приобретении внешних компаний, которые можно присоединить к другим децентрализованным подразделениям.</li>
+          <li>Коммуникация сверху становится редкой — обычно перепиской, звонками или короткими визитами на места.</li>
+        </ul>
+      </div>
+      <div class="crisisbox cb-g">
+        <h4>Кризис контроля</h4>
+        <div class="big">Свобода на местах оборачивается разрозненностью</div>
+        <p>Топ-менеджеры начинают ощущать, что теряют контроль над сильно диверсифицированной полевой структурой. Автономные руководители на местах предпочитают вести «своё дело» без координации планов, денег, технологий и кадров с остальной компанией; свобода порождает местнический настрой. Попытка вернуться к централизованному управлению обычно проваливается из-за нового, гораздо большего масштаба операций — компаниям, которые движутся дальше, требуются новые техники координации.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S09 PHASE 4 -->
+<section class="slide" id="s09">
+  <div class="snum">09</div><div class="spart">Фаза 4 · Координация</div>
+  <div class="deck">
+    <div class="bridge">Компания находит новые техники координации — и снова обретает управляемость.</div>
+    <span class="kicker">Эволюция → Революция</span>
+    <h2>Фаза 4: рост через координацию → кризис волокиты</h2>
+    <div class="phase-wrap">
+      <div>
+        <h3 style="margin-bottom:10px">Что характерно для этого периода</h3>
+        <ul class="bul">
+          <li>Децентрализованные подразделения объединяются в продуктовые группы.</li>
+          <li>Вводятся и интенсивно пересматриваются формальные процедуры планирования.</li>
+          <li>В штаб-квартиру нанимается многочисленный штабной персонал для запуска общекорпоративных программ контроля и обзора для линейных менеджеров.</li>
+          <li>Капитальные вложения тщательно взвешиваются и распределяются по всей организации.</li>
+          <li>Каждая продуктовая группа рассматривается как инвестиционный центр, где рентабельность вложенного капитала — ключевой критерий распределения средств.</li>
+          <li>Отдельные технические функции (например, обработка данных) централизуются в штаб-квартире, а повседневные операционные решения остаются децентрализованными.</li>
+          <li>Опционы на акции и общекорпоративное участие в прибыли используются, чтобы сотрудники отождествляли себя с компанией в целом.</li>
+        </ul>
+      </div>
+      <div class="crisisbox cb-t">
+        <h4>Кризис волокиты</h4>
+        <div class="big">Система стала больше своей пользы</div>
+        <p>Между линейными менеджерами и штабными специалистами нарастает недоверие: линейные менеджеры тяготятся жёстким руководством со стороны штаба, незнакомого с реалиями на местах, а штабные сотрудники жалуются на неготовых к сотрудничеству линейных менеджеров. Разрастание систем и программ начинает превышать их полезность — процедуры важнее решения реальных проблем, инновации подавляются. Организация стала слишком большой и сложной, чтобы управляться формальными программами и жёсткими системами.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S10 PHASE 5 + ALT PRACTICES -->
+<section class="slide" id="s10">
+  <div class="snum">10</div><div class="spart">Фаза 5 · Сотрудничество</div>
+  <div class="deck">
+    <div class="bridge">Компания преодолевает волокиту через новую спонтанность и командную работу.</div>
+    <span class="kicker">Эволюция → Революция (версия 1972 года)</span>
+    <h2>Фаза 5: рост через сотрудничество → кризис «?»</h2>
+    <div class="phase-wrap">
+      <div>
+        <h3 style="margin-bottom:10px">Что характерно для этого периода</h3>
+        <ul class="bul">
+          <li>Акцент на быстром решении проблем через командные действия.</li>
+          <li>Команды собираются на пересечении функций для работы над конкретными задачами.</li>
+          <li>Штабные эксперты штаб-квартиры сокращаются в числе, перераспределяются и объединяются в межфункциональные команды, которые консультируют полевые подразделения, а не управляют ими напрямую.</li>
+          <li>Часто используется матричная структура для сборки нужных команд под конкретные задачи.</li>
+          <li>Прежние формальные системы контроля упрощаются и объединяются в единые многоцелевые системы.</li>
+          <li>Регулярно проводятся конференции ключевых менеджеров, сфокусированные на главных проблемных вопросах.</li>
+          <li>Образовательные программы используются для развития поведенческих навыков — командной работы и разрешения конфликтов.</li>
+          <li>Экономическое вознаграждение больше привязано к результату команды, чем к индивидуальным достижениям.</li>
+        </ul>
+      </div>
+      <div class="crisisbox cb-p">
+        <h4>Кризис «?»</h4>
+        <div class="big">В 1972 году — открытый вопрос</div>
+        <p>На момент выхода статьи у пятой фазы не было наблюдаемого завершения. Гипотеза Грейнера тогда: революция будет связана с «психологическим насыщением» — усталостью команд от постоянного давления искать нестандартные решения. Двадцать пять лет спустя автор пересмотрел этот прогноз — см. слайд 14.</p>
+      </div>
+    </div>
+    <h3 style="margin-top:26px">Что уже пробуют компании (примеры из статьи)</h3>
+    <div class="grid g3" style="margin-top:10px">
+      <div class="card a"><span class="tag">Отдых</span><h3>Творческие отпуска</h3><p>Продолжительные сабатикалы для восстановления сил сотрудников.</p></div>
+      <div class="card o"><span class="tag">Ротация</span><h3>«Горячие» позиции</h3><p>Временное перемещение менеджеров на другие участки работы и обратно.</p></div>
+      <div class="card g"><span class="tag">График</span><h3>4-дневная неделя</h3><p>Эксперимент с ритмом работы через сокращённую рабочую неделю.</p></div>
+      <div class="card t"><span class="tag">Конвейер</span><h3>Доп. команда</h3><p>Дополнительная бригада на линии, чтобы одна команда всегда была свободна для переобучения.</p></div>
+      <div class="card p"><span class="tag">Гибкость</span><h3>Часы и отпуска</h3><p>Более длинные отпуска, гибкий график, помещения для отдыха в течение дня.</p></div>
+      <div class="card a"><span class="tag">Практика из Китая</span><h3>Работа «внизу»</h3><p>Периодическая работа руководителей на низовых должностях.</p></div>
+    </div>
+    <p class="note">Кейс из статьи: одна европейская компания создала пять «рефлексивных групп» вне обычной структуры для непрерывной оценки ключевых направлений деятельности — с ротацией сотрудников между группами каждые полгода.</p>
+  </div>
+</section>
+
+<!-- S11 DIAGNOSTIC TABLE -->
+<section class="slide" id="s11">
+  <div class="snum">11</div><div class="spart">Диагностика</div>
+  <div class="deck">
+    <span class="kicker">Найдите свою строку</span>
+    <h2>Таблица: определите фазу вашей компании</h2>
+    <p class="lead muted">По каждой фазе — доминирующие практики сразу по пяти направлениям. Сравните с тем, что реально происходит у вас: несовпадение по нескольким пунктам сразу — сигнал, что компания либо ещё не завершила переход в фазу, либо уже перерастает её.</p>
+    <table class="dtable" style="margin-top:12px">
+      <thead><tr><th>Фаза</th><th>Фокус менеджмента</th><th>Оргструктура</th><th>Стиль топ-менеджмента</th><th>Система контроля</th><th>Акцент вознаграждения</th></tr></thead>
+      <tbody>
+        <tr><td class="rh" data-label="Фаза">1 · Творчество</td><td data-label="Фокус менеджмента">Делать и продавать</td><td data-label="Оргструктура">Неформальная</td><td data-label="Стиль топ-менеджмента">Индивидуалистичный, предпринимательский</td><td data-label="Система контроля">По результатам рынка</td><td data-label="Акцент вознаграждения">Доля в собственности</td></tr>
+        <tr><td class="rh" data-label="Фаза">2 · Директивность</td><td data-label="Фокус менеджмента">Эффективность операций</td><td data-label="Оргструктура">Централизованная, функциональная</td><td data-label="Стиль топ-менеджмента">Директивный</td><td data-label="Система контроля">Нормативы и центры затрат</td><td data-label="Акцент вознаграждения">Оклад и надбавки за заслуги</td></tr>
+        <tr><td class="rh" data-label="Фаза">3 · Делегирование</td><td data-label="Фокус менеджмента">Расширение рынка</td><td data-label="Оргструктура">Децентрализованная, географическая</td><td data-label="Стиль топ-менеджмента">Делегирующий</td><td data-label="Система контроля">Отчёты и центры прибыли</td><td data-label="Акцент вознаграждения">Индивидуальный бонус</td></tr>
+        <tr><td class="rh" data-label="Фаза">4 · Координация</td><td data-label="Фокус менеджмента">Консолидация организации</td><td data-label="Оргструктура">Линейно-штабная, продуктовые группы</td><td data-label="Стиль топ-менеджмента">«Сторожевой» контроль</td><td data-label="Система контроля">Планы и инвестцентры</td><td data-label="Акцент вознаграждения">Доля в прибыли, опционы</td></tr>
+        <tr><td class="rh" data-label="Фаза">5 · Сотрудничество</td><td data-label="Фокус менеджмента">Решение проблем и инновации</td><td data-label="Оргструктура">Матрица команд</td><td data-label="Стиль топ-менеджмента">Партисипативный</td><td data-label="Система контроля">Взаимная постановка целей</td><td data-label="Акцент вознаграждения">Командный бонус</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<!-- S12 1998: WHAT HOLDS TRUE -->
+<section class="slide" id="s12">
+  <div class="snum">12</div><div class="spart">1998 · Проверка временем</div>
+  <div class="deck">
+    <div class="bridge">Модель описана в 1972 году. Спустя четверть века Грейнер вернулся к ней и честно проверил, что удержалось, а что нет.</div>
+    <span class="kicker">Четыре вещи, которые подтвердились</span>
+    <h2>Что подтвердилось за 25 лет практики</h2>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card o"><span class="tag">1</span><h3>Фазы длятся 3–15 лет</h3><p>Крупные фазы развития растущих компаний по-прежнему наблюдаются в жизни организаций. Учёные спорят о точной длительности и природе фаз, но все согласны: у каждой фазы своя структура, свои системы и свой стиль лидерства. Темп роста отрасли определяет длительность фазы.</p></div>
+      <div class="card o"><span class="tag">2</span><h3>Переходы между фазами по-прежнему болезненны</h3><p>Смена фаз не происходит естественно или гладко независимо от силы топ-менеджмента. Все организации сталкиваются с революционными трудностями; многие спотыкаются, выходят на плато, терпят неудачу или их поглощают — вместо того чтобы расти дальше.</p></div>
+      <div class="card o"><span class="tag">3</span><h3>Логика парадокса всё ещё верна</h3><p>Менеджерам по-прежнему трудно принять, что решение, которое они лично внедрили в одной фазе, со временем сеет семена следующей революции.</p></div>
+      <div class="card o"><span class="tag">4</span><h3>Главное сопротивление переменам — наверху</h3><p>Революция часто означает, что подразделения под руководством конкретных топ-менеджеров будут ликвидированы или трансформированы. Поэтому новых CEO так часто ищут снаружи, а старшие руководители нередко уходят — не потому что они «плохие» менеджеры, а потому что просто не вписываются в то, куда должна двигаться компания.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- S13 1998: HARSHER REALITY -->
+<section class="slide" id="s13">
+  <div class="snum">13</div><div class="spart">1998 · Проверка временем</div>
+  <div class="deck">
+    <div class="bridge">А вот что изменилось по сравнению с 1972 годом — сам Грейнер называет это прямо.</div>
+    <span class="kicker">Реальность оказалась жёстче</span>
+    <h2>Мало кто проходит все пять фаз</h2>
+    <p class="lead">В организационной жизни стало заметно больше «смертей». Немногие компании проходят через все фазы роста целиком: если они не терпят неудачу — а большинство терпит именно на начальной фазе творчества и предпринимательства, — их нередко поглощают компании, находящиеся на более поздней фазе развития.</p>
+    <p class="lead" style="margin-top:14px">Сами фазы на практике размыты сильнее, чем на аккуратном графике: следы предыдущей фазы остаются надолго после того, как внедрены новые подходы — например, предприниматель фазы 1 часто продолжает держаться за компанию даже после того, как в фазе 2 появляется профессиональный менеджмент. Внутри каждой эволюционной стадии есть и свои мини-фазы: делегирование обычно не начинается с одномоментной децентрализации всей организации на множество продуктовых подразделений — обычно запускается одна продуктовая группа, а остальные добавляются постепенно. При этом старшие менеджеры корпоративного центра остаются не так отстранены, как в исходном описании фазы: рост числа продуктовых или географических подразделений требует от них содержательного участия в пересмотре стратегий и результатов — но не в микроуправлении подразделениями.</p>
+    <div class="grid g2" style="margin-top:18px">
+      <div class="card a"><span class="tag">Пример из статьи</span><h3>IBM до Лу Герстнера</h3><p>Компания серьёзно пострадала в конце фазы 4 (координация), когда её изощрённые управленческие системы превратились в жёсткую бюрократию — ровно та ловушка, которую описывает кризис волокиты.</p></div>
+      <div class="card a"><span class="tag">Пример из статьи</span><h3>General Electric до Джека Уэлча</h3><p>Компания пережила похожий кризис на том же переходе от координации к следующей фазе — управленческие системы, которые прежде обеспечивали рост, стали тормозом именно тогда, когда закостенели в бюрократию.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- S14 1998: PHASE 5 + CRISIS "?" REVISED -->
+<section class="slide" id="s14">
+  <div class="snum">14</div><div class="spart">1998 · Проверка временем</div>
+  <div class="deck">
+    <div class="bridge">Здесь автор прямо признал: описание фазы 5 и её кризиса в 1972 году было неточным.</div>
+    <span class="kicker">Главный пересмотр модели</span>
+    <h2>Фаза 5 и кризис «?»: что оказалось не так</h2>
+    <p class="lead">Изначальное описание фазы 5 предполагало, что вся организация превращается в матрицу команд. Спустя 25 лет Грейнер видит эту матрицу иначе: она в основном ограничена уровнем старшего руководства, где главы географических направлений, продуктовых линий и функциональных дисциплин сотрудничают как команда, чтобы согласовывать решения на глобальных рынках. Самое существенное изменение: прежний бюрократический, контролирующий штат фазы 4 заменяется меньшим числом штабных экспертов-консультантов, которые помогают принимать решения на местах, а не контролируют их.</p>
+    <p class="lead" style="margin-top:14px">Гипотеза о «психологическом насыщении» как причине кризиса, завершающего фазу 5, теперь, по признанию самого автора, выглядит ошибочной. Настоящий кризис — это момент, когда компания осознаёт: у неё больше нет внутреннего решения, например нового продукта, чтобы продолжать расти. Организация начинает искать партнёров снаружи или возможность продать себя более крупной компании.</p>
+    <div class="grid g2" style="margin-top:16px">
+      <div class="card t"><span class="tag">Возможная фаза 6</span><h3>Внеорганизационные решения</h3><p>Рост начинает зависеть от конструкций за пределами самой компании — например, создания холдинга или сетевой организации из альянсов и перекрёстного владения акциями.</p></div>
+      <div class="card p"><span class="tag">Гипотеза автора</span><h3>Модель GE Capital</h3><p>Возможно, у General Electric сложилась похожая модель: сеть компаний вокруг центральной «денежной» компании или банка (GE Capital), который привлекает капитал, зарабатывает высокую доходность и подпитывает рост остальных подразделений.</p></div>
+    </div>
+    <p class="note">Отдельное наблюдение автора: развитие информационных технологий не сильно изменило базовую логику модели. ИТ — это инструмент, который просто принимает разную форму под задачи каждой фазы: функциональной структуре фазы 2 нужны данные о выручке и затратных центрах, децентрализации фазы 3 — данные о результативности центров прибыли.</p>
+  </div>
+</section>
+
+<!-- S15 EXTENSION: PROFESSIONAL SERVICE FIRMS -->
+<section class="slide" id="s15">
+  <div class="snum">15</div><div class="spart">Расширение модели</div>
+  <div class="deck">
+    <div class="bridge">Статья 1972 года писалась в основном о промышленных и потребительских компаниях. В 1998 году Грейнер добавил ещё один тип организаций.</div>
+    <span class="kicker">Исследование консалтинговых, юридических и инвестиционных фирм</span>
+    <h2>Та же логика — в фирмах профессиональных услуг</h2>
+    <p class="lead">Изучив ряд консалтинговых, юридических и инвестиционных компаний, исследовательская группа Грейнера обнаружила, что такие организации тоже проходят через эволюцию и революцию — но с собственным набором из четырёх фаз.</p>
+    <div class="grid g4" style="margin-top:16px">
+      <div class="card a"><span class="tag">Фаза 1</span><h3>Предпринимательская</h3><p>Фирма пробует и тестирует разные рыночные направления. Заканчивается спором партнёров: оставаться ли вместе или сосредоточиться на видении будущего одного из партнёров.</p></div>
+      <div class="card o"><span class="tag">Фаза 2</span><h3>Одна услуга</h3><p>Фирма фокусируется на одной главной услуге. Заканчивается дискуссией партнёров: продолжать концентрироваться на текущей практике или открыть новый офис / добавить новые услуги.</p></div>
+      <div class="card g"><span class="tag">Фаза 3</span><h3>Экспансия</h3><p>Географическое или сервисное расширение. Заканчивается борьбой за собственность: сколько доли исходные партнёры готовы отдать младшим партнёрам, которые вели экспансию и привели новых клиентов.</p></div>
+      <div class="card t"><span class="tag">Фаза 4</span><h3>Институционализация</h3><p>Закрепление имени фирмы, репутации и стандартного способа работы. Заканчивается кризисом культурного конформизма — фирме приходится заново возвращать себе инновационность и гибкость.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- S16 THREE RULES + ACTION -->
+<section class="slide" id="s16">
+  <div class="snum">16</div><div class="spart">Действия</div>
+  <div class="deck">
+    <span class="kicker">Три правила от автора + с чего начать</span>
+    <h2>Что делать с этой моделью на практике</h2>
+    <div class="grid g2" style="margin-top:14px;align-items:start">
+      <div>
+        <div class="check">
+          <div class="chk"><strong>Знайте, на каком этапе развития вы находитесь.</strong> Каждая часть организации может быть на своей стадии — задача руководства осознавать это, иначе легко пропустить момент, когда пора меняться, или навязать неподходящее решение.</div>
+          <div class="chk"><strong>Признайте ограниченный набор решений для каждого кризиса.</strong> Каждую революционную стадию завершают лишь определённые решения — и это не те же решения, что закрывали предыдущий кризис. Соблазн повторить старое работавшее решение как раз и мешает перейти в новую фазу роста.</div>
+          <div class="chk"><strong>Понимайте, что сегодняшнее решение создаёт завтрашнюю проблему.</strong> Решение делегировать полномочия со временем порождает проблему контроля. Управленческие действия компании во многом определяют, что случится с ней намного позже.</div>
+        </div>
+        <p class="note">Важная оговорка самого автора: модель «эволюции и революции» — лишь простой набросок широких вызовов роста, а не готовое решение на все случаи. Темп роста, качество разрешения кризисов и результаты компании внутри каждой фазы всё равно зависят от базовых основ хорошего управления — умелого лидерства и работающей стратегии.</p>
+      </div>
+      <div>
+        <div class="quote" style="margin-bottom:20px">Компании, которые не могут отказаться от прошлых практик и провести серьёзные организационные изменения, склонны либо разоряться, либо останавливаться в росте.</div>
+        <div class="callout">
+          <h3>Если запомнить только это</h3>
+          <p style="margin-top:8px"><strong>5</strong> фаз роста · <strong>5</strong> управленческих кризисов · <strong>5</strong> факторов, формирующих траекторию · <strong>3</strong> практических правила.</p>
+          <p style="margin-top:10px">Определите свою фазу по таблице выше, сверьте её с тем, что реально происходит в компании, и начните разговор о том, какое решение подходит именно этой стадии — не то, что сработало в прошлый раз.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- S17 FINAL / CREDIT -->
+<section class="slide cover" id="s17">
+  <div class="snum" style="color:#a89d84">17</div>
+  <div class="deck">
+    <span class="kicker">Следующий шаг</span>
+    <h1 style="font-size:clamp(1.6rem,3.8vw,2.8rem);max-width:24ch">Определить фазу по таблице — полдела. Сложнее увидеть её в цифрах.</h1>
+    <p class="sub" style="max-width:58ch;margin-top:16px">Кризис контроля или волокиты виден в управленческой отчётности задолго до того, как он превращается в открытый конфликт людей — если отчётность настроена так, чтобы его показывать. Выстраивание систем управления, финансового и управленческого учёта — моя специализация.</p>
+    <p style="margin-top:22px;color:#e0d6c0;font-weight:700;font-size:1.05rem">Запишитесь на диагностику системы управления — разберём на вашей компании:</p>
+    <ul class="ask">
+      <li>в какой фазе роста компания находится сейчас и какой кризис уже на подходе;</li>
+      <li>что в управленческом учёте и отчётности не показывает проблему вовремя;</li>
+      <li>какие решения подходят именно этой стадии, а какие только отложат взрыв.</li>
+    </ul>
+    <div style="margin-top:26px">
+      <a class="cta" href="https://ayzenshtat.ru/#contact">Записаться на диагностику →</a>
+      <div class="cta-note">Обсудим вашу ситуацию и решим, нужна ли вам моя помощь вообще.</div>
+    </div>
+    <div style="margin-top:26px;font-family:'Spectral',serif;border-top:1px solid rgba(189,132,42,.3);padding-top:18px">
+      <div style="font-size:1.4rem;color:#f6efe1;font-weight:700">Дмитрий Айзенштат</div>
+      <div style="color:#c9bfa9;font-size:1rem;margin-top:4px">Консультант по управлению</div>
+      <div style="margin-top:12px"><a href="https://ayzenshtat.ru/#contact" style="color:var(--gold);font-size:1.1rem;font-weight:600;font-family:'Manrope',sans-serif;text-decoration:none">Ayzenshtat.ru</a></div>
+    </div>
+    <p style="margin-top:22px;color:#a89d84;font-size:.82rem;max-width:66ch;font-style:italic;font-family:'Spectral',serif">Гайд подготовлен по статье Larry E. Greiner «Evolution and Revolution as Organizations Grow» (Harvard Business Review, 1972; переиздание с авторским обновлением — May–June 1998) совместно с Claude. Обзорно-образовательный материал; не является перепечаткой. Права на оригинал принадлежат автору и Harvard Business Review. Рекомендуем прочесть оригинал.</p>
+  </div>
+</section>
+
+</body>
+</html>
