@@ -1,23 +1,6 @@
 <!doctype html>
 <html lang="ru">
 <head>
-  
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript">
-    (function(m,e,t,r,i,k,a){
-        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-        m[i].l=1*new Date();
-        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110737676', 'ym');
-
-    ym(110737676, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/110737676" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
-
-
-
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Тест: готова ли компания к следующему уровню — Дмитрий Айзенштат</title>
@@ -284,6 +267,19 @@
     * { transition: none !important; }
   }
 </style>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+    (function(m,e,t,r,i,k,a){
+        m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+        m[i].l=1*new Date();
+        for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+        k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+    })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110737676', 'ym');
+
+    ym(110737676, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/110737676" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
 </head>
 <body>
 
@@ -326,7 +322,7 @@
     </div>
 
     <div class="btn-row">
-      <button class="btn" onclick="goTo('screen-company')">Начать тест →</button>
+      <button class="btn" onclick="ym(110737676,'reachGoal','test_started'); goTo('screen-company')">Начать тест →</button>
     </div>
   </section>
 
@@ -620,6 +616,7 @@ function checkCompanyStep() {
 
 /* ---- шаг: вопросы ---- */
 function startQuestions() {
+  ym(110737676,'reachGoal','test_company_filled',{ industry: state.industryName });
   renderQuestions();
   goTo('screen-questions');
 }
@@ -821,6 +818,14 @@ function showResult() {
     : `Прошёл тест по методологии Флэмхольца: у меня ${zone.label.toLowerCase()} по болезням роста — как у ${zone.share}% компаний в мире. Стадия — «${stage.name}». Честный диагноз — уже половина дела. Проверьте свою компанию: ${window.location.href}`;
   document.getElementById('shareTextPreview').textContent = shareText;
   window._shareText = shareText;
+
+  ym(110737676,'reachGoal','test_completed',{
+    industry: state.industryName,
+    stage: stage.code,
+    pain_score: painSum,
+    pain_zone: zone.key,
+    pyramid_score: Number(pyramidAvg.toFixed(1))
+  });
 
   goTo('screen-result');
 }
