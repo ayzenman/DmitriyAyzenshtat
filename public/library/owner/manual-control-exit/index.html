@@ -203,9 +203,8 @@ main h2 {
 .related ul{margin:0;padding-left:20px}
 .related li{margin-bottom:7px}
 .related a{color:#17345f;text-decoration:underline;text-underline-offset:2px}
-.lead-note{font-size:18px;line-height:1.5;color:#333;margin:0 0 24px;padding-bottom:18px;border-bottom:1px solid #e5e5e5}
-.lead-note strong{font-weight:650}
-@media(max-width:620px){.lead-note{font-size:17px}}
+.toc ul ul{margin:5px 0 8px;font-size:15px}
+.toc ul ul a{color:#555}
 </style>
 </head>
 <body>
@@ -228,16 +227,6 @@ main h2 {
     <img src="manual-control-exit-hero.jpg" width="1254" height="1254" alt="Выход из ручного управления: развилка из четырёх вариантов для собственника — развивать, продать, передать управление, заняться другим проектом" fetchpriority="high">
     <figcaption>Четыре направления, между которыми выбирает собственник.</figcaption>
   </figure>
-
-  <div class="toc">
-    <strong>В этой статье</strong>
-    <ul>
-      <li><a href="#why">Сначала — зачем</a></li>
-      <li><a href="#learn">Разобраться самому или найти того, кто уже умеет</a></li>
-      <li><a href="#who">Кто будет строить систему</a></li>
-      <li><a href="#role">Самый важный вопрос</a></li>
-    </ul>
-  </div>
 
   <p>Готового рецепта нет. Компании разные, собственники разные, да и причины, по которым ручное управление перестаёт работать, тоже отличаются. Но почти каждый собственник, который проходит этот этап, сталкивается с одной и той же последовательностью решений.</p>
   <p>Сначала нужно определить, куда вы вообще хотите прийти. Потом решить, насколько глубоко вы готовы разбираться в управлении самостоятельно. И только после этого выбирать, кто будет строить систему управления.</p>
@@ -348,6 +337,8 @@ main h2 {
     var a = e.target.closest && e.target.closest('a');
     if(!a) return;
     var href = a.getAttribute('href') || '';
+    if(href === 'https://ayzenshtat.ru/' || href === 'https://ayzenshtat.ru' || href === '/') { goal('manualexit_to_home'); return; }
+    if(href === '/library/') { goal('manualexit_to_library'); return; }
     if(href.indexOf('BolezniRostaTest') > -1) goal('manualexit_to_test');
     else if(href.indexOf('/library/solutions/eos') > -1) goal('manualexit_to_eos');
     else if(href.indexOf('/library/solutions/scaling-up') > -1) goal('manualexit_to_scaling_up');
