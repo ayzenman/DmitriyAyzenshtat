@@ -242,9 +242,8 @@ main h2 {
 .related ul{margin:0;padding-left:20px}
 .related li{margin-bottom:7px}
 .related a{color:#17345f;text-decoration:underline;text-underline-offset:2px}
-.lead-note{font-size:18px;line-height:1.5;color:#333;margin:0 0 24px;padding-bottom:18px;border-bottom:1px solid #e5e5e5}
-.lead-note strong{font-weight:650}
-@media(max-width:620px){.lead-note{font-size:17px}}
+.toc ul ul{margin:5px 0 8px;font-size:15px}
+.toc ul ul a{color:#555}
 </style>
 </head>
 <body>
@@ -259,8 +258,6 @@ main h2 {
 
   <div class="eyebrow">Кризис и деньги</div>
   <div class="meta">Дмитрий Айзенштат · 6 августа 2026</div>
-
-  <p class="lead-note"><strong>19 лет я работал финансовым руководителем в промышленных холдингах — АвтоВАЗ, ЧТПЗ, «Римера». Сейчас помогаю собственникам среднего бизнеса выстраивать системы управления. Про кризисы роста пишут много, про кризис, который приходит с рынка, — заметно меньше. Разбираю, как выглядит падение по стадиям и что делают, когда оно уже началось.</strong></p>
 
   <figure class="hero">
     <img src="turnaround-hero.jpg" width="1280" height="853" alt="Антикризисное управление: замёрзший промышленный город и одно освещённое здание" fetchpriority="high">
@@ -383,6 +380,8 @@ main h2 {
     var a = e.target.closest && e.target.closest('a');
     if(!a) return;
     var href = a.getAttribute('href') || '';
+    if(href === 'https://ayzenshtat.ru/' || href === 'https://ayzenshtat.ru' || href === '/') { goal('turnaround_to_home'); return; }
+    if(href === '/library/') { goal('turnaround_to_library'); return; }
     if(href.indexOf('BolezniRostaTest') > -1) goal('turnaround_to_test');
     else if(href.indexOf('/library/lifecycle/growth-architecture') > -1) goal('turnaround_to_growth');
     else if(href.indexOf('/library/solutions/') > -1) goal('turnaround_to_solutions');
