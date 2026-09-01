@@ -413,6 +413,8 @@ main h2 {
     var a = e.target.closest && e.target.closest('a');
     if(!a) return;
     var href = a.getAttribute('href') || '';
+    if(href === 'https://ayzenshtat.ru/' || href === 'https://ayzenshtat.ru' || href === '/') { goal('eos_to_home'); return; }
+    if(href === '/library/') { goal('eos_to_library'); return; }
     if(href.indexOf('BolezniRostaTest') > -1) goal('eos_to_test');
     else if(href.indexOf('/library/solutions/scaling-up') > -1) goal('eos_to_scaling_up');
     else if(href.indexOf('t.me/') > -1) goal('eos_to_telegram');
