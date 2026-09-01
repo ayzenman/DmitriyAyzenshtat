@@ -125,6 +125,20 @@ footer{border-top:1px solid var(--color-border);padding:32px 0 48px;text-align:c
 </div>
 
 <footer><a href="https://ayzenshtat.ru">Ayzenshtat.ru</a> · <a href="https://t.me/AyzenshtatProBiznes">Telegram-канал</a></footer>
+<script>
+(function(){
+  var ID = 110737676, fired = {};
+  function goal(name){ if(fired[name]) return; fired[name]=1; if(window.ym) ym(ID,'reachGoal',name); }
+  document.addEventListener('click', function(e){
+    var a = e.target.closest && e.target.closest('a');
+    if(!a) return;
+    var href = a.getAttribute('href') || '';
+    if(href === 'https://ayzenshtat.ru' || href === 'https://ayzenshtat.ru/' || href === '/') { goal('library_to_home'); return; }
+    if(href.indexOf('t.me/') > -1) goal('library_to_telegram');
+    else if(href.indexOf('/library/') === 0) goal('library_to_article');
+  }, true);
+})();
+</script>
 </body>
 </html>
 
