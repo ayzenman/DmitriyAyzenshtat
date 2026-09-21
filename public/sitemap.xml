@@ -18,7 +18,7 @@
 
     <loc>https://ayzenshtat.ru/library/</loc>
 
-    <lastmod>2026-09-01</lastmod>
+    <lastmod>2026-09-21</lastmod>
 
     <changefreq>weekly</changefreq>
 
@@ -43,6 +43,42 @@
     <loc>https://ayzenshtat.ru/library/solutions/scaling-up/</loc>
 
     <lastmod>2026-08-25</lastmod>
+
+    <changefreq>monthly</changefreq>
+
+    <priority>0.8</priority>
+
+  </url>
+
+  <url>
+
+    <loc>https://ayzenshtat.ru/library/solutions/management-systems/</loc>
+
+    <lastmod>2026-09-21</lastmod>
+
+    <changefreq>monthly</changefreq>
+
+    <priority>0.8</priority>
+
+  </url>
+
+  <url>
+
+    <loc>https://ayzenshtat.ru/library/solutions/balanced-scorecard/</loc>
+
+    <lastmod>2026-09-21</lastmod>
+
+    <changefreq>monthly</changefreq>
+
+    <priority>0.8</priority>
+
+  </url>
+
+  <url>
+
+    <loc>https://ayzenshtat.ru/library/solutions/okr/</loc>
+
+    <lastmod>2026-09-21</lastmod>
 
     <changefreq>monthly</changefreq>
 
