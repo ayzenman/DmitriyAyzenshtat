@@ -181,8 +181,9 @@
     /* Без JavaScript всё содержимое видно сразу, без анимаций появления */
     .no-js [data-anim] { opacity: 1 !important; }
     [hidden] { display: none !important; }
-    /* Верхнее меню не закреплено: стоит вверху страницы и уходит вместе с ней при прокрутке */
-    nav[data-ref="Navbar-nav"] { position: absolute; }
+    /* Меню закреплено. После прокрутки у него сплошной тёмный фон без размытия,
+       текст страницы под ним не просвечивает. */
+    nav.backdrop-blur-lg { background-color: #1a1f2e; -webkit-backdrop-filter: none; backdrop-filter: none; }
   </style>
   <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 </head>
