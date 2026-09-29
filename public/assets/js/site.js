@@ -170,6 +170,10 @@
     return;
   }
   gsap.registerPlugin(ScrollTrigger);
+
+  // Скорость всех анимаций: 1 — как в React-версии, 0.7 — примерно в полтора раза медленнее
+  var ANIMATION_SPEED = 0.7;
+  gsap.globalTimeline.timeScale(ANIMATION_SPEED);
   // Анимации появления проигрываются один раз за просмотр страницы:
   // при прокрутке назад и повторном проходе блоки остаются на месте.
   ScrollTrigger.defaults({ toggleActions: 'play none none none', start: 'top 80%', once: true });
