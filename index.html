@@ -181,9 +181,14 @@
     /* Без JavaScript всё содержимое видно сразу, без анимаций появления */
     .no-js [data-anim] { opacity: 1 !important; }
     [hidden] { display: none !important; }
-    /* Меню закреплено. После прокрутки у него сплошной тёмный фон без размытия,
-       текст страницы под ним не просвечивает. */
-    nav.backdrop-blur-lg { background-color: #1a1f2e; -webkit-backdrop-filter: none; backdrop-filter: none; }
+    /* Единый фон всей страницы — тёмный с золотыми точками, как на первом экране.
+       Сетка точек та же: шаг 60 пикселей, точка в центре клетки, та же прозрачность. */
+    body > div.min-h-screen { background-color: #1a1f2e; background-image: radial-gradient(circle at 30px 30px, rgba(212, 168, 83, 0.15) 0, rgba(212, 168, 83, 0.15) 1.6px, rgba(212, 168, 83, 0) 2.4px); background-size: 60px 60px; }
+    #problems, #about, #services, #results, #for-whom, #contact, footer { background: transparent !important; }
+    /* Затемнение внизу первого экрана убрано, чтобы точки шли без разрыва */
+    #hero > .bg-gradient-to-t { display: none; }
+    /* Меню закреплено. После прокрутки — тот же фон с точками, без размытия; текст под ним не просвечивает */
+    nav.backdrop-blur-lg { background-color: #1a1f2e; background-image: radial-gradient(circle at 30px 30px, rgba(212, 168, 83, 0.15) 0, rgba(212, 168, 83, 0.15) 1.6px, rgba(212, 168, 83, 0) 2.4px); background-size: 60px 60px; -webkit-backdrop-filter: none; backdrop-filter: none; }
   </style>
   <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 </head>
