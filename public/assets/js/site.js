@@ -284,7 +284,11 @@
       var sec = ref('ForWhom-section'); if (!sec) return;
       var center = ref('ForWhom-center');
       gsap.fromTo(center, { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.8, ease: 'elastic.out(1, 0.5)', scrollTrigger: st(sec, 'top 70%') });
+        { scale: 1, opacity: 1, duration: 0.8, ease: 'elastic.out(1, 0.5)', scrollTrigger: st(sec, 'top 70%'),
+          // Лёгкая пульсация 1 → 1.02 начинается, когда круг уже появился.
+          // В React-версии она стартовала сразу при загрузке от масштаба 0,
+          // и круг каждые 4 секунды сжимался в точку.
+          onComplete: function () { gsap.to(center, { scale: 1.02, duration: 2, ease: 'sine.inOut', repeat: -1, yoyo: true }); } });
       $$('.connecting-line', ref('ForWhom-lines')).forEach(function (line, i) {
         gsap.fromTo(line, { strokeDashoffset: 200 },
           { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out', scrollTrigger: st(sec, 'top 60%'), delay: 0.4 + i * 0.12 });
@@ -295,7 +299,6 @@
         gsap.fromTo(card, { x: d.x, y: d.y, opacity: 0 },
           { x: 0, y: 0, opacity: 1, duration: 0.6, ease: 'expo.out', scrollTrigger: st(sec, 'top 55%'), delay: 0.6 + i * 0.12 });
       });
-      gsap.to(center, { scale: 1.02, duration: 2, ease: 'sine.inOut', repeat: -1, yoyo: true });
 
       // Мобильная раскладка: в React-версии эти карточки не анимировались и оставались невидимыми
       var desktop = ref('ForWhom-criteria');
