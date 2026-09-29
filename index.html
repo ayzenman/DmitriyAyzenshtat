@@ -181,9 +181,8 @@
     /* Без JavaScript всё содержимое видно сразу, без анимаций появления */
     .no-js [data-anim] { opacity: 1 !important; }
     [hidden] { display: none !important; }
-    /* Фон меню после прокрутки. В исходном React-коде он был задан классом bg-[var(--color-bg)]/90,
-       но этот класс не попадал в стили, и под меню просвечивал размытый текст. */
-    nav.backdrop-blur-lg { background-color: rgba(26, 31, 46, 0.9); }
+    /* Верхнее меню не закреплено: стоит вверху страницы и уходит вместе с ней при прокрутке */
+    nav[data-ref="Navbar-nav"] { position: absolute; }
   </style>
   <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 </head>
