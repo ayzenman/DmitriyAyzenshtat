@@ -1,4 +1,4 @@
-name: Build and Deploy
+name: Deploy
 
 # Запускать при пушах в ветку main (измените на вашу основную ветку, если нужно)
 on:
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 # Не запускать две выкладки одновременно: следующая ждёт, пока закончится предыдущая.
-# Иначе две очистки папки на сервере накладываются, и часть файлов пропадает.
+# Иначе две выкладки накладываются друг на друга, и часть файлов может пропасть.
 concurrency:
   group: deploy-production
   cancel-in-progress: false
@@ -22,21 +22,16 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2. Устанавливаем Node.js (версия 20)
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      # 2. Собираем папку для выкладки: главная + всё из public (библиотека, стили, скрипты, иконки).
+      #    Сайт статичный, поэтому сборка не нужна — файлы просто копируются.
+      - name: Prepare site
+        run: |
+          rm -rf dist
+          mkdir dist
+          cp -r public/. dist/
+          cp index.html dist/
 
-      # 3. Устанавливаем зависимости
-      - name: Install dependencies
-        run: npm install
-
-      # 4. Собираем проект (появляется папка dist)
-      - name: Build project
-        run: npm run build
-
-      # 5. НОВЫЙ ШАГ: создаём secrets.php из GitHub Secret и кладём в dist.
+      # 3. Создаём secrets.php из GitHub Secret и кладём в dist.
       #    Токен берётся из защищённого хранилища GitHub (Settings → Secrets),
       #    в коде репозитория его нет. Файл попадает на сервер вместе со сборкой.
       - name: Create secrets.php for MAX
@@ -49,7 +44,9 @@ jobs:
           ];
           PHP
 
-      # 6. Загружаем файлы на хостинг по FTP с полной очисткой папки назначения
+      # 4. Загружаем файлы на хостинг по FTP.
+      #    Загружаются только изменённые файлы, удалённые из репозитория — удаляются с сервера.
+      #    Полной очистки папки больше нет: сайт не пропадает на время выкладки.
       - name: Deploy via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
@@ -59,6 +56,3 @@ jobs:
           local-dir: ./dist/
           # Укажите точный путь к корневой папке вашего сайта на хостинге
           server-dir: public_html/
-          # Удаляет все файлы в server-dir перед загрузкой новых.
-          # Теперь это безопасно: secrets.php создаётся заново на каждом деплое (шаг 5).
-          dangerous-clean-slate: true
