@@ -1,73 +1,39 @@
-# React + TypeScript + Vite
+# ayzenshtat.ru
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Сайт Дмитрия Айзенштата — системы управления для собственников бизнеса.
 
-Currently, two official plugins are available:
+## Устройство
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Сайт статичный: обычные HTML-страницы, без сборки и фреймворков.
 
-## React Compiler
+| Путь | Что это |
+|---|---|
+| `index.html` | главная страница |
+| `public/assets/site.css` | стили главной |
+| `public/assets/js/site.js` | анимации, меню, форма записи, баннер cookie, цели Метрики |
+| `public/assets/js/gsap.min.js`, `ScrollTrigger.min.js` | библиотека анимаций GSAP |
+| `public/library/` | библиотека статей — каждая статья в своей папке `index.html` |
+| `public/send-max.php` | приём заявок с формы и пересылка в MAX |
+| `public/privacy.html` | политика обработки персональных данных |
+| `public/404.html`, `public/.htaccess` | страница «не найдено» и настройки сервера |
+| `public/sitemap.xml`, `public/robots.txt` | для поисковиков |
+| `public/google…html`, `public/yandex_…html` | подтверждение прав в Search Console и Яндекс Вебмастере — не удалять |
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Обновление стилей и скрипта главной
 
-## Expanding the ESLint configuration
+После правки `site.css` или `site.js` поменяйте в `index.html` число после `?v=` (например, на сегодняшнюю дату) — иначе браузеры посетителей могут ещё какое-то время показывать старую версию.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Выкладка
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+Любой коммит в `main` запускает `.github/workflows/deploy.yml`:
+файлы из `public/` и `index.html` копируются в папку `dist`, туда же создаётся `secrets.php`
+(токен MAX из GitHub Secrets), и всё загружается по FTP в `public_html/`.
+Загружаются только изменённые файлы. Две выкладки одновременно не идут — вторая ждёт первую.
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+Запустить выкладку вручную: вкладка **Actions → Deploy → Run workflow**.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Цели Яндекс Метрики (счётчик 110737676)
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+Главная: `lead_form_sent` (заявка отправлена), `home_tg_channel`, `home_tg_personal`, `home_email`.
+Статьи: `<статья>_read_90s`, `<статья>_scroll_75`, `<статья>_to_telegram`, `<статья>_to_home` и др.
+Тест: `test_started`, `test_company_filled`, `test_completed`.
