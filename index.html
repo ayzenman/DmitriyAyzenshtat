@@ -183,6 +183,15 @@
     [hidden] { display: none !important; }
   </style>
   <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
+
+  <!-- Стили сайта (скомпилированный Tailwind) -->
+  <link rel="stylesheet" href="/assets/site.css" />
+  <style>
+    /* Без JavaScript всё содержимое видно сразу, без анимаций появления */
+    .no-js [data-anim] { opacity: 1 !important; }
+    [hidden] { display: none !important; }
+  </style>
+  <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
 </head>
 
 <body>
@@ -215,8 +224,8 @@
 <div id="cookie-banner" hidden class="fixed bottom-0 left-0 right-0 z-50 p-4 sm:p-5" style="background:var(--color-bg-card);border-top:1px solid var(--color-border)"><div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center gap-4"><p class="text-sm text-[var(--color-text-muted)] leading-snug flex-1">Мы используем файлы cookie и сервис Яндекс.Метрика для работы сайта и анализа посещаемости. Продолжая пользоваться сайтом, вы соглашаетесь с обработкой данных в соответствии с <a href="/privacy.html" target="_blank" rel="noopener noreferrer" class="text-[var(--color-gold)] underline hover:no-underline">Политикой обработки персональных данных</a>.</p><button type="button" class="btn-primary shrink-0 px-6 py-2 text-sm whitespace-nowrap">Принять</button></div></div></div>
 
 <div id="success-dialog" hidden>
-  <div data-dialog-close class="fixed inset-0 z-50 bg-black/50"></div>
-  <div role="dialog" aria-modal="true" aria-labelledby="success-title" class="bg-[var(--color-bg-card)] border-[var(--color-border)] text-[var(--color-text)] fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 outline-none sm:max-w-lg">
+  <div data-dialog-close data-state="open" class="data-[state=open]:animate-in data-[state=open]:fade-in-0 fixed inset-0 z-50 bg-black/50"></div>
+  <div role="dialog" data-state="open" aria-modal="true" aria-labelledby="success-title" class="data-[state=open]:animate-in data-[state=open]:fade-in-0 data-[state=open]:zoom-in-95 bg-[var(--color-bg-card)] border-[var(--color-border)] text-[var(--color-text)] fixed top-[50%] left-[50%] z-50 grid w-full max-w-[calc(100%-2rem)] translate-x-[-50%] translate-y-[-50%] gap-4 rounded-lg border p-6 shadow-lg duration-200 outline-none sm:max-w-lg">
     <div class="flex flex-col gap-2 text-center sm:text-left">
       <h2 id="success-title" class="text-lg leading-none font-semibold flex items-center gap-3 text-xl"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-circle-check-big w-6 h-6 text-[var(--color-success)]" aria-hidden="true"><path d="M21.801 10A10 10 0 1 1 17 3.335"></path><path d="m9 11 3 3L22 4"></path></svg>Заявка отправлена</h2>
       <p class="text-sm text-[var(--color-text-muted)]">Спасибо за обращение! Я свяжусь с вами в ближайшее время для согласования встречи.</p>
