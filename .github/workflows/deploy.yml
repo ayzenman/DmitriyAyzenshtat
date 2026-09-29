@@ -4,6 +4,14 @@ name: Build and Deploy
 on:
   push:
     branches: [ main ]
+  # Ручной запуск из вкладки Actions (кнопка «Run workflow»)
+  workflow_dispatch:
+
+# Не запускать две выкладки одновременно: следующая ждёт, пока закончится предыдущая.
+# Иначе две очистки папки на сервере накладываются, и часть файлов пропадает.
+concurrency:
+  group: deploy-production
+  cancel-in-progress: false
 
 jobs:
   build-and-deploy:
