@@ -170,10 +170,12 @@
     return;
   }
   gsap.registerPlugin(ScrollTrigger);
-  ScrollTrigger.defaults({ toggleActions: 'play none none reverse', start: 'top 80%' });
+  // Анимации появления проигрываются один раз за просмотр страницы:
+  // при прокрутке назад и повторном проходе блоки остаются на месте.
+  ScrollTrigger.defaults({ toggleActions: 'play none none none', start: 'top 80%', once: true });
 
   function st(trigger, start) {
-    return { trigger: trigger, start: start, toggleActions: 'play none none reverse' };
+    return { trigger: trigger, start: start, toggleActions: 'play none none none', once: true };
   }
 
   // Меню
@@ -312,3 +314,4 @@
     setTimeout(function () { requestAnimationFrame(function () { scrollToId(window.location.hash); }); }, 500);
   }
 })();
+
