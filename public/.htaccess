@@ -1,8 +1,9 @@
-<IfModule mod_rewrite.c>
-  RewriteEngine On
-  RewriteBase /
-  RewriteRule ^index\.html$ - [L]
-  RewriteCond %{REQUEST_FILENAME} !-f
-  RewriteCond %{REQUEST_FILENAME} !-d
-  RewriteRule . /index.html [L]
-</IfModule>
+ Сайт статичный: несуществующие адреса отдают честную страницу 404,
+# а не главную (иначе поисковики видят «мягкие» 404 и дубли главной).
+ErrorDocument 404 /404.html
+
+# Служебный файл с токеном бота нельзя открыть из браузера
+<Files "secrets.php">
+  Order allow,deny
+  Deny from all
+</Files>
