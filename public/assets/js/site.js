@@ -191,7 +191,9 @@
   whenFontsReady(function () {
     // Анимации появления проигрываются один раз за просмотр страницы:
     // при прокрутке назад и повторном проходе блоки остаются на месте.
-    ScrollTrigger.defaults({ toggleActions: 'play none none none', start: 'top 80%', once: true });
+    // «Один раз» задаётся только у анимаций появления (в функции st ниже).
+    // Параллакс фото и смена фона раздела «Результаты» работают постоянно, как в React-версии.
+    ScrollTrigger.defaults({ toggleActions: 'play none none none', start: 'top 80%' });
 
     function st(trigger, start) {
       return { trigger: trigger, start: start, toggleActions: 'play none none none', once: true };
