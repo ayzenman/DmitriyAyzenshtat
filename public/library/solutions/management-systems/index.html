@@ -223,6 +223,22 @@ main h2 {
     max-width: 100% !important;
   }
 }
+
+/* Блок об авторе */
+.author-card{margin:38px 0 6px;padding:20px 22px;border:1px solid #e2e2e2;border-radius:6px;background:#fff;display:flex;gap:18px;align-items:flex-start}
+.author-card img{width:88px;height:88px;border-radius:50%;object-fit:cover;flex:none}
+.author-card .ac-label{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:#d9773f;font-weight:700;margin:0 0 5px}
+.author-card .ac-name{font-weight:700;color:#17345f;font-size:17px;margin:0 0 4px}
+.author-card .ac-text{margin:0 0 14px;font-size:15px;line-height:1.5;color:#444}
+.author-card .ac-btns{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.author-card .ac-btn{display:inline-block;padding:9px 16px;border-radius:4px;font-size:14px;font-weight:600;text-decoration:none;line-height:1.3}
+.author-card .ac-main{background:#17345f;color:#fff}
+.author-card .ac-main:hover{background:#0f2748}
+.author-card .ac-sec{color:#17345f;border:1px solid #17345f;background:#fff}
+.author-card .ac-sec:hover{background:#f1f4f9}
+.meta a{color:inherit;text-decoration:underline;text-decoration-color:#bbb;text-underline-offset:2px}
+.meta a:hover{color:#17345f}
+@media(max-width:560px){.author-card{flex-direction:column;gap:12px;padding:18px}.author-card .ac-btn{display:block;text-align:center;width:100%;box-sizing:border-box}.author-card .ac-btns{width:100%}}
 </style>
 
 </head>
@@ -237,7 +253,7 @@ main h2 {
 <main class="article"><h1>Системы управления компанией: разные подходы к разным задачам</h1>
 
   <div class="eyebrow">Системы управления · Серия</div>
-  <div class="meta">Дмитрий Айзенштат · 18 сентября 2026</div>
+  <div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 18 сентября 2026</div>
 
   <p>Первые две статьи этой серии были посвящены готовым системам управления компанией: <a href="/library/solutions/eos/">EOS Джино Викмана</a> и <a href="/library/solutions/scaling-up/">Scaling Up Верна Харниша</a>.</p>
   <p>Обе системы дают собственнику полезную основу: набор инструментов, правила их применения и ритм работы руководящей команды. Особенно это важно для бизнеса, который вырос из предпринимательского управления и больше не может держаться только на личном участии собственника.</p>
@@ -276,6 +292,19 @@ main h2 {
     <li><a href="/library/solutions/okr/">OKR: как ставить цели, которые двигают компанию вперёд</a> — подход Энди Гроува: цели и ключевые результаты, высокая планка, открытость и отделение от премии.</li>
   </ul>
 
+    <div class="author-card">
+    <img src="/library/author.jpg" width="88" height="88" alt="Дмитрий Айзенштат" loading="lazy">
+    <div>
+      <p class="ac-label">Об авторе</p>
+      <p class="ac-name">Дмитрий Айзенштат</p>
+      <p class="ac-text">19 лет был финансовым руководителем в промышленных холдингах. Сейчас помогаю владельцам компаний с оборотом от 500 млн рублей выстроить систему управления.</p>
+      <div class="ac-btns">
+        <a class="ac-btn ac-main" href="https://ayzenshtat.ru/#contact" data-ac="article_author_contact">Обсудить задачу</a>
+        <a class="ac-btn ac-sec" href="https://t.me/+gFDF8W4bWqQ4MmYy" rel="noopener" data-ac="article_author_channel">Ещё больше статей в Telegram-канале</a>
+      </div>
+    </div>
+  </div>
+
   <div class="related">
     <strong>Читайте также</strong>
     <ul>
@@ -292,7 +321,7 @@ main h2 {
 </main>
 
 <footer>
-  Дмитрий Айзенштат · <a href="https://ayzenshtat.ru/">Ayzenshtat.ru</a> · <a href="/library/">Библиотека</a> · <a href="https://t.me/AyzenshtatProBiznes" rel="noopener">Telegram-канал</a>
+  Дмитрий Айзенштат · <a href="https://ayzenshtat.ru/">Ayzenshtat.ru</a> · <a href="/library/">Библиотека</a> · <a href="https://t.me/+gFDF8W4bWqQ4MmYy" rel="noopener">Telegram-канал</a>
 </footer>
 
 <script>
@@ -330,6 +359,13 @@ main h2 {
     else if(href.indexOf('/library/solutions/scaling-up') > -1) goal('management_systems_to_scaling_up');
   }, true);
 })();
+</script>
+<script>
+document.addEventListener('click',function(e){
+  var a=e.target.closest&&e.target.closest('[data-ac],.meta a[href*="#about"]');
+  if(!a||!window.ym)return;
+  ym(110737676,'reachGoal',a.getAttribute('data-ac')||'article_meta_author');
+},true);
 </script>
 </body>
 </html>
