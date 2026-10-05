@@ -40,12 +40,23 @@ function clean($v) {
     return trim(mb_substr((string)($v ?? ''), 0, 2000));
 }
 $name    = clean($input['name']    ?? '');
+$method  = clean($input['method']  ?? '');
+$contact = clean($input['contact'] ?? '');
+$topic   = clean($input['topic']   ?? '');
+
+// Совместимость со старой формой (если страница закеширована у посетителя)
 $phone   = clean($input['phone']   ?? '');
 $email   = clean($input['email']   ?? '');
 $company = clean($input['company'] ?? '');
+if ($contact === '' && $phone !== '') { $method = 'phone'; $contact = $phone; }
+if ($contact === '' && $email !== '') { $method = 'email'; $contact = $email; }
+if ($topic === '' && $company !== '') { $topic = $company; }
 
-// Минимальная проверка: имя и хотя бы один контакт
-if ($name === '' || ($phone === '' && $email === '')) {
+$methodLabels = ['phone' => 'Телефон', 'telegram' => 'Telegram', 'max' => 'Max', 'email' => 'Email'];
+$methodLabel  = $methodLabels[$method] ?? 'Контакт';
+
+// Минимальная проверка: имя и контакт
+if ($name === '' || $contact === '') {
     http_response_code(400);
     echo json_encode(['ok' => false, 'error' => 'validation']);
     exit;
@@ -56,9 +67,8 @@ $lines = [];
 $lines[] = '<b>Новая заявка с сайта</b>';
 $lines[] = '';
 $lines[] = '<b>Имя:</b> ' . htmlspecialchars($name);
-if ($phone !== '')   $lines[] = '<b>Телефон:</b> ' . htmlspecialchars($phone);
-if ($email !== '')   $lines[] = '<b>Email:</b> ' . htmlspecialchars($email);
-if ($company !== '') $lines[] = '<b>Компания и оборот:</b> ' . htmlspecialchars($company);
+$lines[] = '<b>' . $methodLabel . ':</b> ' . htmlspecialchars($contact);
+if ($topic !== '') $lines[] = '<b>Что хотят обсудить:</b> ' . htmlspecialchars($topic);
 $lines[] = '';
 $lines[] = '<i>' . date('d.m.Y H:i') . '</i>';
 $text = implode("\n", $lines);

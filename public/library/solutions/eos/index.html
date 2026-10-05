@@ -39,7 +39,9 @@
 
 
 <!-- Yandex.Metrika counter -->
+<script>(function(){try{var s=location.search;if(/[?&]track=off(&|$)/.test(s))localStorage.setItem('ym_off','1');else if(/[?&]track=on(&|$)/.test(s))localStorage.removeItem('ym_off');if(localStorage.getItem('ym_off')==='1'){window.__ymOff=true;window.ym=function(){};}}catch(e){}})();</script>
 <script type="text/javascript">
+if(!window.__ymOff){
     (function(m,e,t,r,i,k,a){
         m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
         m[i].l=1*new Date();
@@ -48,6 +50,7 @@
     })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=110737676', 'ym');
 
     ym(110737676, 'init', {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", referrer: document.referrer, url: location.href, accurateTrackBounce:true, trackLinks:true});
+}
 </script>
 <noscript><div><img src="https://mc.yandex.ru/watch/110737676" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 <!-- /Yandex.Metrika counter -->

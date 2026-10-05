@@ -80,14 +80,83 @@
   var submitBtn = form && $('.submit-btn', form);
   var submitIdle = submitBtn ? submitBtn.innerHTML : '';
   var submitLoading = $('#tpl-loading') ? $('#tpl-loading').innerHTML : 'Отправка...';
+  var errorBox = $('#form-error');
+  var nameInput = $('#name-input');
+  var contactInput = $('#contact-input');
+  var topicInput = $('#topic-input');
+  var method = 'phone';
 
-  function syncSubmit(loading) {
+  // «Один раз за визит»: флаг живёт до закрытия вкладки
+  function onceGoal(name) {
+    try { if (sessionStorage.getItem('goal_' + name)) return; sessionStorage.setItem('goal_' + name, '1'); } catch (e) { /* ignore */ }
+    ymGoal(name);
+  }
+
+  function setLoading(loading) {
     if (!submitBtn) return;
-    submitBtn.disabled = !!loading || !(consent && consent.checked);
+    submitBtn.disabled = !!loading;
     submitBtn.innerHTML = loading ? submitLoading : submitIdle;
   }
-  if (consent) consent.addEventListener('change', function () { syncSubmit(false); });
-  syncSubmit(false);
+
+  function clearError() {
+    if (errorBox) { errorBox.hidden = true; errorBox.textContent = ''; }
+    $$('.field-invalid', form).forEach(function (el) { el.classList.remove('field-invalid'); });
+  }
+  function showError(text, field) {
+    clearError();
+    if (errorBox) { errorBox.textContent = text; errorBox.hidden = false; }
+    if (field) { field.classList.add('field-invalid'); try { field.focus(); } catch (e) { /* ignore */ } }
+  }
+
+  // Способ связи: телефон / Telegram / Max
+  var METHODS = {
+    phone:    { type: 'tel',  inputmode: 'tel',  placeholder: '+7 (___) ___-__-__',     autocomplete: 'tel' },
+    telegram: { type: 'text', inputmode: 'text', placeholder: '@ник или номер телефона', autocomplete: 'off' },
+    max:      { type: 'tel',  inputmode: 'tel',  placeholder: 'Номер телефона в Max',   autocomplete: 'tel' }
+  };
+  $$('[data-method]', form).forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var m = btn.getAttribute('data-method');
+      if (m === method) return;
+      method = m;
+      $$('[data-method]', form).forEach(function (b) {
+        var on = b === btn;
+        b.classList.toggle('is-active', on);
+        b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      });
+      if (contactInput) {
+        var cfg = METHODS[m];
+        contactInput.value = '';
+        contactInput.type = cfg.type;
+        contactInput.setAttribute('inputmode', cfg.inputmode);
+        contactInput.setAttribute('autocomplete', cfg.autocomplete);
+        contactInput.placeholder = cfg.placeholder;
+        contactInput.classList.remove('field-invalid');
+        contactInput.focus();
+      }
+    });
+  });
+
+  if (form) {
+    // Ошибка исчезает, как только человек начинает исправлять
+    form.addEventListener('input', clearError);
+    if (consent) consent.addEventListener('change', clearError);
+    // Начало заполнения
+    form.addEventListener('focusin', function (e) {
+      if (e.target.matches && e.target.matches('input, textarea')) onceGoal('form_start');
+    });
+  }
+
+  // Посетитель долистал до блока с формой
+  var contactSection = $('#contact');
+  if (contactSection && 'IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) { onceGoal('contact_block_view'); io.disconnect(); }
+      });
+    }, { threshold: 0.3 });
+    io.observe(contactSection);
+  }
 
   var dialog = $('#success-dialog');
   function openDialog() {
@@ -107,19 +176,27 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !dialog.hidden) closeDialog(); });
   }
 
+  function resetMethod() {
+    var first = $('[data-method="phone"]', form);
+    if (first && method !== 'phone') first.click();
+  }
+
   if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!consent || !consent.checked) {
-      alert('Пожалуйста, подтвердите согласие на обработку персональных данных.');
-      return;
+    var name = nameInput ? nameInput.value.trim() : '';
+    var contact = contactInput ? contactInput.value.trim() : '';
+    if (!name) { showError('Укажите, как к вам обращаться.', nameInput); return; }
+    if (!contact) { showError('Укажите, как с вами связаться.', contactInput); return; }
+    if ((method === 'phone' || method === 'max') && contact.replace(/\D/g, '').length < 10) {
+      showError('Проверьте номер телефона.', contactInput); return;
     }
-    var data = {
-      name: form.elements.name.value,
-      phone: form.elements.phone.value,
-      email: form.elements.email.value,
-      company: form.elements.company.value
-    };
-    syncSubmit(true);
+    if (!consent || !consent.checked) {
+      ymGoal('form_no_consent');
+      showError('Для отправки нужно согласие на обработку персональных данных.', consent); return;
+    }
+    clearError();
+    var data = { name: name, method: method, contact: contact, topic: topicInput ? topicInput.value.trim() : '' };
+    setLoading(true);
     fetch('/send-max.php', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -127,19 +204,22 @@
     })
       .then(function (r) { return r.ok ? r.json().catch(function () { return null; }) : null; })
       .then(function (result) {
+        setLoading(false);
         if (result && result.ok) {
           ymGoal('lead_form_sent');
           form.reset();
-          syncSubmit(false);
+          resetMethod();
+          clearError();
           openDialog();
         } else {
-          syncSubmit(false);
-          alert('Не удалось отправить заявку. Попробуйте позже или свяжитесь напрямую.');
+          ymGoal('form_error');
+          showError('Не удалось отправить заявку. Попробуйте позже или свяжитесь напрямую по контактам ниже.');
         }
       })
       .catch(function () {
-        syncSubmit(false);
-        alert('Произошла ошибка. Попробуйте ещё раз.');
+        setLoading(false);
+        ymGoal('form_error');
+        showError('Произошла ошибка. Попробуйте ещё раз или свяжитесь напрямую по контактам ниже.');
       });
   });
 
