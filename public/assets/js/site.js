@@ -204,6 +204,35 @@
     });
   }
 
+  /* ---------- «Подходит не всем»: линии от круга к углам карточек ---------- */
+  function layoutForWhomLines() {
+    var svg = ref('ForWhom-lines'), crit = ref('ForWhom-criteria'), cen = ref('ForWhom-center');
+    if (!svg || !crit || !cen || !cen.firstElementChild) return;
+    var sr = svg.getBoundingClientRect();
+    if (!sr.width) return; // на телефоне схема скрыта
+    var circ = cen.firstElementChild.getBoundingClientRect();
+    var cx = circ.left + circ.width / 2 - sr.left, cy = circ.top + circ.height / 2 - sr.top, r = circ.width / 2;
+    var cards = $$('.criterion-card', crit), lines = $$('.connecting-line', svg);
+    // Ближний к кругу угол каждой карточки: верх-лево, верх-право, низ-лево, низ-право
+    var corners = [['right', 'bottom'], ['left', 'bottom'], ['right', 'top'], ['left', 'top']];
+    lines.forEach(function (l, i) {
+      var c = cards[i]; if (!c || !corners[i]) return;
+      var cr = c.getBoundingClientRect();
+      var x = cr[corners[i][0]] - sr.left, y = cr[corners[i][1]] - sr.top;
+      var dx = x - cx, dy = y - cy, d = Math.sqrt(dx * dx + dy * dy) || 1;
+      l.setAttribute('x1', (cx + dx / d * r).toFixed(1));
+      l.setAttribute('y1', (cy + dy / d * r).toFixed(1));
+      l.setAttribute('x2', x.toFixed(1));
+      l.setAttribute('y2', y.toFixed(1));
+      l.setAttribute('stroke', 'rgba(212,168,83,0.45)');
+      l.setAttribute('stroke-dasharray', 'none');
+    });
+  }
+  layoutForWhomLines();
+  window.addEventListener('load', layoutForWhomLines);
+  window.addEventListener('resize', layoutForWhomLines);
+  try { if (document.fonts && document.fonts.ready) document.fonts.ready.then(layoutForWhomLines); } catch (e) { /* ignore */ }
+
   /* ---------- Анимации ---------- */
   var gsap = window.gsap, ScrollTrigger = window.ScrollTrigger;
   if (!gsap || !ScrollTrigger) {
