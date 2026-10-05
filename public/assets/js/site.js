@@ -83,8 +83,6 @@
   var errorBox = $('#form-error');
   var nameInput = $('#name-input');
   var contactInput = $('#contact-input');
-  var topicInput = $('#topic-input');
-  var method = 'phone'; // в форме только телефон
 
   // «Один раз за визит»: флаг живёт до закрытия вкладки
   function onceGoal(name) {
@@ -147,7 +145,6 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !dialog.hidden) closeDialog(); });
   }
 
-
   if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = nameInput ? nameInput.value.trim() : '';
@@ -162,7 +159,7 @@
       showError('Для отправки нужно согласие на обработку персональных данных.', consent); return;
     }
     clearError();
-    var data = { name: name, method: method, contact: contact, topic: topicInput ? topicInput.value.trim() : '' };
+    var data = { name: name, method: 'phone', contact: contact };
     setLoading(true);
     fetch('/send-max.php', {
       method: 'POST',
@@ -175,18 +172,17 @@
         if (result && result.ok) {
           ymGoal('lead_form_sent');
           form.reset();
-          
           clearError();
           openDialog();
         } else {
           ymGoal('form_error');
-          showError('Не удалось отправить заявку. Попробуйте позже или свяжитесь напрямую по контактам ниже.');
+          showError('Не удалось отправить заявку. Попробуйте позже или свяжитесь напрямую по контактам рядом с формой.');
         }
       })
       .catch(function () {
         setLoading(false);
         ymGoal('form_error');
-        showError('Произошла ошибка. Попробуйте ещё раз или свяжитесь напрямую по контактам ниже.');
+        showError('Произошла ошибка. Попробуйте ещё раз или свяжитесь напрямую по контактам рядом с формой.');
       });
   });
 
