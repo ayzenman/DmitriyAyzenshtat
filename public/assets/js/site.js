@@ -84,7 +84,7 @@
   var nameInput = $('#name-input');
   var contactInput = $('#contact-input');
   var topicInput = $('#topic-input');
-  var method = 'phone';
+  var method = 'phone'; // в форме только телефон
 
   // «Один раз за визит»: флаг живёт до закрытия вкладки
   function onceGoal(name) {
@@ -107,35 +107,6 @@
     if (errorBox) { errorBox.textContent = text; errorBox.hidden = false; }
     if (field) { field.classList.add('field-invalid'); try { field.focus(); } catch (e) { /* ignore */ } }
   }
-
-  // Способ связи: телефон / Telegram / Max
-  var METHODS = {
-    phone:    { type: 'tel',  inputmode: 'tel',  placeholder: '+7 (___) ___-__-__',     autocomplete: 'tel' },
-    telegram: { type: 'text', inputmode: 'text', placeholder: '@ник или номер телефона', autocomplete: 'off' },
-    max:      { type: 'tel',  inputmode: 'tel',  placeholder: 'Номер телефона в Max',   autocomplete: 'tel' }
-  };
-  $$('[data-method]', form).forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var m = btn.getAttribute('data-method');
-      if (m === method) return;
-      method = m;
-      $$('[data-method]', form).forEach(function (b) {
-        var on = b === btn;
-        b.classList.toggle('is-active', on);
-        b.setAttribute('aria-pressed', on ? 'true' : 'false');
-      });
-      if (contactInput) {
-        var cfg = METHODS[m];
-        contactInput.value = '';
-        contactInput.type = cfg.type;
-        contactInput.setAttribute('inputmode', cfg.inputmode);
-        contactInput.setAttribute('autocomplete', cfg.autocomplete);
-        contactInput.placeholder = cfg.placeholder;
-        contactInput.classList.remove('field-invalid');
-        contactInput.focus();
-      }
-    });
-  });
 
   if (form) {
     // Ошибка исчезает, как только человек начинает исправлять
@@ -176,18 +147,14 @@
     document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !dialog.hidden) closeDialog(); });
   }
 
-  function resetMethod() {
-    var first = $('[data-method="phone"]', form);
-    if (first && method !== 'phone') first.click();
-  }
 
   if (form) form.addEventListener('submit', function (e) {
     e.preventDefault();
     var name = nameInput ? nameInput.value.trim() : '';
     var contact = contactInput ? contactInput.value.trim() : '';
     if (!name) { showError('Укажите, как к вам обращаться.', nameInput); return; }
-    if (!contact) { showError('Укажите, как с вами связаться.', contactInput); return; }
-    if ((method === 'phone' || method === 'max') && contact.replace(/\D/g, '').length < 10) {
+    if (!contact) { showError('Укажите телефон.', contactInput); return; }
+    if (contact.replace(/\D/g, '').length < 10) {
       showError('Проверьте номер телефона.', contactInput); return;
     }
     if (!consent || !consent.checked) {
@@ -208,7 +175,7 @@
         if (result && result.ok) {
           ymGoal('lead_form_sent');
           form.reset();
-          resetMethod();
+          
           clearError();
           openDialog();
         } else {
