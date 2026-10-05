@@ -224,111 +224,13 @@
       });
     })();
 
-    // Проблемы
+    // Ниже первого экрана анимаций нет: блоки видны сразу.
     (function () {
-      var sec = ref('Problems-section'); if (!sec) return;
-      gsap.fromTo(ref('Problems-title'), { x: -100, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.7, ease: 'expo.out', scrollTrigger: st(sec, 'top 80%') });
-      gsap.fromTo(ref('Problems-intro'), { opacity: 0, filter: 'blur(5px)' },
-        { opacity: 1, filter: 'blur(0px)', duration: 0.6, ease: 'power2.out', scrollTrigger: st(sec, 'top 70%') });
-      $$('.problem-card', ref('Problems-cards')).forEach(function (card, i) {
-        gsap.fromTo(card, { x: 100, y: 50, rotateZ: 5, opacity: 0 },
-          { x: 0, y: 0, rotateZ: 0, opacity: 1, duration: 0.6, ease: 'expo.out', scrollTrigger: st(card, 'top 85%'), delay: i * 0.12 });
+      var hero = ref('Hero-section');
+      $$('[data-anim]').forEach(function (el) {
+        if (el === nav || (hero && hero.contains(el))) return;
+        el.classList.remove('opacity-0'); el.style.opacity = '1';
       });
-    })();
-
-    // Обо мне
-    (function () {
-      var sec = ref('About-section'); if (!sec) return;
-      var img = ref('About-image'), frame = ref('About-frame'), content = ref('About-content');
-      gsap.fromTo(img, { scale: 0.9, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.8, ease: 'expo.out', scrollTrigger: st(sec, 'top 70%') });
-      gsap.fromTo(frame, { opacity: 0, x: 20, y: 20 },
-        { opacity: 1, x: 0, y: 0, duration: 1, ease: 'power2.out', scrollTrigger: st(sec, 'top 60%'), delay: 0.3 });
-      gsap.fromTo(ref('About-title'), { x: 80, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.7, ease: 'expo.out', scrollTrigger: st(sec, 'top 65%'), delay: 0.2 });
-      gsap.fromTo($$('.bio-paragraph', content), { y: 30, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: 'power2.out', stagger: 0.15, scrollTrigger: st(sec, 'top 55%'), delay: 0.4 });
-      $$('.metric-card', content).forEach(function (item, i) {
-        gsap.fromTo(item, { y: 40, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out', scrollTrigger: st(item, 'top 90%'), delay: i * 0.1 });
-      });
-      gsap.to(img, { y: -40, ease: 'none', scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 1 } });
-      gsap.to(frame, { y: 20, ease: 'none', scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 1 } });
-    })();
-
-    // Услуги
-    (function () {
-      var sec = ref('Services-section'); if (!sec) return;
-      gsap.fromTo(ref('Services-title'), { y: 50, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out', scrollTrigger: st(sec, 'top 80%') });
-      $$('.service-card', sec).forEach(function (card, i) {
-        gsap.fromTo(card, { rotateY: -30, opacity: 0, x: 100 },
-          { rotateY: 0, opacity: 1, x: 0, duration: 0.8, ease: 'expo.out', scrollTrigger: st(card, 'top 85%'), delay: i * 0.15 });
-      });
-    })();
-
-    // Результаты
-    (function () {
-      var sec = ref('Results-section'); if (!sec) return;
-      gsap.fromTo(ref('Results-title'), { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out', scrollTrigger: st(sec, 'top 80%') });
-      $$('.result-card', ref('Results-cards')).forEach(function (card, i) {
-        gsap.fromTo(card, { y: 80, rotateX: 15, opacity: 0 },
-          { y: 0, rotateX: 0, opacity: 1, duration: 0.7, ease: 'expo.out', scrollTrigger: st(card, 'top 90%'), delay: i * 0.13 });
-      });
-      gsap.to(sec, { backgroundColor: '#242b3d', ease: 'none',
-        scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom top', scrub: 1 } });
-    })();
-
-    // Кому подходит
-    (function () {
-      var sec = ref('ForWhom-section'); if (!sec) return;
-      var center = ref('ForWhom-center');
-      gsap.fromTo(center, { scale: 0, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.8, ease: 'elastic.out(1, 0.5)', scrollTrigger: st(sec, 'top 70%'),
-          // Лёгкая пульсация 1 → 1.02 начинается, когда круг уже появился.
-          // В React-версии она стартовала сразу при загрузке от масштаба 0,
-          // и круг каждые 4 секунды сжимался в точку.
-          onComplete: function () { gsap.to(center, { scale: 1.02, duration: 2, ease: 'sine.inOut', repeat: -1, yoyo: true }); } });
-      $$('.connecting-line', ref('ForWhom-lines')).forEach(function (line, i) {
-        gsap.fromTo(line, { strokeDashoffset: 200 },
-          { strokeDashoffset: 0, duration: 0.6, ease: 'power2.out', scrollTrigger: st(sec, 'top 60%'), delay: 0.4 + i * 0.12 });
-      });
-      var dirs = [{ x: -50, y: -50 }, { x: 50, y: -50 }, { x: -50, y: 50 }, { x: 50, y: 50 }];
-      $$('.criterion-card', ref('ForWhom-criteria')).forEach(function (card, i) {
-        var d = dirs[i] || { x: 0, y: 0 };
-        gsap.fromTo(card, { x: d.x, y: d.y, opacity: 0 },
-          { x: 0, y: 0, opacity: 1, duration: 0.6, ease: 'expo.out', scrollTrigger: st(sec, 'top 55%'), delay: 0.6 + i * 0.12 });
-      });
-
-      // Мобильная раскладка: в React-версии эти карточки не анимировались и оставались невидимыми
-      var desktop = ref('ForWhom-criteria');
-      $$('.criterion-card', sec).filter(function (c) { return !desktop || !desktop.contains(c); }).forEach(function (card, i) {
-        gsap.fromTo(card, { y: 30, opacity: 0 },
-          { y: 0, opacity: 1, duration: 0.6, ease: 'expo.out', scrollTrigger: st(card, 'top 90%'), delay: i * 0.08 });
-      });
-    })();
-
-    // Контакты
-    (function () {
-      var sec = ref('Contact-section'); if (!sec) return;
-      gsap.fromTo(ref('Contact-title'), { y: 40, opacity: 0 },
-        { y: 0, opacity: 1, duration: 0.7, ease: 'expo.out', scrollTrigger: st(sec, 'top 80%') });
-      gsap.fromTo(ref('Contact-divider'), { scaleY: 0 },
-        { scaleY: 1, duration: 0.8, ease: 'power2.out', scrollTrigger: st(sec, 'top 70%'), delay: 0.3 });
-      gsap.fromTo($$('.form-field', form), { x: -30, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.5, ease: 'power2.out', stagger: 0.1, scrollTrigger: st(sec, 'top 65%'), delay: 0.4 });
-      if (submitBtn) gsap.fromTo(submitBtn, { scale: 0.9, opacity: 0 },
-        { scale: 1, opacity: 1, duration: 0.5, ease: 'elastic.out(1, 0.5)', scrollTrigger: st(sec, 'top 60%'), delay: 0.9 });
-      gsap.fromTo(ref('Contact-contacts'), { x: 50, opacity: 0 },
-        { x: 0, opacity: 1, duration: 0.6, ease: 'expo.out', scrollTrigger: st(sec, 'top 65%'), delay: 0.5 });
-    })();
-
-    // Подвал
-    (function () {
-      var f = ref('Footer-footer'); if (!f) return;
-      gsap.fromTo(f, { opacity: 0 }, { opacity: 1, duration: 0.6, ease: 'power2.out', scrollTrigger: st(f, 'top 95%') });
     })();
 
     ScrollTrigger.refresh();
