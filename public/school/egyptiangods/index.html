@@ -1,0 +1,74 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Тренажёр: египетские боги</title>
+<style>
+:root{color-scheme:light;--ink:#23251f;--muted:#65685f;--paper:#fffdf7;--sand:#f4ead3;--gold:#bd7c27;--green:#28734f;--red:#ae463a}
+*{box-sizing:border-box}body{margin:0;min-height:100vh;background:linear-gradient(145deg,#efe2c5,#f8f3e7 52%,#e7efdf);color:var(--ink);font:18px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif;display:grid;place-items:center;padding:22px}
+main{width:min(100%,660px);background:var(--paper);border:1px solid #e8dcc2;border-radius:24px;padding:clamp(22px,5vw,42px);box-shadow:0 18px 55px #47341418}
+.top{display:flex;justify-content:space-between;gap:12px;align-items:center;color:var(--muted);font-size:15px}.badge{background:var(--sand);border-radius:999px;padding:6px 12px;color:#684c20;font-weight:650}
+h1{font-size:clamp(27px,6vw,38px);line-height:1.12;margin:22px 0 8px} .intro{color:var(--muted);margin:0 0 25px}
+.bar{height:9px;background:#eee9dd;border-radius:9px;overflow:hidden;margin:0 0 28px}.fill{height:100%;width:0;background:linear-gradient(90deg,#d39a43,#78976d);transition:width .25s}
+.prompt{font-size:clamp(21px,4.4vw,28px);font-weight:650;line-height:1.3;margin:0 0 22px;min-height:74px}.inputrow{display:flex;gap:10px}.inputrow input{min-width:0;flex:1;border:2px solid #d8d1c2;border-radius:13px;padding:14px 15px;font:inherit;outline:none}.inputrow input:focus{border-color:var(--gold);box-shadow:0 0 0 3px #bd7c2722}
+.deity-art{height:180px;margin:0 0 17px;border-radius:18px;background:radial-gradient(circle at 50% 40%,#fff7e3,#f0e1bf);display:grid;place-items:center;overflow:hidden}.deity-art img{height:170px;width:170px;object-fit:cover;border-radius:12px;filter:drop-shadow(0 5px 3px #63452020)}
+button{border:0;border-radius:13px;background:#293d2e;color:white;font:650 17px system-ui;padding:13px 20px;cursor:pointer}button:hover{background:#385942}button:focus-visible{outline:3px solid #d69a42;outline-offset:3px}button.secondary{background:#eae4d7;color:#34352e}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.feedback{min-height:58px;margin:17px 0 0;font-weight:600}.feedback.good{color:var(--green)}.feedback.nope{color:var(--red)}.hint{font-size:15px;color:var(--muted);font-weight:400}.hidden{display:none!important}.finish{text-align:center;padding:18px 0}.finish .emoji{font-size:54px}.finish h2{font-size:30px;margin:4px}.finish p{color:var(--muted)}
+@media(max-width:480px){.inputrow{flex-direction:column}.inputrow button{width:100%}.top{font-size:14px}}
+</style>
+</head>
+<body>
+<main>
+  <div class="top"><span class="badge">Египетские боги</span><span id="score">Верных ответов: 0</span></div>
+  <h1>Вспомни и назови</h1>
+  <p class="intro">Впиши имя бога по описанию. Ошибочные вопросы появятся ещё раз в конце.</p>
+  <div class="bar" aria-label="Прогресс"><div class="fill" id="fill"></div></div>
+  <section id="quiz" aria-live="polite">
+    <div class="deity-art" id="art"></div>
+    <p class="prompt" id="prompt"></p>
+    <form class="inputrow" id="form"><input id="answer" autocomplete="off" spellcheck="false" aria-label="Имя бога" placeholder="Напиши имя бога…"><button type="submit">Проверить</button></form>
+    <p class="feedback" id="feedback"></p>
+    <div class="actions"><button class="secondary hidden" id="next" type="button">Дальше</button><button class="secondary" id="hint" type="button">Подсказка</button></div>
+  </section>
+  <section class="finish hidden" id="finish" aria-live="polite"><div class="emoji">🏺</div><h2>Раунд пройден!</h2><p id="summary"></p><button id="restart" type="button" onclick="window.location.reload()">Сыграть ещё раз</button></section>
+</main>
+<script>
+const cards=[
+ {clue:'Главный бог солнца в Древнем Египте. Его часто изображали с солнечным диском над головой.',answers:['ра']},
+ {clue:'Бог загробного мира и возрождения, супруг Исиды.',answers:['осирис','озирис']},
+ {clue:'Супруга Осириса, богиня магии, материнства и защиты.',answers:['исида','исис']},
+ {clue:'Сын Осириса и Исиды, бог неба и покровитель фараонов.',answers:['хор','гор','хорус']},
+ {clue:'Бог с головой шакала, связанный с мумификацией и проводивший умерших в загробный мир.',answers:['анубис']},
+ {clue:'Бог мудрости, письма и счёта; часто изображался с головой ибиса.',answers:['тот','джхути','тхот']},
+ {clue:'Бог пустыни, бурь и беспорядка; противник Хора.',answers:['сет','сэт','сете']},
+ {clue:'Богиня правды, справедливости и мирового порядка. Её символ — перо.',answers:['маат','маатт']},
+ {clue:'Богиня-кошка, защитница дома, женщин и детей.',answers:['бастет','баст']},
+ {clue:'Бог, олицетворявший разлив и плодородие Нила.',answers:['хапи']}
+];
+const $=id=>document.getElementById(id);let deck=[],wrong=[],index=0,correct=0,locked=false,showingWrong=false;
+const art=[
+`<circle cx="100" cy="43" r="25" fill="#e7a936" stroke="#9b5e20" stroke-width="5"/><path d="M100 6v13M63 43H47m106 0h-16M73 16l11 11m32 0 11-11" stroke="#c88728" stroke-width="5" stroke-linecap="round"/><path d="M64 159q4-50 36-54 32 4 36 54" fill="#bd633c" stroke="#70452e" stroke-width="4"/><path d="M78 101q-4-35 22-36 26 1 22 36l-13 16H91z" fill="#d89861" stroke="#70452e" stroke-width="4"/><path d="M76 75q-4-34 24-35 29 0 26 35-13-12-25-12T76 75" fill="#302b28"/>`,
+`<path d="M71 36h58l-10 26H81z" fill="#fff4d6" stroke="#87612e" stroke-width="4"/><path d="M100 10v28M80 12l20 22 20-22" fill="none" stroke="#c29343" stroke-width="5"/><path d="M64 159q4-50 36-54 32 4 36 54" fill="#43815f" stroke="#304f3d" stroke-width="4"/><path d="M79 100q-4-33 21-34 27 1 21 34l-12 16H91z" fill="#d89861" stroke="#70452e" stroke-width="4"/><path d="M77 79q3-30 23-30t23 30l-10-8H87z" fill="#292723"/>`,
+`<path d="M91 16h18v29H91z" fill="#c99b45" stroke="#74552b" stroke-width="4"/><path d="M100 8v14m-7-7h14" stroke="#74552b" stroke-width="4"/><path d="M64 159q4-50 36-54 32 4 36 54" fill="#327c91" stroke="#304f3d" stroke-width="4"/><path d="M79 100q-4-33 21-34 27 1 21 34l-12 16H91z" fill="#d89861" stroke="#70452e" stroke-width="4"/><path d="M77 78q0-31 23-31t23 31l-23-10z" fill="#292723"/>`,
+`<path d="M79 45q21-30 43-1l-7 13-25 4z" fill="#315c74" stroke="#273b48" stroke-width="4"/><path d="M98 37q18-26 31-15l-10 22" fill="#315c74" stroke="#273b48" stroke-width="4"/><path d="M64 159q4-50 36-54 32 4 36 54" fill="#376c9b" stroke="#304f3d" stroke-width="4"/><path d="M79 100q-4-33 21-34 27 1 21 34l-12 16H91z" fill="#d89861" stroke="#70452e" stroke-width="4"/><path d="M84 76q-3-24 17-25 21 3 21 26l-20-8z" fill="#292723"/>`,
+`<path d="M85 29q17-13 35 2l-4 28-17 9-16-10z" fill="#34322d" stroke="#252522" stroke-width="4"/><path d="M88 40l-20-16 3 34 18 4m26-22 18-13-3 34-17 4" fill="#34322d" stroke="#252522" stroke-width="4"/><path d="M64 159q4-50 36-54 32 4 36 54" fill="#b37a43" stroke="#704f30" stroke-width="4"/><path d="M79 100q-4-33 21-34 27 1 21 34l-12 16H91z" fill="#38342e" stroke="#252522" stroke-width="4"/><path d="M82 90h36" stroke="#d2b05d" stroke-width="5"/>`,
+`<path d="M81 29q19-12 39 2l-4 28-17 8-17-10z" fill="#ece4cf" stroke="#504a3b" stroke-width="4"/><path d="M91 45q-4-28-21-16l-12 21 25 2m24-8q4-23 20-13l9 19-23 2" fill="#ece4cf" stroke="#504a3b" stroke-width="4"/><path d="M101 43l20 6-17 8" fill="#d7a13f" stroke="#504a3b" stroke-width="3"/><path d="M64 159q4-50 36-54 32 4 36 54" fill="#3f868e" stroke="#304f3d" stroke-width="4"/><path d="M80 102q-4-32 20-34 25 2 20 34l-12 14H91z" fill="#d89861" stroke="#70452e" stroke-width="4"/>`,
+`<path d="M79 40q20-17 43 0l-6 21-16 8-19-13z" fill="#423a32" stroke="#292722" stroke-width="4"/><path d="M85 42l-9-22 18 17m22 5 11-22-20 17" fill="#423a32" stroke="#292722" stroke-width="4"/><path d="M64 159q4-50 36-54 32 4 36 54" fill="#b7523e" stroke="#704f30" stroke-width="4"/><path d="M79 100q-4-33 21-34 27 1 21 34l-12 16H91z" fill="#d89861" stroke="#70452e" stroke-width="4"/><path d="M80 90h40" stroke="#dfbd59" stroke-width="5"/>`,
+`<path d="M107 15q-8 20 5 37-20-8-26 10 20 5 27-9 11-14-6-38" fill="#f3da8b" stroke="#9b7e35" stroke-width="4"/><path d="M64 159q4-50 36-54 32 4 36 54" fill="#64875d" stroke="#304f3d" stroke-width="4"/><path d="M79 100q-4-33 21-34 27 1 21 34l-12 16H91z" fill="#d89861" stroke="#70452e" stroke-width="4"/><path d="M78 78q-1-29 22-30t22 30l-22-9z" fill="#302b28"/>`,
+`<path d="M78 45q22-24 44 0l-5 22H84z" fill="#39342e" stroke="#252522" stroke-width="4"/><path d="M83 44L70 25l-2 38 17 2m32-21 14-19 2 38-17 0" fill="#39342e" stroke="#252522" stroke-width="4"/><path d="M64 159q4-50 36-54 32 4 36 54" fill="#c47b4f" stroke="#704f30" stroke-width="4"/><path d="M79 100q-4-33 21-34 27 1 21 34l-12 16H91z" fill="#d89861" stroke="#70452e" stroke-width="4"/>`,
+`<path d="M83 13q17 24 0 46 21-8 17-27 11 20 0 34 25-14 10-37-12-15-27-16" fill="#4e9a69" stroke="#315f41" stroke-width="4"/><path d="M64 159q4-50 36-54 32 4 36 54" fill="#52a0a0" stroke="#304f3d" stroke-width="4"/><path d="M79 100q-4-33 21-34 27 1 21 34l-12 16H91z" fill="#815e49" stroke="#70452e" stroke-width="4"/><path d="M78 77q0-29 22-29t22 29l-22-8z" fill="#292723"/><path d="M64 138h72" stroke="#8cc5c0" stroke-width="5"/>`
+];
+function clean(s){return s.toLocaleLowerCase('ru').replaceAll('ё','е').replace(/[\s\-—.,!?«»"']/g,'').trim()}
+function start(){deck=[...cards].sort(()=>Math.random()-.5);wrong=[];index=0;correct=0;locked=false;showingWrong=false;$('quiz').classList.remove('hidden');$('finish').classList.add('hidden');$('score').textContent='Верных ответов: 0';render()}
+function render(){locked=false;$('feedback').textContent='';$('feedback').className='feedback';$('next').classList.add('hidden');$('hint').classList.remove('hidden');$('answer').value='';$('answer').disabled=false;$('prompt').textContent=deck[index].clue;$('art').innerHTML='<img src="images/'+['ra','osiris','isis','horus','anubis','thoth','set','maat','bastet','hapi'][cards.indexOf(deck[index])]+'.png" alt="Иллюстрация: '+pretty(deck[index].answers[0])+'">';$('fill').style.width=(index/deck.length*100)+'%';$('answer').focus()}
+function submit(e){e.preventDefault();if(locked)return;const typed=clean($('answer').value);if(!typed){$('feedback').textContent='Напиши имя, которое вспомнил.';return}const card=deck[index];if(card.answers.some(a=>clean(a)===typed)){correct++;$('score').textContent='Верных ответов: '+correct;$('feedback').textContent='Верно! '+pretty(card.answers[0])+'.';$('feedback').className='feedback good';}else{if(!showingWrong)wrong.push(card);$('feedback').innerHTML='Пока не угадал. Правильный ответ: <strong>'+pretty(card.answers[0])+'</strong>.<br><span class="hint">Прочитай имя и попробуй запомнить — в конце будет повтор.</span>';$('feedback').className='feedback nope';}locked=true;$('answer').disabled=true;$('hint').classList.add('hidden');$('next').classList.remove('hidden');$('next').focus()}
+function pretty(s){return s[0].toLocaleUpperCase('ru')+s.slice(1)}
+function next(){if(index<deck.length-1){index++;render();return}if(!showingWrong&&wrong.length){deck=[...wrong].sort(()=>Math.random()-.5);wrong=[];index=0;showingWrong=true;$('intro').textContent='Повторяем вопросы, которые вызвали затруднение.';render();return}$('fill').style.width='100%';$('quiz').classList.add('hidden');$('finish').classList.remove('hidden');const total=cards.length; $('summary').textContent='Ты ответил верно '+correct+' '+(correct===1?'раз':correct<5?'раза':'раз')+'. '+(correct>=total?'Отлично, ты знаешь всех богов!':'Попробуй сыграть ещё раз, чтобы запомнить ещё лучше.');}
+function hint(){const card=deck[index];$('feedback').innerHTML='Подсказка: '+card.answers[0][0].toLocaleUpperCase('ru')+'… <span class="hint">Вспомни имя и введи его.</span>';}
+$('form').addEventListener('submit',submit);$('next').addEventListener('click',next);$('hint').addEventListener('click',hint);start();
+</script>
+</body>
+</html>
+
+
+
