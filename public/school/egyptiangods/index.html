@@ -15,14 +15,14 @@ h1{font-size:clamp(27px,6vw,38px);line-height:1.12;margin:22px 0 8px} .intro{col
 .deity-art{height:180px;margin:0 0 17px;border-radius:18px;background:radial-gradient(circle at 50% 40%,#fff7e3,#f0e1bf);display:grid;place-items:center;overflow:hidden}.deity-art img{height:170px;width:170px;object-fit:cover;border-radius:12px;filter:drop-shadow(0 5px 3px #63452020)}
 button{border:0;border-radius:13px;background:#293d2e;color:white;font:650 17px system-ui;padding:13px 20px;cursor:pointer}button:hover{background:#385942}button:focus-visible{outline:3px solid #d69a42;outline-offset:3px}button.secondary{background:#eae4d7;color:#34352e}.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}.feedback{min-height:58px;margin:17px 0 0;font-weight:600}.feedback.good{color:var(--green)}.feedback.nope{color:var(--red)}.hint{font-size:15px;color:var(--muted);font-weight:400}.hidden{display:none!important}.finish{text-align:center;padding:18px 0}.finish .emoji{font-size:54px}.finish h2{font-size:30px;margin:4px}.finish p{color:var(--muted)}
 @media(max-width:600px){
- body{padding:8px;align-items:start}
- main{padding:15px;border-radius:18px}
- .top{font-size:13px}
+ body{width:100%;max-width:100vw;padding:8px;align-items:start;overflow-x:hidden}
+ main{width:100%;min-width:0;padding:15px;border-radius:18px}
+ .top{font-size:13px;flex-wrap:wrap}
  h1{font-size:25px;margin:11px 0 5px}
  .intro{font-size:14px;line-height:1.3;margin:0 0 10px}
  .bar{height:7px;margin:0 0 12px}
- .deity-art{height:104px;margin:0 0 10px;border-radius:14px}
- .deity-art img{height:96px;width:96px}
+ .deity-art{width:100%;height:clamp(180px,29svh,240px);margin:0 0 12px;border-radius:14px}
+ .deity-art img{height:100%;width:min(100%,280px);object-fit:contain;border-radius:10px}
  .prompt{font-size:20px;line-height:1.22;min-height:0;margin:0 0 12px}
  .inputrow{flex-direction:row;gap:7px}
  .inputrow input{padding:10px 11px;font-size:16px}
@@ -40,8 +40,8 @@ button{border:0;border-radius:13px;background:#293d2e;color:white;font:650 17px 
  main{padding:11px}
  .intro{display:none}
  h1{margin:7px 0 5px}
- .deity-art{height:88px;margin-bottom:8px}
- .deity-art img{height:80px;width:80px}
+ .deity-art{height:clamp(145px,27svh,180px);margin-bottom:9px}
+ .deity-art img{height:100%;width:min(100%,220px)}
  .prompt{font-size:19px;margin-bottom:9px}
  .feedback{min-height:28px;margin-top:6px}
 }
