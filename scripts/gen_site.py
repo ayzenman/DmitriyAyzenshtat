@@ -459,7 +459,7 @@ for i, b in enumerate(blocks):
 os_md = "\n".join(osnovy[1]).strip()
 sl_md = "## Словарь\n\n" + "\n".join(slovar[1]).strip()
 tl_md = "## Инструменты автора\n\n" + "\n".join(tools[1]).strip()
-h = render_body(os_md + "\n\n" + sl_md + "\n\n" + tl_md, None, "osnovy")
+h = render_body(os_md, None, "osnovy")
 h, toc = headings_ids(h)
 first_h2 = h.find("<h2")
 intro_h, rest_h = h[:first_h2], h[first_h2:]
@@ -473,16 +473,7 @@ def tool_cell(m):
         res.append(f'<a href="{SECTION}{cand[0]["key"]}/">{p}</a>' if cand else p)
     return "<td>" + "; ".join(res) + "</td></tr>"
 tl_start = rest_h.find('id="instrumenty-avtora"')
-MODES_FIG = ('<figure class="modes"><div class="axis"><span>ошибка стоит дёшево</span><span>ошибка стоит дорого</span></div><div class="bar"></div><div class="row">'
-  '<div class="m"><b>Автомат</b><span>ИИ сам делает рутину по заданному порядку. Ошибку легко заметить и исправить.</span></div>'
-  '<div class="m"><b>Соавтор</b><span>ИИ пишет и делает, вы проверяете и правите.</span></div>'
-  '<div class="m"><b>Советчик</b><span>ИИ задаёт вопросы и спорит, решаете и пишете вы.</span></div>'
-  '</div><figcaption>Чем дороже ошибка, тем больше работы остаётся за человеком.</figcaption></figure>')
-rest_h = re.sub(r'(<h2 id="tri-rezhima-raboty">.*?</ul>)', lambda m: m.group(1) + MODES_FIG, rest_h, count=1, flags=re.S)
-tl_start = rest_h.find('id="instrumenty-avtora"')
-rest_h = rest_h[:tl_start] + re.sub(r"<td>([^<]+)</td>\s*</tr>", tool_cell, rest_h[tl_start:])
-osn_src = linkify_urls(md(SRC_COMMON + "\n\n" + "\n\n".join(
-    f"**{b['title']}**\n\n" + SRC_BY_NUM[b['num']] for b in blocks if b['num'] in SRC_BY_NUM)))
+osn_src = "<p>HBR Guide to Generative AI for Managers (2025) и HBR Guide to Generative AI for Teams (2026); практика автора.</p>"
 body = (intro_h + toc_html(toc, 2) + rest_h
         + f'<div class="sources"><p><strong>Источники</strong></p>{osn_src}</div>' + AUTHOR
         + related_html([(SECTION, "ИИ в работе: найти свою задачу", "22 типа задач по шести группам"),
@@ -491,7 +482,7 @@ body = (intro_h + toc_html(toc, 2) + rest_h
         + f'<nav class="pager"><a class="prev" href="{SECTION}">← Оглавление</a><span></span><a class="next" href="{SECTION}{blocks[0]["key"]}/">{esc(blocks[0]["title"])} →</a></nav>')
 path = SECTION + "osnovy/"
 out_pages["osnovy"] = (path, page(path, "Основы работы с ИИ: режимы, установки, проверки — ИИ в работе",
-    "Три режима работы с ИИ и как выбрать по цене ошибки, шаблон запроса, общие проверки, ведение длинной задачи, чек-лист перед использованием результата, словарь.",
+    "Три режима работы с ИИ и как выбрать по цене ошибки, шаблон запроса, общие проверки, ведение длинной задачи и чек-лист перед использованием результата.",
     "ИИ в работе", ["искусственный интеллект", "промпты", "проверка результата"],
     [("ИИ в работе", SECTION), ("Основы", path)], body, "ИИ в работе, режимы работы с ИИ, промпт, проверка результата ИИ, чек-лист"),
     dict(title="Основы", sub="Режимы, установки, проверки, чек-лист"))
@@ -503,7 +494,7 @@ kak = intro_text.split("## Как читать")[1]
 kak = kak.split("**Как пользоваться.**")[0].strip()
 # адаптация к сайту: «в конце документа» → где это на сайте
 kak = re.sub(r"\n\nПримеры задач и промпты показывают.*", "", kak.strip(), flags=re.S)
-kak = re.sub(r"В начале каждого блока — «Коротко».*?готовые промпты\.", "В каждом блоке — что можно поручить ИИ, режимы работы, на что обратить внимание, что проверить и готовые промпты.", kak, flags=re.S)
+kak = re.sub(r"\n*В начале каждого блока — «Коротко».*?готовые промпты\.", "", kak, flags=re.S)
 kak_h = link_blocks(md("## Как читать\n\n" + kak), None)
 groups_nav = []
 gnames = {}
