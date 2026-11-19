@@ -243,6 +243,9 @@ main h2 {
 .brief .lead{font-weight:700;color:#17345f}
 .brief .note{font-size:14px;color:#666}.brief a{color:#17345f}
 .prompt-name{margin:22px 0 6px}
+.prompt-note{font-size:15px;color:#666;margin:-2px 0 10px}
+.modes{margin:22px 0 28px}.modes .axis{display:flex;justify-content:space-between;font-size:13px;color:#888;margin:0 0 8px;padding:0 2px}.modes .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.modes .m{background:#f6f6f6;border-radius:6px;padding:12px 14px;border-top:4px solid #d9773f}.modes .m:nth-child(1){border-top-color:#f0c4a5}.modes .m:nth-child(2){border-top-color:#e39a68}.modes .m b{display:block;color:#17345f;font-size:17px;margin:0 0 4px}.modes .m span{display:block;font-size:14px;line-height:1.45;color:#444}.modes .bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#f3dccb,#d9773f);margin:0 0 10px}.modes figcaption{font-size:13px;color:#888;text-align:center;margin-top:10px}
+@media(max-width:620px){.modes .row{grid-template-columns:1fr}}
 .prompt{position:relative;margin:0 0 20px}
 .prompt pre{margin:0;padding:14px 16px 14px;padding-right:16px;background:#f7f8fa;border:1px solid #e3e6eb;border-radius:4px;white-space:pre-wrap;word-wrap:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;color:#222}
 .prompt .fld{background:#fdecdf;color:#9a4a17;border-radius:3px;padding:0 2px}
@@ -285,7 +288,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <div class="crumbs"><a href="/library/">Библиотека</a> · <a href="/library/ai/">ИИ в работе</a> · <a href="/library/ai/#g6">Личное</a></div>
 <h1>Обучение и изучение нового</h1>
 <div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 19 ноября 2026</div>
-<div class="brief"><p class="lead">ИИ как наставник: сначала своя попытка, потом подсказка; если отдавать ему всю умственную работу, навык слабеет.</p><p><strong>Режим:</strong> советчик. <strong>Главный риск:</strong> готовые ответы вместо понимания.</p><p><strong>С чего начать:</strong> промпт «<a href="#p-nastavnik-po-teme">Наставник по теме</a>».</p><p class="note">Режимы, общие проверки и шаблон запроса — в разделе «<a href="/library/ai/osnovy/">Основы</a>».</p></div><nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#ogranicheniya-i-proverki">Ограничения и проверки</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
+<nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#ogranicheniya-i-proverki">Ограничения и проверки</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
 <p><strong>Для себя.</strong></p>
 <ul>
 <li><strong>Разобраться в новой теме за вечер:</strong> простое объяснение, карта понятий, с чего начать, что пропустить.</li>
@@ -330,7 +333,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <li>В обучении детей участвует взрослый.</li>
 <li>Для групп: определить правила использования данных, ограничения и ответственность.</li>
 </ul>
-<h2 id="gotovye-prompty">Готовые промпты</h2>
+<h2 id="gotovye-prompty">Готовые промпты</h2><p class="prompt-note">В квадратных скобках — ваши данные. Нажмите «Копировать», вставьте промпт в чат с ИИ и заполните скобки.</p>
 <p class="prompt-name" id="p-nastavnik-po-teme"><strong>Наставник по теме</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Я хочу разобраться в теме: <span class="fld">[тема]</span>. Мой уровень: <span class="fld">[какой]</span>. Цель: <span class="fld">[зачем]</span>.
 Работай как наставник: 1) спроси, что я уже знаю; 2) объясни основное простыми словами с примером; 3) задай мне 3 вопроса на понимание и жди ответа; 4) укажи, где мои ответы неточны; 5) предложи следующий шаг. Не решай за меня, если я прошу подсказку, дай намёк.
@@ -342,12 +345,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <p class="prompt-name" id="p-plan-prompt-a-thon"><strong>План prompt-a-thon</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Помоги спланировать prompt-a-thon на <span class="fld">[N]</span> человек, <span class="fld">[N]</span> часа. Задачи взять из реальной работы: <span class="fld">[примеры]</span>. Нужны: правила, роли, порядок работы (составить, проверить, улучшить промпт), моменты рефлексии, как сохранить лучшие промпты, как продолжить после события. Предложи типичные ловушки и как их избежать.
 </pre></div>
-<hr /><div class="sources" id="istochniki"><p><strong>Источники</strong></p><ul>
-<li><strong>Книги:</strong> HBR Managers, гл. 3 (как следить за развитием ИИ), гл. 21 (геймификация), эпилог (четыре шага, эксперименты); HBR Teams, гл. 30 (prompt-a-thon, ролевые игры, дни ИИ).</li>
-<li><strong>Общие источники:</strong> Science News, риск потери навыков при чрезмерном использовании ИИ (<a href="https://www.sciencenews.org/article/ai-making-us-dumber-learning-skills-risk" rel="noopener" target="_blank">https://www.sciencenews.org/article/ai-making-us-dumber-learning-skills-risk</a>).</li>
-<li><strong>Практика автора:</strong> DeepSeek, а также пара Claude и ChatGPT.</li>
-</ul>
-<p>Книги: <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025) и <em>HBR Guide to Generative AI for Teams</em> (2026). «Практика автора» — собственный опыт автора. «Общее знание» и «Общие источники» — сведения из открытых источников; проверяйте актуальность, инструменты меняются быстро.</p></div><div class="author-card">
+<hr /><div class="author-card">
     <img src="/library/author.jpg" width="88" height="88" alt="Дмитрий Айзенштат" loading="lazy">
     <div>
       <p class="ac-label">Об авторе</p>

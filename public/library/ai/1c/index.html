@@ -243,6 +243,9 @@ main h2 {
 .brief .lead{font-weight:700;color:#17345f}
 .brief .note{font-size:14px;color:#666}.brief a{color:#17345f}
 .prompt-name{margin:22px 0 6px}
+.prompt-note{font-size:15px;color:#666;margin:-2px 0 10px}
+.modes{margin:22px 0 28px}.modes .axis{display:flex;justify-content:space-between;font-size:13px;color:#888;margin:0 0 8px;padding:0 2px}.modes .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.modes .m{background:#f6f6f6;border-radius:6px;padding:12px 14px;border-top:4px solid #d9773f}.modes .m:nth-child(1){border-top-color:#f0c4a5}.modes .m:nth-child(2){border-top-color:#e39a68}.modes .m b{display:block;color:#17345f;font-size:17px;margin:0 0 4px}.modes .m span{display:block;font-size:14px;line-height:1.45;color:#444}.modes .bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#f3dccb,#d9773f);margin:0 0 10px}.modes figcaption{font-size:13px;color:#888;text-align:center;margin-top:10px}
+@media(max-width:620px){.modes .row{grid-template-columns:1fr}}
 .prompt{position:relative;margin:0 0 20px}
 .prompt pre{margin:0;padding:14px 16px 14px;padding-right:16px;background:#f7f8fa;border:1px solid #e3e6eb;border-radius:4px;white-space:pre-wrap;word-wrap:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;color:#222}
 .prompt .fld{background:#fdecdf;color:#9a4a17;border-radius:3px;padding:0 2px}
@@ -285,7 +288,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <div class="crumbs"><a href="/library/">Библиотека</a> · <a href="/library/ai/">ИИ в работе</a> · <a href="/library/ai/#g5">Техника</a></div>
 <h1>Программирование и отчёты в 1С</h1>
 <div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 19 ноября 2026</div>
-<div class="brief"><p class="lead">ИИ объясняет, пишет запросы, отчёты и расширения; итоги сверяются независимым запросом, а в рабочую базу ИИ не пишет.</p><p><strong>Режим:</strong> соавтор для кода, советчик для учётной логики; запись в базу делает только человек. <strong>Главный риск:</strong> выдуманные имена объектов и изменения в рабочей базе.</p><p><strong>С чего начать:</strong> промпт «<a href="#p-postanovka-zadachi-na-otchet">Постановка задачи на отчёт</a>».</p><p class="note">Режимы, общие проверки и шаблон запроса — в разделе «<a href="/library/ai/osnovy/">Основы</a>».</p></div><p>Блок для тех, кто работает с 1С: бухгалтеров, финансистов, аналитиков, руководителей учёта, и для тех, кто программирует. ИИ может объяснять, писать запросы, делать отчёты, обработки и расширения. При этом 1С опасна для экспериментов: ошибка в запросе даёт неверные цифры, а ошибка в записи портит данные. Поэтому здесь особенно важны проверки и порядок работы. Блок состоит из двух частей: «Что поручить и как принять» — для специалистов по учёту и руководителей, «Как сделать самому» — для тех, кто программирует.</p>
+<p>Блок для тех, кто работает с 1С: бухгалтеров, финансистов, аналитиков, руководителей учёта, и для тех, кто программирует. ИИ может объяснять, писать запросы, делать отчёты, обработки и расширения. При этом 1С опасна для экспериментов: ошибка в запросе даёт неверные цифры, а ошибка в записи портит данные. Поэтому здесь особенно важны проверки и порядок работы. Блок состоит из двух частей: «Что поручить и как принять» — для специалистов по учёту и руководителей, «Как сделать самому» — для тех, кто программирует.</p>
 <nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-poruchit-i-kak-prinyat">Что поручить и как принять</a><ul><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#kak-prinyat-rezultat">Как принять результат</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></li><li><a href="#kak-sdelat-samomu">Как сделать самому</a><ul><li><a href="#poryadok-raboty">Порядок работы</a></li><li><a href="#proverki">Проверки</a></li><li><a href="#gotovye-prompty-2">Готовые промпты</a></li></ul></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
 <ul>
 <li><strong>Разобраться, что происходит.</strong> Например, что означает ошибка, где найти нужный регистр или отчёт, как формируется проводка или показатель.</li>
@@ -324,7 +327,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <li><strong>Права.</strong> Проверка прав реального пользователя автоматикой обычно не покрывается, её нужно сделать вручную.</li>
 </ul>
 <p>В конце работы полезно просить ИИ дать четыре блока: «Проверено», «Не проверено», «Нужно решить вам», «Предлагаю сохранить».</p>
-<h3 id="gotovye-prompty">Готовые промпты</h3>
+<h3 id="gotovye-prompty">Готовые промпты</h3><p class="prompt-note">В квадратных скобках — ваши данные. Нажмите «Копировать», вставьте промпт в чат с ИИ и заполните скобки.</p>
 <p class="prompt-name" id="p-razobrat-oshibku-ili-zapros"><strong>Разобрать ошибку или запрос</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Я работаю в 1С: <span class="fld">[конфигурация и версия, если известна]</span>. Делаю <span class="fld">[действие]</span>. Получаю: <span class="fld">[точный текст ошибки или вставьте запрос]</span>.
 Объясни простыми словами, что это значит, назови три вероятные причины и порядок проверки. Если нужны данные из конфигурации, скажи, что именно посмотреть, а не придумывай имена объектов. Для рискованных шагов скажи заранее, как отменить.
@@ -362,10 +365,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 </pre></div>
 <p class="prompt-name" id="p-revyu-koda-i-zaprosa"><strong>Ревью кода и запроса</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Ты — ревьюер кода 1С, не видишь истории работы. Ниже код/запрос: <span class="fld">[вставьте]</span>. Найди: ошибки логики, граничные случаи (пустой период, первый и последний день), запросы в цикле, неочевидные допущения, нарушения стиля. Для каждого замечания укажи, обязательное оно или нет, и как проверить. Не переписывай код целиком.
-</pre></div><div class="sources" id="istochniki"><p><strong>Источники</strong></p><ul>
-<li><strong>Практика автора:</strong> проект «ИИ в 1С» (2026): правила работы, проверки результата, реестр задач; учебная база, внешние отчёты и расширение.</li>
-</ul>
-<p>Книги: <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025) и <em>HBR Guide to Generative AI for Teams</em> (2026). «Практика автора» — собственный опыт автора. «Общее знание» и «Общие источники» — сведения из открытых источников; проверяйте актуальность, инструменты меняются быстро.</p></div><div class="author-card">
+</pre></div><div class="author-card">
     <img src="/library/author.jpg" width="88" height="88" alt="Дмитрий Айзенштат" loading="lazy">
     <div>
       <p class="ac-label">Об авторе</p>

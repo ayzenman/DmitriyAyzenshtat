@@ -24,6 +24,8 @@ COOKIE = re.search(r"<!-- cookie-banner -->.*?(?=</body>)", sample, re.S).group(
 BASE_CSS = re.search(r"<style>(.*?)</style>", sample, re.S).group(1)
 
 # Внешние материалы библиотеки (вариант 1: ссылки из руководства наружу, где тема совпадает)
+PROMPT_NOTE = '<p class="prompt-note">В квадратных скобках — ваши данные. Нажмите «Копировать», вставьте промпт в чат с ИИ и заполните скобки.</p>'
+
 EXTERNAL = {
     "resheniya-i-strategiya": [("/library/solutions/okr/", "OKR: цели и ключевые результаты", "как формулировать цели и ключевые результаты"),
                                ("/library/solutions/balanced-scorecard/", "Сбалансированная система показателей", "стратегия на одной карте")],
@@ -196,6 +198,9 @@ EXTRA_CSS = """
 .brief .lead{font-weight:700;color:#17345f}
 .brief .note{font-size:14px;color:#666}.brief a{color:#17345f}
 .prompt-name{margin:22px 0 6px}
+.prompt-note{font-size:15px;color:#666;margin:-2px 0 10px}
+.modes{margin:22px 0 28px}.modes .axis{display:flex;justify-content:space-between;font-size:13px;color:#888;margin:0 0 8px;padding:0 2px}.modes .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.modes .m{background:#f6f6f6;border-radius:6px;padding:12px 14px;border-top:4px solid #d9773f}.modes .m:nth-child(1){border-top-color:#f0c4a5}.modes .m:nth-child(2){border-top-color:#e39a68}.modes .m b{display:block;color:#17345f;font-size:17px;margin:0 0 4px}.modes .m span{display:block;font-size:14px;line-height:1.45;color:#444}.modes .bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#f3dccb,#d9773f);margin:0 0 10px}.modes figcaption{font-size:13px;color:#888;text-align:center;margin-top:10px}
+@media(max-width:620px){.modes .row{grid-template-columns:1fr}}
 .prompt{position:relative;margin:0 0 20px}
 .prompt pre{margin:0;padding:14px 16px 14px;padding-right:16px;background:#f7f8fa;border:1px solid #e3e6eb;border-radius:4px;white-space:pre-wrap;word-wrap:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;color:#222}
 .prompt .fld{background:#fdecdf;color:#9a4a17;border-radius:3px;padding:0 2px}
@@ -390,6 +395,8 @@ def render_body(md_text, self_key, page_key):
     return h
 
 def brief_html(b, h_body):
+    return ""
+def _old_brief_html(b, h_body):
     korotko, rezhim, risk, start = brief_parts(b["brief"])
     # «С чего начать: промпт «X»» → якорь на промпт
     def st(m):
@@ -418,6 +425,7 @@ for i, b in enumerate(blocks):
     h, toc = headings_ids(h)
     brief = brief_html(b, h)
     # первый абзац(ы) до первого h2 — вступление; оглавление ставим после него
+    h = re.sub(r'(<h[23] id="gotovye-prompty">.*?</h[23]>)', r'\1' + PROMPT_NOTE, h, count=1)
     first_h2 = h.find("<h2")
     intro_h, rest_h = h[:first_h2], h[first_h2:]
     src_md = SRC_BY_NUM.get(b["num"], "")
@@ -441,7 +449,7 @@ for i, b in enumerate(blocks):
     desc = re.sub(r"\*\*|\*", "", korotko)
     if len(desc) > 200: desc = desc[:197].rsplit(" ", 1)[0] + "…"
     title = f"{b['title']} — ИИ в работе"
-    body = (brief + intro_h + toc_html(toc) + rest_h + sources_h + AUTHOR + related_html(rel) + pager)
+    body = (brief + intro_h + toc_html(toc) + rest_h + AUTHOR + related_html(rel) + pager)
     tags = ["искусственный интеллект"] + [w.strip() for w in b["ishut"].split(",")[:4]]
     out_pages[b["key"]] = (path, page(path, title, desc, "ИИ в работе",
         tags, [("ИИ в работе", SECTION), (f"{b['gname']}", SECTION + f"#g{b['group']}"), (b["title"], path)],
@@ -465,8 +473,16 @@ def tool_cell(m):
         res.append(f'<a href="{SECTION}{cand[0]["key"]}/">{p}</a>' if cand else p)
     return "<td>" + "; ".join(res) + "</td></tr>"
 tl_start = rest_h.find('id="instrumenty-avtora"')
+MODES_FIG = ('<figure class="modes"><div class="axis"><span>ошибка стоит дёшево</span><span>ошибка стоит дорого</span></div><div class="bar"></div><div class="row">'
+  '<div class="m"><b>Автомат</b><span>ИИ сам делает рутину по заданному порядку. Ошибку легко заметить и исправить.</span></div>'
+  '<div class="m"><b>Соавтор</b><span>ИИ пишет и делает, вы проверяете и правите.</span></div>'
+  '<div class="m"><b>Советчик</b><span>ИИ задаёт вопросы и спорит, решаете и пишете вы.</span></div>'
+  '</div><figcaption>Чем дороже ошибка, тем больше работы остаётся за человеком.</figcaption></figure>')
+rest_h = re.sub(r'(<h2 id="tri-rezhima-raboty">.*?</ul>)', lambda m: m.group(1) + MODES_FIG, rest_h, count=1, flags=re.S)
+tl_start = rest_h.find('id="instrumenty-avtora"')
 rest_h = rest_h[:tl_start] + re.sub(r"<td>([^<]+)</td>\s*</tr>", tool_cell, rest_h[tl_start:])
-osn_src = linkify_urls(md(SRC_COMMON))
+osn_src = linkify_urls(md(SRC_COMMON + "\n\n" + "\n\n".join(
+    f"**{b['title']}**\n\n" + SRC_BY_NUM[b['num']] for b in blocks if b['num'] in SRC_BY_NUM)))
 body = (intro_h + toc_html(toc, 2) + rest_h
         + f'<div class="sources"><p><strong>Источники</strong></p>{osn_src}</div>' + AUTHOR
         + related_html([(SECTION, "ИИ в работе: найти свою задачу", "22 типа задач по шести группам"),
@@ -486,8 +502,8 @@ lead = intro_text.split("## Как читать")[0].strip()
 kak = intro_text.split("## Как читать")[1]
 kak = kak.split("**Как пользоваться.**")[0].strip()
 # адаптация к сайту: «в конце документа» → где это на сайте
-kak = kak.replace("Словарь терминов, инструменты автора и источники собраны в конце документа.",
-                  "Словарь терминов и инструменты автора — на странице «Основы», источники — внизу каждого блока.")
+kak = re.sub(r"\n\nПримеры задач и промпты показывают.*", "", kak.strip(), flags=re.S)
+kak = re.sub(r"В начале каждого блока — «Коротко».*?готовые промпты\.", "В каждом блоке — что можно поручить ИИ, режимы работы, на что обратить внимание, что проверить и готовые промпты.", kak, flags=re.S)
 kak_h = link_blocks(md("## Как читать\n\n" + kak), None)
 groups_nav = []
 gnames = {}
@@ -499,8 +515,7 @@ for g in sorted(gnames):
         if b["group"] != g: continue
         rezhim = brief_parts(b["brief"])[1]
         words = (task + " " + b["title"] + " " + b["ishut"]).lower().replace("ё", "е")
-        lis.append(f'<li data-s="{esc(words)}"><a href="{SECTION}{b["key"]}/">{esc(task)}</a>'
-                   f'<span class="bt">{esc(b["title"])} <span class="mode" title="Основной режим: {esc(rezhim)}">{esc(mode_short(rezhim))}</span></span></li>')
+        lis.append(f'<li data-s="{esc(words)}"><a href="{SECTION}{b["key"]}/">{esc(task)}</a></li>')
     groups_nav.append(f'<section class="navgroup" id="g{g}"><h3>{esc(gnames[g])}</h3><ul>{"".join(lis)}</ul></section>')
 search_js = """<script>
 (function(){
@@ -517,7 +532,6 @@ search_js = """<script>
 body = (f'<p>{md(lead)[3:-4]}</p>'
         f'<p><a class="cta" href="{SECTION}osnovy/">Начать с «Основ»</a></p>'
         f'<h2 id="zadachi">Найдите свою задачу</h2>'
-        f'<p>Режим рядом с блоком — основной: <strong>соавтор</strong> — ИИ делает, вы проверяете; <strong>советчик</strong> — ИИ спрашивает и спорит, решаете вы; <strong>автомат</strong> — ИИ выполняет рутину по заданному порядку.</p>'
         f'<div class="navsearch"><input id="navq" type="search" placeholder="Что нужно сделать? Например: договор, отчёт, совещание" aria-label="Поиск задачи"></div>'
         f'<div class="navgrid">{"".join(groups_nav)}</div><p id="navempty" class="navempty" hidden>Ничего не нашлось. Попробуйте другое слово или откройте «<a href="{SECTION}osnovy/">Основы</a>».</p>'
         + kak_h.replace("<h2>", '<h2 id="kak-chitat">')

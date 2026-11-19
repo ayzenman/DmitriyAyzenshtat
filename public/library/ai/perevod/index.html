@@ -243,6 +243,9 @@ main h2 {
 .brief .lead{font-weight:700;color:#17345f}
 .brief .note{font-size:14px;color:#666}.brief a{color:#17345f}
 .prompt-name{margin:22px 0 6px}
+.prompt-note{font-size:15px;color:#666;margin:-2px 0 10px}
+.modes{margin:22px 0 28px}.modes .axis{display:flex;justify-content:space-between;font-size:13px;color:#888;margin:0 0 8px;padding:0 2px}.modes .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.modes .m{background:#f6f6f6;border-radius:6px;padding:12px 14px;border-top:4px solid #d9773f}.modes .m:nth-child(1){border-top-color:#f0c4a5}.modes .m:nth-child(2){border-top-color:#e39a68}.modes .m b{display:block;color:#17345f;font-size:17px;margin:0 0 4px}.modes .m span{display:block;font-size:14px;line-height:1.45;color:#444}.modes .bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#f3dccb,#d9773f);margin:0 0 10px}.modes figcaption{font-size:13px;color:#888;text-align:center;margin-top:10px}
+@media(max-width:620px){.modes .row{grid-template-columns:1fr}}
 .prompt{position:relative;margin:0 0 20px}
 .prompt pre{margin:0;padding:14px 16px 14px;padding-right:16px;background:#f7f8fa;border:1px solid #e3e6eb;border-radius:4px;white-space:pre-wrap;word-wrap:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;color:#222}
 .prompt .fld{background:#fdecdf;color:#9a4a17;border-radius:3px;padding:0 2px}
@@ -285,7 +288,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <div class="crumbs"><a href="/library/">Библиотека</a> · <a href="/library/ai/">ИИ в работе</a> · <a href="/library/ai/#g1">Слово и документы</a></div>
 <h1>Перевод и иноязычные источники</h1>
 <div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 19 ноября 2026</div>
-<div class="brief"><p class="lead">Перевод для понимания ИИ делает быстро; перевод, который уйдёт клиенту, в договор или в публикацию, требует вычитки человеком.</p><p><strong>Режим:</strong> автомат — для понимания, соавтор — для того, что пойдёт дальше. <strong>Главный риск:</strong> гладкий перевод с искажёнными терминами и цифрами.</p><p><strong>С чего начать:</strong> промпт «<a href="#p-ponyat-dokument-bez-perevoda">Понять документ без перевода</a>».</p><p class="note">Режимы, общие проверки и шаблон запроса — в разделе «<a href="/library/ai/osnovy/">Основы</a>».</p></div><nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#ogranicheniya-i-proverki">Ограничения и проверки</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
+<nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#ogranicheniya-i-proverki">Ограничения и проверки</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
 <ul>
 <li><strong>Перевод книги или большой статьи для себя.</strong> Например, нужен читаемый русский вариант, чтобы быстро понять содержание. Вы получаете машинный перевод и читаете его как рабочий материал.</li>
 <li><strong>Перевод письма или документа партнёру</strong> на английский или другой язык. Скажем, деловое письмо, описание продукта, раздел договора для предварительного понимания.</li>
@@ -319,7 +322,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <li>Для договоров и юридически значимых документов перевод ИИ — только рабочая версия: заключение по ним делает юрист или проверяется в блоке «<a href="/library/ai/dokumenty-i-pravo/">Документы, право и налоги</a>».</li>
 </ul>
 <p><strong>Авторское право.</strong> Перевод и распространение защищённого текста (книги, статьи, отчёты) без разрешения правообладателя может быть ограничен. Для личного понимания и работы это обычно допустимо; для публикации, рассылки или размещения в открытом доступе нужно разрешение либо проверка условий использования. Машинный перевод чужого текста не следует публиковать как свой. Это общая осторожная рекомендация, а не юридическая гарантия: проверяйте нормы своей страны и условия сервиса, которым пользуетесь.</p>
-<h2 id="gotovye-prompty">Готовые промпты</h2>
+<h2 id="gotovye-prompty">Готовые промпты</h2><p class="prompt-note">В квадратных скобках — ваши данные. Нажмите «Копировать», вставьте промпт в чат с ИИ и заполните скобки.</p>
 <p class="prompt-name" id="p-perevod-s-edinym-slovarem"><strong>Перевод с единым словарём</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Переведи текст с <span class="fld">[язык]</span> на <span class="fld">[язык]</span>. Назначение: <span class="fld">[для себя / для клиента / для публикации]</span>.
 Используй такие переводы терминов: <span class="fld">[термин — перевод; ...]</span>. Если встретишь важный термин, которого нет в списке, не угадывай, а выпиши отдельным списком в конце.
@@ -333,11 +336,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 3) что требуется от нас;
 4) какие места неоднозначны и могут быть поняты по-разному.
 Не выдумывай: если чего-то в тексте нет, так и скажи.
-</pre></div><div class="sources" id="istochniki"><p><strong>Источники</strong></p><ul>
-<li><strong>Книги:</strong> HBR Managers, гл. 6 (ограничения объёма запроса), гл. 7 (после завершения работы над текстом ИИ может перевести его на другие языки), гл. 21 (перевод коммуникаций на местные языки при изменениях).</li>
-<li><strong>Практика автора:</strong> перевод книг в Google Документах.</li>
-</ul>
-<p>Книги: <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025) и <em>HBR Guide to Generative AI for Teams</em> (2026). «Практика автора» — собственный опыт автора. «Общее знание» и «Общие источники» — сведения из открытых источников; проверяйте актуальность, инструменты меняются быстро.</p></div><div class="author-card">
+</pre></div><div class="author-card">
     <img src="/library/author.jpg" width="88" height="88" alt="Дмитрий Айзенштат" loading="lazy">
     <div>
       <p class="ac-label">Об авторе</p>

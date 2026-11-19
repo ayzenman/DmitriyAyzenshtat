@@ -243,6 +243,9 @@ main h2 {
 .brief .lead{font-weight:700;color:#17345f}
 .brief .note{font-size:14px;color:#666}.brief a{color:#17345f}
 .prompt-name{margin:22px 0 6px}
+.prompt-note{font-size:15px;color:#666;margin:-2px 0 10px}
+.modes{margin:22px 0 28px}.modes .axis{display:flex;justify-content:space-between;font-size:13px;color:#888;margin:0 0 8px;padding:0 2px}.modes .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.modes .m{background:#f6f6f6;border-radius:6px;padding:12px 14px;border-top:4px solid #d9773f}.modes .m:nth-child(1){border-top-color:#f0c4a5}.modes .m:nth-child(2){border-top-color:#e39a68}.modes .m b{display:block;color:#17345f;font-size:17px;margin:0 0 4px}.modes .m span{display:block;font-size:14px;line-height:1.45;color:#444}.modes .bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#f3dccb,#d9773f);margin:0 0 10px}.modes figcaption{font-size:13px;color:#888;text-align:center;margin-top:10px}
+@media(max-width:620px){.modes .row{grid-template-columns:1fr}}
 .prompt{position:relative;margin:0 0 20px}
 .prompt pre{margin:0;padding:14px 16px 14px;padding-right:16px;background:#f7f8fa;border:1px solid #e3e6eb;border-radius:4px;white-space:pre-wrap;word-wrap:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;color:#222}
 .prompt .fld{background:#fdecdf;color:#9a4a17;border-radius:3px;padding:0 2px}
@@ -285,7 +288,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <div class="crumbs"><a href="/library/">Библиотека</a> · <a href="/library/ai/">ИИ в работе</a> · <a href="/library/ai/#g2">Информация</a></div>
 <h1>Инструкции «как сделать то, что непонятно»</h1>
 <div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 19 ноября 2026</div>
-<div class="brief"><p class="lead">ИИ ведёт по шагам под вашу программу и ситуацию; сообщайте, что видите на экране, а не подстраивайтесь под инструкцию.</p><p><strong>Режим:</strong> соавтор; советчик, если непонятно, где вы в интерфейсе. <strong>Главный риск:</strong> несуществующие кнопки и меню, ошибка на рабочих данных.</p><p><strong>С чего начать:</strong> промпт «<a href="#p-poshagovaya-instrukciya">Пошаговая инструкция</a>».</p><p class="note">Режимы, общие проверки и шаблон запроса — в разделе «<a href="/library/ai/osnovy/">Основы</a>».</p></div><nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#ogranicheniya-i-proverki">Ограничения и проверки</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
+<nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#ogranicheniya-i-proverki">Ограничения и проверки</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
 <ul>
 <li><strong>Как составить сложную формулу в Excel или Google Таблицах</strong> (с несколькими функциями, вложенными условиями, ссылками на другие листы).</li>
 <li><strong>Как объединить данные из разных документов и файлов</strong> (из нескольких таблиц, листов, выгрузок) в одну таблицу.</li>
@@ -323,7 +326,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <li>Для чувствительных настроек (безопасность, доступы, платежи) сверяйтесь с официальной справкой производителя.</li>
 <li>Сложные формулы и скрипты проверяйте на тестовых данных, где вы знаете правильный ответ.</li>
 </ul>
-<h2 id="gotovye-prompty">Готовые промпты</h2>
+<h2 id="gotovye-prompty">Готовые промпты</h2><p class="prompt-note">В квадратных скобках — ваши данные. Нажмите «Копировать», вставьте промпт в чат с ИИ и заполните скобки.</p>
 <p class="prompt-name" id="p-poshagovaya-instrukciya"><strong>Пошаговая инструкция</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Я работаю в <span class="fld">[программа и версия]</span>. Хочу <span class="fld">[цель]</span>. Сейчас у меня <span class="fld">[что есть, что вижу на экране]</span>.
 Веди меня по одному шагу. После каждого шага жди, что я напишу. Для каждого шага объясни одним предложением, зачем он. Если шаг рискованный (удаляет или перезаписывает данные), предупреди заранее и скажи, как отменить.
@@ -345,11 +348,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 Файл 2: <span class="fld">[название]</span>, столбцы: <span class="fld">[список]</span>, пример трёх строк: <span class="fld">[вставьте]</span>.
 Ключ для объединения: <span class="fld">[поле]</span> и как оно записано в каждом файле: <span class="fld">[формат, пробелы, регистр, возможные расхождения]</span>.
 Работаем в <span class="fld">[программа и версия]</span>. Веди по одному шагу: сначала проверь, совпадают ли ключи в обоих файлах и что может помешать (пробелы, регистр, формат, дубли), затем предложи способ объединения. После объединения подскажи, как проверить результат: число строк до и после, итоговые суммы, несколько контрольных строк, строки без совпадения.
-</pre></div><div class="sources" id="istochniki"><p><strong>Источники</strong></p><ul>
-<li><strong>Книги:</strong> HBR Managers, гл. 3 и гл. 2 (общий подход «если застрял — спроси сам ИИ», например: «Не могли бы вы показать, как сделать [что]?»). Отдельной главы по теме нет.</li>
-<li><strong>Практика автора:</strong> режим ИИ в Google для быстрых вопросов, Claude и ChatGPT для сложного.</li>
-</ul>
-<p>Книги: <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025) и <em>HBR Guide to Generative AI for Teams</em> (2026). «Практика автора» — собственный опыт автора. «Общее знание» и «Общие источники» — сведения из открытых источников; проверяйте актуальность, инструменты меняются быстро.</p></div><div class="author-card">
+</pre></div><div class="author-card">
     <img src="/library/author.jpg" width="88" height="88" alt="Дмитрий Айзенштат" loading="lazy">
     <div>
       <p class="ac-label">Об авторе</p>

@@ -235,6 +235,9 @@ main h2 {
 .brief .lead{font-weight:700;color:#17345f}
 .brief .note{font-size:14px;color:#666}.brief a{color:#17345f}
 .prompt-name{margin:22px 0 6px}
+.prompt-note{font-size:15px;color:#666;margin:-2px 0 10px}
+.modes{margin:22px 0 28px}.modes .axis{display:flex;justify-content:space-between;font-size:13px;color:#888;margin:0 0 8px;padding:0 2px}.modes .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.modes .m{background:#f6f6f6;border-radius:6px;padding:12px 14px;border-top:4px solid #d9773f}.modes .m:nth-child(1){border-top-color:#f0c4a5}.modes .m:nth-child(2){border-top-color:#e39a68}.modes .m b{display:block;color:#17345f;font-size:17px;margin:0 0 4px}.modes .m span{display:block;font-size:14px;line-height:1.45;color:#444}.modes .bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#f3dccb,#d9773f);margin:0 0 10px}.modes figcaption{font-size:13px;color:#888;text-align:center;margin-top:10px}
+@media(max-width:620px){.modes .row{grid-template-columns:1fr}}
 .prompt{position:relative;margin:0 0 20px}
 .prompt pre{margin:0;padding:14px 16px 14px;padding-right:16px;background:#f7f8fa;border:1px solid #e3e6eb;border-radius:4px;white-space:pre-wrap;word-wrap:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;color:#222}
 .prompt .fld{background:#fdecdf;color:#9a4a17;border-radius:3px;padding:0 2px}
@@ -277,13 +280,13 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <div class="crumbs"><a href="/library/">Библиотека</a> · <a href="/library/ai/">ИИ в работе</a></div>
 <h1>Основы работы с ИИ: режимы, установки, проверки</h1>
 <div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 19 ноября 2026</div>
-<p>Всё, что относится к любой задаче. В блоках это не повторяется.</p>
+<p>Здесь собрано то, что пригодится в любой задаче: как распределить работу между собой и ИИ, как поставить задачу, что проверить, прежде чем использовать ответ. В блоках по типам задач это не повторяется, поэтому страницу стоит прочитать первой.</p>
 <nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#tri-rezhima-raboty">Три режима работы</a></li><li><a href="#tri-ustanovki">Три установки</a></li><li><a href="#kak-postavit-zadachu">Как поставить задачу</a></li><li><a href="#obschie-proverki">Общие проверки</a></li><li><a href="#dlinnaya-zadacha">Длинная задача</a></li><li><a href="#pered-tem-kak-ispolzovat-rezultat">Перед тем как использовать результат</a></li><li><a href="#slovar">Словарь</a></li><li><a href="#instrumenty-avtora">Инструменты автора</a></li></ul></nav><h2 id="tri-rezhima-raboty">Три режима работы</h2>
 <ul>
 <li><strong>Соавтор.</strong> ИИ пишет или делает, человек проверяет и правит. Быстро, но результат всегда проверяется.</li>
 <li><strong>Советчик.</strong> ИИ задаёт вопросы, спорит, играет роли (клиент, оппонент, критик), а решает и пишет человек. Медленнее, зато качество мысли выше.</li>
 <li><strong>Автомат.</strong> ИИ выполняет типовую работу сам по заданному порядку, вплоть до отправки результата. Режим для рутины, где ошибка стоит дёшево и её можно исправить.</li>
-</ul>
+</ul><figure class="modes"><div class="axis"><span>ошибка стоит дёшево</span><span>ошибка стоит дорого</span></div><div class="bar"></div><div class="row"><div class="m"><b>Автомат</b><span>ИИ сам делает рутину по заданному порядку. Ошибку легко заметить и исправить.</span></div><div class="m"><b>Соавтор</b><span>ИИ пишет и делает, вы проверяете и правите.</span></div><div class="m"><b>Советчик</b><span>ИИ задаёт вопросы и спорит, решаете и пишете вы.</span></div></div><figcaption>Чем дороже ошибка, тем больше работы остаётся за человеком.</figcaption></figure>
 <p><strong>Как выбрать режим.</strong> Ориентир — цена ошибки. Чем дороже ошибка (деньги, право, люди, репутация) и чем больше в задаче неоднозначных случаев, тем ближе режим к советчику и тем строже проверка человеком. Автомат подходит для частых повторяющихся процессов с чёткими правилами; начинать с него лучше с небольшой пробы.</p>
 <h2 id="tri-ustanovki">Три установки</h2>
 <p>На них держится любая работа с ИИ.</p>
@@ -424,7 +427,122 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <td>Qwen, в режиме эксперимента</td>
 <td><a href="/library/ai/formuly-modeli-avtomatizaciya/">Программирование, таблицы, формулы</a>; <a href="/library/ai/obrabotka-faylov/">Обработка файлов</a></td></tr>
 </tbody>
-</table></div><div class="sources"><p><strong>Источники</strong></p><p>Книги: <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025) и <em>HBR Guide to Generative AI for Teams</em> (2026). «Практика автора» — собственный опыт автора. «Общее знание» и «Общие источники» — сведения из открытых источников; проверяйте актуальность, инструменты меняются быстро.</p></div><div class="author-card">
+</table></div><div class="sources"><p><strong>Источники</strong></p><p>Книги: <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025) и <em>HBR Guide to Generative AI for Teams</em> (2026). «Практика автора» — собственный опыт автора. «Общее знание» и «Общие источники» — сведения из открытых источников; проверяйте актуальность, инструменты меняются быстро.</p>
+<p><strong>Написание и редактура текстов</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 2 (ИИ как второй пилот, а не автопилот), гл. 3 (ловушки доверия и конформизма), гл. 6 (почта: сокращение, упрощение терминов, ясный призыв к действию), гл. 7 (написание текстов: структура, черновик, тон, аутентичность, редактура).</li>
+<li><strong>Практика автора:</strong> пара Claude и ChatGPT.</li>
+</ul>
+<p><strong>Перевод и иноязычные источники</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 6 (ограничения объёма запроса), гл. 7 (после завершения работы над текстом ИИ может перевести его на другие языки), гл. 21 (перевод коммуникаций на местные языки при изменениях).</li>
+<li><strong>Практика автора:</strong> перевод книг в Google Документах.</li>
+</ul>
+<p><strong>Презентации и слайды</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 5 (смена режимов), гл. 7 (создание слайдов: ввод, внешний вид, последовательность, проверка, визуальные и мультимедийные элементы, заметки для выступления; ловушка конформизма), гл. 9 (подготовка выступления).</li>
+<li><strong>Общие источники:</strong> MindStudio (искажение текста внутри сгенерированных изображений).</li>
+<li><strong>Практика автора:</strong> Claude и ChatGPT.</li>
+</ul>
+<p><strong>Документы, право и налоги</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 2 (ИИ как второй пилот, а не автопилот), гл. 3 (ловушки доверия и фальсификации, риски конфиденциальности и интеллектуальной собственности), гл. 7 (написание документов), гл. 16 (проверка надёжности источников).</li>
+<li><strong>Практика автора:</strong> пара Claude и ChatGPT для подготовки и проверки.</li>
+</ul>
+<p><strong>Промпты: как формулировать и копить удачные</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 2 (как ставить задачу ИИ, четыре шага диалога, цепочка рассуждений), гл. 3 (разговорный подход, сравнение моделей), гл. 9 (угодливость ИИ), гл. 16 (риск выдуманных данных), эпилог (промпт-академии и библиотеки); HBR Teams, гл. 1–4 и 30 (контекст, prompt-a-thon, общий ресурс промптов).</li>
+<li><strong>Практика автора:</strong> папка <code>_ПРОМТЫ/</code>.</li>
+</ul>
+<p><strong>Поиск информации и исследования</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 16 (поиск: веб, знания компании, знания экспертов; проверка источников), гл. 17 (дизайн исследования, анализ отзывов, синтетические исследования), гл. 3 (ловушки доверия и фальсификации); HBR Teams, гл. 30 (ограничения ИИ-персон).</li>
+<li><strong>Практика автора:</strong> DeepSeek, режим ИИ в Google, пара Claude и ChatGPT, Claude в браузере.</li>
+</ul>
+<p><strong>Инструкции «как сделать то, что непонятно»</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 3 и гл. 2 (общий подход «если застрял — спроси сам ИИ», например: «Не могли бы вы показать, как сделать [что]?»). Отдельной главы по теме нет.</li>
+<li><strong>Практика автора:</strong> режим ИИ в Google для быстрых вопросов, Claude и ChatGPT для сложного.</li>
+</ul>
+<p><strong>Разбор документов и данных</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 6 (резюмирование, цепочка плотности, вопросы проверки), гл. 16 (анализ данных, четыре уровня проверки), гл. 17 (анализ отзывов).</li>
+<li><strong>Общие источники:</strong> задачи финансового директора и ИИ: <a href="https://media.future-hub.io/stati/ii-dlya-finansovyih-direktorov" rel="noopener" target="_blank">https://media.future-hub.io/stati/ii-dlya-finansovyih-direktorov</a>, <a href="https://blog.fin-ctrl.ru/zadachi-cfo-2026" rel="noopener" target="_blank">https://blog.fin-ctrl.ru/zadachi-cfo-2026</a></li>
+<li><strong>Практика автора:</strong> пара Claude и ChatGPT.</li>
+</ul>
+<p><strong>Идеи и творчество</strong></p>
+<ul>
+<li><strong>Книги:</strong> <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025): гл. 12 (генерация идей: широта, расхождение, кластеризация, уточнение, оценка, визуализация; как поднять планку творчества; сначала свои идеи 10-30 минут), гл. 3 (ловушка конформизма, авторское право). <em>HBR Guide to Generative AI for Teams</em> (2026): гл. 16 (брейншторм), 17 (хакатон), 24 (дизайн-мышление), 30 (ограничения синтетических персон).</li>
+<li><strong>Практика автора:</strong> пара Claude и ChatGPT, картинки в ChatGPT.</li>
+</ul>
+<p><strong>Решения, проблемы, стратегия, цели и проверка идей</strong></p>
+<ul>
+<li><strong>Книги:</strong> <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025): гл. 2 (режимы работы), 9 (угодливость), 11 (цели), 12 (решения о людях), 14 (проблема, причины, «квест», проверка идей), 18 (стейкхолдеры, компромиссы, риски), 19 (стратегия, оценка идей, цепочка поставок). <em>HBR Guide to Generative AI for Teams</em> (2026): гл. 6 (стратегическая сессия), 7 (OKR, сбор целей), 8 (операционное планирование), 11 (совещание руководства), 13 (go/no-go), 14 (приоритизация), 19 (инновация бизнес-модели), 21-24 (разбор сбоя, кризис, первопричины, дизайн-мышление).</li>
+<li><strong>Практика автора:</strong> пара Claude и ChatGPT для стратегий.</li>
+</ul>
+<p><strong>Совещания и командные сессии</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 11 (повестка, роли ведущего, анализ вовлечённости, итоги), гл. 2 (встроенные помощники), гл. 3 (ловушки), эпилог (влияние на команду); HBR Teams, гл. 1–4 (до, во время, после; шесть принципов; два типа выгоды), 6–29 (двадцать форматов), 30 (новые форматы).</li>
+<li><strong>Практика автора:</strong> использование ИИ как участника совещаний.</li>
+</ul>
+<p><strong>Планирование, поручения и контроль</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 6 (время и приоритеты), 11 (план, отчёты, цели), эпилог (чувствительные области); HBR Teams, гл. 8 (операционное планирование), 9 (запуск проекта), 12, 27, 29 (поручения и фиксация итогов).</li>
+<li><strong>Практика автора:</strong> контроль поручений, цели и бюджеты.</li>
+</ul>
+<p><strong>Рефлексия руководителя</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 8 (стили лидерства, обратная связь), 9 (подготовка к выступлению и собеседованию), 12 (состав команды, решения о людях), 13 (смысл команды, качество работы, конфликты, психологическая безопасность), 20–22 (изменения, сопротивление, смена мышления), 3 (риски предвзятости).</li>
+</ul>
+<p><strong>Программирование, таблицы, формулы, моделирование и автоматизация</strong></p>
+<ul>
+<li><strong>Книги:</strong> <em>HBR Guide to Generative AI for Managers</em>, гл. 16 (формулы, анализ чувствительности, предупреждение о неподходящих расчётах), гл. 17 (создание анкеты), гл. 11 (метрики и формулы).</li>
+<li><strong>Общие источники:</strong> задачи финансового директора и ИИ (<a href="https://media.future-hub.io/stati/ii-dlya-finansovyih-direktorov" rel="noopener" target="_blank">https://media.future-hub.io/stati/ii-dlya-finansovyih-direktorov</a>, <a href="https://blog.fin-ctrl.ru/zadachi-cfo-2026" rel="noopener" target="_blank">https://blog.fin-ctrl.ru/zadachi-cfo-2026</a>).</li>
+<li><strong>Практика автора:</strong> Claude и ChatGPT для моделей, режим ИИ в Google для формул и скриптов, Qwen локально.</li>
+</ul>
+<p><strong>Отчёты и дашборды</strong></p>
+<ul>
+<li><strong>Практика автора:</strong> проект ежедневного флэш-отчёта цеха сборки (Google Таблицы, Google Apps Script, рассылка снимка по почте), 2026; ведение проекта через паспорт, состояние и журнал решений.</li>
+<li><strong>Общее знание:</strong> типовые приёмы ускорения веб-страниц и скриптов (кэширование, пакетное чтение данных, фоновая подгрузка).</li>
+</ul>
+<p><strong>Программирование и отчёты в 1С</strong></p>
+<ul>
+<li><strong>Практика автора:</strong> проект «ИИ в 1С» (2026): правила работы, проверки результата, реестр задач; учебная база, внешние отчёты и расширение.</li>
+</ul>
+<p><strong>Работа в браузере и на сайтах</strong></p>
+<ul>
+<li><strong>Книги:</strong> <em>HBR Guide to Generative AI for Managers</em>, гл. 3 (ответственное использование, риски безопасности; агенты ИИ как новый вид продуктов), глоссарий (ИИ-агент: система, способная действовать самостоятельно); <em>HBR Guide to Generative AI for Teams</em>, гл. 1–4 (агентные функции).</li>
+<li><strong>Общие источники:</strong> документация Claude в Chrome и ChatGPT agent (возможности: заполнение форм, извлечение данных, повторяющиеся задачи; предупреждения о разрешениях и скрытых инструкциях); Strata, человек в контуре управления агентами (<a href="https://www.strata.io/blog/agentic-identity/practicing-the-human-in-the-loop/" rel="noopener" target="_blank">https://www.strata.io/blog/agentic-identity/practicing-the-human-in-the-loop/</a>).</li>
+<li><strong>Практика автора:</strong> Claude в браузере.</li>
+</ul>
+<p><strong>Создание сайтов</strong></p>
+<ul>
+<li><strong>Книги:</strong> <em>HBR Guide to Generative AI for Managers</em>, гл. 7 (общий принцип проверки и добавления своего).</li>
+<li><strong>Практика автора:</strong> Kimi раньше, Claude сейчас.</li>
+</ul>
+<p><strong>Картинки и визуалы для работы</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 7 (визуальные концепции для слайдов), 12 (визуализация идей, пример с дизайном обуви), 14 (диаграммы и визуальные истории), 16 (визуализация данных), 3 (риски авторских прав).</li>
+<li><strong>Практика автора:</strong> ChatGPT для картинок.</li>
+<li><strong>Общее знание:</strong> об искажении текста на изображениях и ограничениях генераторов изображений.</li>
+</ul>
+<p><strong>Работа с базой знаний</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 16 («знания компании», управление сообществом экспертов: извлечение инсайтов, выделение тем, организация знаний, поиск, карта экспертизы) и 21 (фиксация уроков); HBR Teams, гл. 12 (ИИ как «память решений»).</li>
+<li><strong>Практика автора:</strong> правила работы с личной базой знаний; Claude и ChatGPT.</li>
+<li><strong>Общее знание:</strong> Тьяго Форте, «Building a Second Brain» (2022); метод Zettelkasten (Никлас Луман).</li>
+</ul>
+<p><strong>Обработка файлов</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 6 (работа с документами и резюмирование), гл. 16 (подготовка и очистка данных).</li>
+<li><strong>Практика автора:</strong> Claude и ChatGPT; Qwen локально (эксперимент).</li>
+</ul>
+<p><strong>Обучение и изучение нового</strong></p>
+<ul>
+<li><strong>Книги:</strong> HBR Managers, гл. 3 (как следить за развитием ИИ), гл. 21 (геймификация), эпилог (четыре шага, эксперименты); HBR Teams, гл. 30 (prompt-a-thon, ролевые игры, дни ИИ).</li>
+<li><strong>Общие источники:</strong> Science News, риск потери навыков при чрезмерном использовании ИИ (<a href="https://www.sciencenews.org/article/ai-making-us-dumber-learning-skills-risk" rel="noopener" target="_blank">https://www.sciencenews.org/article/ai-making-us-dumber-learning-skills-risk</a>).</li>
+<li><strong>Практика автора:</strong> DeepSeek, а также пара Claude и ChatGPT.</li>
+</ul></div><div class="author-card">
     <img src="/library/author.jpg" width="88" height="88" alt="Дмитрий Айзенштат" loading="lazy">
     <div>
       <p class="ac-label">Об авторе</p>

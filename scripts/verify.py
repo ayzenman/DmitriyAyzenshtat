@@ -27,7 +27,7 @@ for b in blocks:
     h = html_by[b["key"]]
     main = h[h.find("<main"):h.find("</main>")]
     page_text = " " + norm(main) + " "
-    units = [norm(u) for u in (b["body"] + "\n" + b["brief"]).split("\n") if norm(u)]
+    units = [norm(u) for u in b["body"].split("\n") if norm(u)]
     miss_list = [u for u in units if " " + u + " " not in page_text]
     miss = len(miss_list); words_src = units
     for u in miss_list[:3]: info.append("   нет: " + u[:90])
@@ -42,8 +42,9 @@ for b in blocks:
     info.append(f"{b['num']:>2} {b['key']}: разделов {h2}, промптов {n_pre}, строк текста сверено {len(units)}")
 # Основы, словарь, инструменты
 osn = norm(html_by["osnovy"])
-for part in ["ОСНОВЫ", "СЛОВАРЬ", "ИНСТРУМЕНТЫ АВТОРА"]:
-    body = src.split("\n# " + part + "\n")[1].split("\n# ")[0]
+for part in ["ОСНОВЫ", "СЛОВАРЬ", "ИНСТРУМЕНТЫ АВТОРА", "ИСТОЧНИКИ"]:
+    body = (src + "\n# КОНЕЦ").split("\n# " + part + "\n")[1].split("\n# ")[0]
+    if part == "ИСТОЧНИКИ": body = re.sub(r"^## Блок \d+\. ", "", body, flags=re.M)
     us = [norm(u) for u in body.split("\n") if norm(u)]; miss = sum(1 for u in us if u not in osn)
     if miss: errs.append(f"osnovy/{part}: не найдено {miss} фрагментов")
 # 3. запрещённое

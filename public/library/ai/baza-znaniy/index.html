@@ -243,6 +243,9 @@ main h2 {
 .brief .lead{font-weight:700;color:#17345f}
 .brief .note{font-size:14px;color:#666}.brief a{color:#17345f}
 .prompt-name{margin:22px 0 6px}
+.prompt-note{font-size:15px;color:#666;margin:-2px 0 10px}
+.modes{margin:22px 0 28px}.modes .axis{display:flex;justify-content:space-between;font-size:13px;color:#888;margin:0 0 8px;padding:0 2px}.modes .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.modes .m{background:#f6f6f6;border-radius:6px;padding:12px 14px;border-top:4px solid #d9773f}.modes .m:nth-child(1){border-top-color:#f0c4a5}.modes .m:nth-child(2){border-top-color:#e39a68}.modes .m b{display:block;color:#17345f;font-size:17px;margin:0 0 4px}.modes .m span{display:block;font-size:14px;line-height:1.45;color:#444}.modes .bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#f3dccb,#d9773f);margin:0 0 10px}.modes figcaption{font-size:13px;color:#888;text-align:center;margin-top:10px}
+@media(max-width:620px){.modes .row{grid-template-columns:1fr}}
 .prompt{position:relative;margin:0 0 20px}
 .prompt pre{margin:0;padding:14px 16px 14px;padding-right:16px;background:#f7f8fa;border:1px solid #e3e6eb;border-radius:4px;white-space:pre-wrap;word-wrap:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;color:#222}
 .prompt .fld{background:#fdecdf;color:#9a4a17;border-radius:3px;padding:0 2px}
@@ -285,7 +288,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <div class="crumbs"><a href="/library/">Библиотека</a> · <a href="/library/ai/">ИИ в работе</a> · <a href="/library/ai/#g5">Техника</a></div>
 <h1>Работа с базой знаний</h1>
 <div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 19 ноября 2026</div>
-<div class="brief"><p class="lead">ИИ разбирает входящее, пишет черновики карточек, ищет связи и противоречия; что важно и что верно, решает человек.</p><p><strong>Режим:</strong> соавтор; автомат — только для служебных операций. <strong>Главный риск:</strong> устаревшие или выдуманные записи, по которым ИИ потом уверенно отвечает.</p><p><strong>С чего начать:</strong> промпт «Создание базы знаний», если базы ещё нет; иначе «Разбор источника».</p><p class="note">Режимы, общие проверки и шаблон запроса — в разделе «<a href="/library/ai/osnovy/">Основы</a>».</p></div><p>Под базой знаний здесь понимается личное или командное собрание заметок (например, в Obsidian, Notion или обычных папках с файлами), которое ведётся с помощью ИИ.</p>
+<p>Под базой знаний здесь понимается личное или командное собрание заметок (например, в Obsidian, Notion или обычных папках с файлами), которое ведётся с помощью ИИ.</p>
 <p><strong>Идея «второго мозга».</strong> Это внешняя память: статьи, книги, идеи, решения и рабочие материалы записываются в одном месте и связываются между собой, чтобы не держать всё в голове и быстро находить нужное. ИИ берёт на себя рутину (разбор входящего, выжимки, поиск связей, повторов и противоречий, ответы по накопленному), а решения о том, что важно, собственные мысли и подтверждение результата остаются за человеком.</p>
 <p><strong>Для чего использовать.</strong> Лично: не терять прочитанное и придуманное, быстрее писать тексты и готовиться к выступлениям. В команде или компании: хранить регламенты, решения и их причины, уроки проектов, шаблоны и ответы на частые вопросы, чтобы знания не уходили вместе с людьми и новые сотрудники быстрее входили в работу. В компании дополнительно нужны права доступа, ответственные за актуальность и защита конфиденциальных данных: устаревшая запись опаснее отсутствующей, потому что ИИ уверенно ответит по ней.</p>
 <p><strong>С чего начать.</strong> Завести одно место для входящего, шаблон заметки (название, тип, описание, теги, источник, статус) и короткий файл правил для ИИ; раз в неделю разбирать входящее. Промпты «Создание базы знаний» и «Правила для ИИ в этой базе» ниже помогают это настроить, остальные работают на готовой базе.</p>
@@ -329,7 +332,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <li>Не помещать в базу полный распознанный текст книг; достаточно краткого конспекта-карты.</li>
 <li>Не использовать в заметках адреса файлов в облачном хранилище: они перестают работать при пересоздании файла. Ссылаться на заметки по названию.</li>
 </ul>
-<h2 id="gotovye-prompty">Готовые промпты</h2>
+<h2 id="gotovye-prompty">Готовые промпты</h2><p class="prompt-note">В квадратных скобках — ваши данные. Нажмите «Копировать», вставьте промпт в чат с ИИ и заполните скобки.</p>
 <p class="prompt-name" id="p-sozdanie-bazy-znaniy-esli-bazy-esche-net"><strong>Создание базы знаний (если базы ещё нет)</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Помоги создать <span class="fld">[личную / командную]</span> базу знаний. Цель: <span class="fld">[зачем]</span>. Материалы: <span class="fld">[книги, статьи, документы, переписка, регламенты]</span>. Инструмент: <span class="fld">[Obsidian / Notion / папки с файлами]</span>. Объём: <span class="fld">[примерно сколько]</span>.
 Задай мне вопросы, если не хватает данных. Затем предложи: 1) типы заметок и структуру папок (небольшую, без лишних уровней); 2) шаблон заметки (название, тип, описание, теги, источник, статус, дата); 3) правила именования; 4) как будут работать «Входящее» и еженедельный разбор; 5) статусы («черновик», «проверено», «заменено»); 6) что нельзя записывать (конфиденциальное, пароли, персональные данные); 7) план первых десяти заметок. Ничего не создавай, пока я не утвержу структуру.
@@ -349,12 +352,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 </pre></div>
 <p class="prompt-name" id="p-poisk-povtorov-i-protivorechiy"><strong>Поиск повторов и противоречий</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Проверь заметки по теме <span class="fld">[тема]</span>: найди пары, которые утверждают несовместимое, и пары, которые говорят одно и то же разными словами. Для каждой находки: что, где, что предлагаешь. Ничего не исправляй до моего подтверждения.
-</pre></div><div class="sources" id="istochniki"><p><strong>Источники</strong></p><ul>
-<li><strong>Книги:</strong> HBR Managers, гл. 16 («знания компании», управление сообществом экспертов: извлечение инсайтов, выделение тем, организация знаний, поиск, карта экспертизы) и 21 (фиксация уроков); HBR Teams, гл. 12 (ИИ как «память решений»).</li>
-<li><strong>Практика автора:</strong> правила работы с личной базой знаний; Claude и ChatGPT.</li>
-<li><strong>Общее знание:</strong> Тьяго Форте, «Building a Second Brain» (2022); метод Zettelkasten (Никлас Луман).</li>
-</ul>
-<p>Книги: <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025) и <em>HBR Guide to Generative AI for Teams</em> (2026). «Практика автора» — собственный опыт автора. «Общее знание» и «Общие источники» — сведения из открытых источников; проверяйте актуальность, инструменты меняются быстро.</p></div><div class="author-card">
+</pre></div><div class="author-card">
     <img src="/library/author.jpg" width="88" height="88" alt="Дмитрий Айзенштат" loading="lazy">
     <div>
       <p class="ac-label">Об авторе</p>

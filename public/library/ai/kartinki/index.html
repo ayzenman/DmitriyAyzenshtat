@@ -243,6 +243,9 @@ main h2 {
 .brief .lead{font-weight:700;color:#17345f}
 .brief .note{font-size:14px;color:#666}.brief a{color:#17345f}
 .prompt-name{margin:22px 0 6px}
+.prompt-note{font-size:15px;color:#666;margin:-2px 0 10px}
+.modes{margin:22px 0 28px}.modes .axis{display:flex;justify-content:space-between;font-size:13px;color:#888;margin:0 0 8px;padding:0 2px}.modes .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.modes .m{background:#f6f6f6;border-radius:6px;padding:12px 14px;border-top:4px solid #d9773f}.modes .m:nth-child(1){border-top-color:#f0c4a5}.modes .m:nth-child(2){border-top-color:#e39a68}.modes .m b{display:block;color:#17345f;font-size:17px;margin:0 0 4px}.modes .m span{display:block;font-size:14px;line-height:1.45;color:#444}.modes .bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#f3dccb,#d9773f);margin:0 0 10px}.modes figcaption{font-size:13px;color:#888;text-align:center;margin-top:10px}
+@media(max-width:620px){.modes .row{grid-template-columns:1fr}}
 .prompt{position:relative;margin:0 0 20px}
 .prompt pre{margin:0;padding:14px 16px 14px;padding-right:16px;background:#f7f8fa;border:1px solid #e3e6eb;border-radius:4px;white-space:pre-wrap;word-wrap:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;color:#222}
 .prompt .fld{background:#fdecdf;color:#9a4a17;border-radius:3px;padding:0 2px}
@@ -285,7 +288,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <div class="crumbs"><a href="/library/">Библиотека</a> · <a href="/library/ai/">ИИ в работе</a> · <a href="/library/ai/#g5">Техника</a></div>
 <h1>Картинки и визуалы для работы</h1>
 <div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 19 ноября 2026</div>
-<div class="brief"><p class="lead">Одна картинка — одна мысль: ИИ даёт варианты, надписи лучше добавить вручную, а графики по данным строить из таблицы.</p><p><strong>Режим:</strong> соавтор. <strong>Главный риск:</strong> искажённые надписи и цифры внутри картинки, чужие логотипы и персонажи.</p><p><strong>С чего начать:</strong> промпт «<a href="#p-illyustraciya-k-odnoy-mysli">Иллюстрация к одной мысли</a>».</p><p class="note">Режимы, общие проверки и шаблон запроса — в разделе «<a href="/library/ai/osnovy/">Основы</a>».</p></div><nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#ogranicheniya-i-proverki">Ограничения и проверки</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
+<nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#ogranicheniya-i-proverki">Ограничения и проверки</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
 <ul>
 <li><strong>Иллюстрация для презентации или поста,</strong> которая передаёт одну мысль.</li>
 <li><strong>Схема или диаграмма причин.</strong> Например, «рыбья кость» по анализу причин, ментальная карта, схема процесса. ИИ может сгенерировать диаграмму Исикавы или дерево причин там, где модель умеет работать с изображениями.</li>
@@ -320,19 +323,14 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <li>Учесть авторские права и правила платформы по использованию сгенерированных изображений: модели могут воспроизводить материалы, защищённые авторским правом.</li>
 <li>Если картинка идёт наружу, подумайте, нужна ли пометка о том, что она создана ИИ (правила компании и площадок).</li>
 </ul>
-<h2 id="gotovye-prompty">Готовые промпты</h2>
+<h2 id="gotovye-prompty">Готовые промпты</h2><p class="prompt-note">В квадратных скобках — ваши данные. Нажмите «Копировать», вставьте промпт в чат с ИИ и заполните скобки.</p>
 <p class="prompt-name" id="p-illyustraciya-k-odnoy-mysli"><strong>Иллюстрация к одной мысли</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Сделай изображение для <span class="fld">[назначение: слайд / пост / обложка]</span>. Идея, которую оно должно передать: <span class="fld">[одна мысль]</span>. Аудитория: <span class="fld">[кто]</span>. Стиль: <span class="fld">[описание]</span>. Цвета: <span class="fld">[перечень]</span>. Формат: <span class="fld">[соотношение сторон]</span>.
 Без текста внутри картинки. Предложи три варианта композиции.
 </pre></div>
 <p class="prompt-name" id="p-vybor-vizualizacii-dlya-dannyh"><strong>Выбор визуализации для данных</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>У меня данные: <span class="fld">[описание]</span>. Главное сообщение: <span class="fld">[что должен понять зритель]</span>. Предложи три подходящих типа диаграммы, порекомендуй один и объясни почему. Подскажи, какие точки данных выделить, какие цвета и подписи использовать. Сформулируй ключевое сообщение в двух предложениях.
-</pre></div><div class="sources" id="istochniki"><p><strong>Источники</strong></p><ul>
-<li><strong>Книги:</strong> HBR Managers, гл. 7 (визуальные концепции для слайдов), 12 (визуализация идей, пример с дизайном обуви), 14 (диаграммы и визуальные истории), 16 (визуализация данных), 3 (риски авторских прав).</li>
-<li><strong>Практика автора:</strong> ChatGPT для картинок.</li>
-<li><strong>Общее знание:</strong> об искажении текста на изображениях и ограничениях генераторов изображений.</li>
-</ul>
-<p>Книги: <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025) и <em>HBR Guide to Generative AI for Teams</em> (2026). «Практика автора» — собственный опыт автора. «Общее знание» и «Общие источники» — сведения из открытых источников; проверяйте актуальность, инструменты меняются быстро.</p></div><div class="author-card">
+</pre></div><div class="author-card">
     <img src="/library/author.jpg" width="88" height="88" alt="Дмитрий Айзенштат" loading="lazy">
     <div>
       <p class="ac-label">Об авторе</p>

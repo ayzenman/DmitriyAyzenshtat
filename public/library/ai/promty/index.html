@@ -243,6 +243,9 @@ main h2 {
 .brief .lead{font-weight:700;color:#17345f}
 .brief .note{font-size:14px;color:#666}.brief a{color:#17345f}
 .prompt-name{margin:22px 0 6px}
+.prompt-note{font-size:15px;color:#666;margin:-2px 0 10px}
+.modes{margin:22px 0 28px}.modes .axis{display:flex;justify-content:space-between;font-size:13px;color:#888;margin:0 0 8px;padding:0 2px}.modes .row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.modes .m{background:#f6f6f6;border-radius:6px;padding:12px 14px;border-top:4px solid #d9773f}.modes .m:nth-child(1){border-top-color:#f0c4a5}.modes .m:nth-child(2){border-top-color:#e39a68}.modes .m b{display:block;color:#17345f;font-size:17px;margin:0 0 4px}.modes .m span{display:block;font-size:14px;line-height:1.45;color:#444}.modes .bar{height:6px;border-radius:3px;background:linear-gradient(90deg,#f3dccb,#d9773f);margin:0 0 10px}.modes figcaption{font-size:13px;color:#888;text-align:center;margin-top:10px}
+@media(max-width:620px){.modes .row{grid-template-columns:1fr}}
 .prompt{position:relative;margin:0 0 20px}
 .prompt pre{margin:0;padding:14px 16px 14px;padding-right:16px;background:#f7f8fa;border:1px solid #e3e6eb;border-radius:4px;white-space:pre-wrap;word-wrap:break-word;font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;line-height:1.55;color:#222}
 .prompt .fld{background:#fdecdf;color:#9a4a17;border-radius:3px;padding:0 2px}
@@ -285,7 +288,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <div class="crumbs"><a href="/library/">Библиотека</a> · <a href="/library/ai/">ИИ в работе</a> · <a href="/library/ai/#g1">Слово и документы</a></div>
 <h1>Промпты: как формулировать и копить удачные</h1>
 <div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 19 ноября 2026</div>
-<div class="brief"><p class="lead">Хороший запрос — это контекст, порядок работы и проверка; составить его поможет сам ИИ.</p><p><strong>Режим:</strong> соавтор; советчик, если задача новая и плохо сформулирована. <strong>Главный риск:</strong> считать, что хороший промпт гарантирует правду.</p><p><strong>С чего начать:</strong> промпт «<a href="#p-sostavit-prompt-po-opisaniyu">Составить промпт по описанию</a>».</p><p class="note">Режимы, общие проверки и шаблон запроса — в разделе «<a href="/library/ai/osnovy/">Основы</a>».</p></div><nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#ogranicheniya-i-proverki">Ограничения и проверки</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
+<nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#primery-zadach">Примеры задач</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#chto-vazhno-uchityvat">Что важно учитывать</a></li><li><a href="#ogranicheniya-i-proverki">Ограничения и проверки</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="primery-zadach">Примеры задач</h2>
 <ul>
 <li><strong>Составить промпт под новую задачу</strong> (например, разбор договора) с помощью самого ИИ.</li>
 <li><strong>Улучшить промпт, который работает плохо.</strong> Например: «Я попробовал этот промпт для такой цели, он работает не очень хорошо. Помогите улучшить».</li>
@@ -318,7 +321,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <li>Хороший промпт не гарантирует правды. Инструкция «не выдумывай» риск снижает, но не убирает. Проверка результата остаётся за вами.</li>
 <li>Если промпт стал длинным и сложным, проверьте его на простой задаче: что-то могло сломаться.</li>
 </ul>
-<h2 id="gotovye-prompty">Готовые промпты</h2>
+<h2 id="gotovye-prompty">Готовые промпты</h2><p class="prompt-note">В квадратных скобках — ваши данные. Нажмите «Копировать», вставьте промпт в чат с ИИ и заполните скобки.</p>
 <p class="prompt-name" id="p-sostavit-prompt-po-opisaniyu"><strong>Составить промпт по описанию</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Я хочу решить задачу: <span class="fld">[описание]</span>. Помоги составить промпт, который я смогу копировать в чат.
 Сначала задай мне вопросы (по одному, жди ответа): кто адресат результата, какие у меня материалы, как я пойму, что результат хороший, чего нельзя делать.
@@ -335,11 +338,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 </pre></div>
 <p class="prompt-name" id="p-vyzov-dlya-lyubogo-rezultata"><strong>Вызов для любого результата</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Не угождай мне. Прочитай свой предыдущий ответ как строгий критик. Найди: слабые места, пропущенные допущения, места, где ты уверенно написал то, что не проверено. Начни с самого опасного.
-</pre></div><div class="sources" id="istochniki"><p><strong>Источники</strong></p><ul>
-<li><strong>Книги:</strong> HBR Managers, гл. 2 (как ставить задачу ИИ, четыре шага диалога, цепочка рассуждений), гл. 3 (разговорный подход, сравнение моделей), гл. 9 (угодливость ИИ), гл. 16 (риск выдуманных данных), эпилог (промпт-академии и библиотеки); HBR Teams, гл. 1–4 и 30 (контекст, prompt-a-thon, общий ресурс промптов).</li>
-<li><strong>Практика автора:</strong> папка <code>_ПРОМТЫ/</code>.</li>
-</ul>
-<p>Книги: <em>HBR Guide to Generative AI for Managers</em> (Розани, Фарри, 2025) и <em>HBR Guide to Generative AI for Teams</em> (2026). «Практика автора» — собственный опыт автора. «Общее знание» и «Общие источники» — сведения из открытых источников; проверяйте актуальность, инструменты меняются быстро.</p></div><div class="author-card">
+</pre></div><div class="author-card">
     <img src="/library/author.jpg" width="88" height="88" alt="Дмитрий Айзенштат" loading="lazy">
     <div>
       <p class="ac-label">Об авторе</p>
