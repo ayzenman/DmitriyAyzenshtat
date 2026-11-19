@@ -128,8 +128,8 @@ def link_blocks(h, self_key=None):
             if not b:   # короткие упоминания: «Отчёты и дашборды» и т.п.
                 cand = [x for x in blocks if x["title"].startswith(name)]
                 b = cand[0] if len(cand) == 1 else None
-            if name == "Основы":
-                return f'«<a href="{SECTION}osnovy/">Основы</a>»'
+            if re.fullmatch(r"Основ[а-я]*", name):
+                return f'«<a href="{SECTION}osnovy/">{name}</a>»'
             if not b or b["key"] == self_key:
                 return m.group(0)
             return f'«<a href="{SECTION}{b["key"]}/">{name}</a>»'
@@ -531,7 +531,7 @@ body = (f'<p>{md(lead)[3:-4]}</p>'
                         ("/library/owner/manual-control-exit/", "Выход из ручного управления", "какие варианты есть у собственника")])
         + search_js)
 out_pages["index"] = (SECTION, page(SECTION, TITLE,
-    "22 типа рабочих задач руководителя и как решать их с ИИ: режим, главный риск, проверки и готовые промпты с кнопкой «Копировать».",
+    "22 типа рабочих задач руководителя и как решать их с ИИ: что поручить, что проверить и готовые промпты с кнопкой «Копировать».",
     "ИИ в работе", ["искусственный интеллект", "промпты", "руководитель"],
     [("ИИ в работе", SECTION)], body, "ИИ в работе, ИИ для руководителя, промпты для руководителя, ChatGPT, Claude", wide=True),
     dict(title="ИИ в работе", sub="Практическое руководство · 22 типа задач"))

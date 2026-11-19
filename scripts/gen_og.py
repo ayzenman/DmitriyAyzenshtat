@@ -21,7 +21,7 @@ import html as H
 for k, (path, og) in pages.items():
     t, sub, kick = og["title"], og["sub"], "ИИ в работе"
     if k == "index":
-        kick, t, sub = "Практическое руководство", "ИИ в работе", "22 типа задач руководителя: режим, главный риск, проверки и готовые промпты"
+        kick, t, sub = "Практическое руководство", "ИИ в работе", "22 типа задач руководителя: что поручить ИИ, что проверить и готовые промпты"
     fs = 64 if len(t) <= 52 else 50
     num = sub.split(" ")[1] if sub.startswith("Блок") else ""
     doc = TPL % dict(title=H.escape(t), sub=H.escape(sub), fs=fs, num=num, kick=kick)
