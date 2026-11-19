@@ -49,7 +49,7 @@ for part in ["ОСНОВЫ"]:
     if miss: errs.append(f"osnovy/{part}: не найдено {miss} фрагментов")
 # 3. запрещённое
 for k, h in html_by.items():
-    for bad in ["служебное", "ищут:", "mcp-1c", "mcp 1c"]:
+    for bad in ["<!-- служебное", "ищут:", "ключ:", "mcp-1c", "mcp 1c"]:
         if bad.lower() in h.lower(): errs.append(f"{k}: найдено «{bad}»")
     if re.search(r"[Бб]лок \d+\b", re.sub(r"Блок \d+ из 22", "", h[h.find("<main"):])): errs.append(f"{k}: ссылка вида «блок N»")
 # 4. внутренние ссылки и якоря
