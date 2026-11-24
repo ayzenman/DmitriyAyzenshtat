@@ -6,7 +6,7 @@
 <title>Программирование и отчёты в 1С — ИИ в работе</title>
 <meta name="description" content="ИИ объясняет, пишет запросы, отчёты и расширения; итоги сверяются независимым запросом, а в рабочую базу ИИ не пишет.">
 <meta name="author" content="Дмитрий Айзенштат">
-<meta name="robots" content="noindex,follow">
+<meta name="robots" content="index,follow,max-image-preview:large">
 <link rel="canonical" href="https://ayzenshtat.ru/library/ai/1c/">
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="Ayzenshtat.ru">
@@ -23,8 +23,8 @@
 <meta name="twitter:description" content="ИИ объясняет, пишет запросы, отчёты и расширения; итоги сверяются независимым запросом, а в рабочую базу ИИ не пишет.">
 <meta name="twitter:image" content="https://ayzenshtat.ru/library/ai/1c/og.jpg">
 <meta property="og:locale" content="ru_RU">
-<meta property="article:published_time" content="2026-11-19">
-<meta property="article:modified_time" content="2026-11-19">
+<meta property="article:published_time" content="2026-11-23">
+<meta property="article:modified_time" content="2026-11-23">
 <meta property="article:author" content="Дмитрий Айзенштат">
 <meta property="article:section" content="ИИ в работе">
 <meta property="article:tag" content="искусственный интеллект">
@@ -81,8 +81,8 @@ if(!window.__ymOff){
  },
  "articleSection": "ИИ в работе",
  "keywords": "1С, запрос, СКД, отчёт в 1С, расширение, обработка, ошибка 1С, регистр, проводки, бухгалтерия, план-факт",
- "datePublished": "2026-11-19",
- "dateModified": "2026-11-19",
+ "datePublished": "2026-11-23",
+ "dateModified": "2026-11-23",
  "mainEntityOfPage": {
   "@type": "WebPage",
   "@id": "https://ayzenshtat.ru/library/ai/1c/"
@@ -287,7 +287,7 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <main class="article">
 <div class="crumbs"><a href="/library/">Библиотека</a> · <a href="/library/ai/">ИИ в работе</a> · <a href="/library/ai/#g5">Техника</a></div>
 <h1>Программирование и отчёты в 1С</h1>
-<div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 19 ноября 2026</div>
+<div class="meta"><a href="https://ayzenshtat.ru/#about">Дмитрий Айзенштат</a> · 23 ноября 2026</div>
 <p>Запросы, отчёты, обработки и доработки в 1С. ИИ объясняет, что происходит в базе, и пишет код. Но 1С плохо подходит для экспериментов: ошибка в запросе даёт неверные цифры, а ошибка в записи портит данные. Поэтому итоги сверяют независимым запросом, а в рабочую базу ИИ не пишет.</p>
 <nav class="toc" aria-label="Содержание"><strong>Содержание</strong><ul><li><a href="#chto-mozhno-poruchit">Что можно поручить</a></li><li><a href="#rezhimy-raboty">Режимы работы</a></li><li><a href="#kak-postavit-zadachu">Как поставить задачу</a></li><li><a href="#kak-prinyat-rezultat">Как принять результат</a></li><li><a href="#esli-delaete-sami">Если делаете сами</a></li><li><a href="#gotovye-prompty">Готовые промпты</a></li></ul></nav><h2 id="chto-mozhno-poruchit">Что можно поручить</h2>
 <ul>
@@ -325,11 +325,13 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 <h2 id="esli-delaete-sami">Если делаете сами</h2>
 <ol>
 <li><strong>Имена — только из базы.</strong> Объекты, реквизиты и регистры берите из выгрузки конфигурации или из самой базы, не из памяти ИИ.</li>
-<li><strong>Доступ к структуре.</strong> Выгрузите конфигурацию в файлы или подключите ИИ к базе только для чтения. Начинайте с учебной базы.</li>
+<li><strong>Готовый коннектор к базе.</strong> Подключите уже разработанный MCP-коннектор, который умеет читать структуру и данные 1С, вместо того чтобы собирать связку самому. Начинайте с учебной базы и режима только для чтения.</li>
 <li><strong>Образец.</strong> Пусть ИИ найдёт похожий отчёт или форму в типовой конфигурации и опирается на него.</li>
 <li><strong>Префикс для своих объектов,</strong> например «УА_», чтобы не совпасть по именам с типовыми.</li>
 <li><strong>Проверки после каждого шага.</strong> Проверка, которая не запустилась или зависла, считается проваленной.</li>
 <li><strong>Записывающая обработка — только в копии,</strong> со сравнением данных до и после.</li>
+<li><strong>Правила проверки кода.</strong> Один раз запишите, что ИИ проверяет после каждого изменения и что ему запрещено, и давайте эти правила в начале каждой задачи. Составить их поможет промпт «Правила проверки кода» ниже.</li>
+<li><strong>Усложняйте постепенно.</strong> Сначала запрос и простой отчёт на чтение, потом отчёт с настройками, потом обработка на копии базы, и только потом расширение. На следующую ступень — когда предыдущая получается без ошибок.</li>
 </ol>
 <h2 id="gotovye-prompty">Готовые промпты</h2><p class="prompt-note">В квадратных скобках — ваши данные. Нажмите «Копировать», вставьте промпт в чат с ИИ и заполните скобки.</p>
 <p class="prompt-name" id="p-razobrat-oshibku-ili-zapros"><strong>Разобрать ошибку или запрос</strong></p>
@@ -351,6 +353,11 @@ th,td{border-bottom:1px solid #ddd;padding:8px 7px;text-align:left;vertical-alig
 </pre></div>
 <p class="prompt-name" id="p-revyu-koda-i-zaprosa"><strong>Ревью кода и запроса</strong></p>
 <div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Ты — ревьюер кода 1С, не видишь истории работы. Ниже код/запрос: <span class="fld">[вставьте]</span>. Найди: ошибки логики, граничные случаи (пустой период, первый и последний день), запросы в цикле, неочевидные допущения, нарушения стиля. Для каждого замечания укажи, обязательное оно или нет, и как проверить. Не переписывай код целиком.
+</pre></div>
+<p class="prompt-name" id="p-pravila-proverki-koda"><strong>Правила проверки кода</strong></p>
+<div class="prompt"><button class="copy" type="button" aria-label="Скопировать промпт">Копировать</button><pre>Составь короткие правила проверки кода 1С для ИИ-ассистента: я буду давать их в начале каждой задачи. Конфигурация: <span class="fld">[название и версия]</span>.
+Включи: что проверять после каждого изменения (синтаксис; запуск на пустом и на полном периоде; сверка итога с независимым запросом к регистру; первый и последний день периода); что запрещено (запись в рабочую базу, изменение типовой конфигурации, имена объектов и реквизитов не из базы); как сообщать итог: «Проверено», «Не проверено», «Нужно решить вам».
+Не больше 15 строк.
 </pre></div><div class="author-card">
     <img src="/library/author.jpg" width="88" height="88" alt="Дмитрий Айзенштат" loading="lazy">
     <div>
